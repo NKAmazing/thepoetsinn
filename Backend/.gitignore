@@ -1,7 +1,10 @@
+__pycache__
 .env
 /bin
 /lib
 /share
 /lib64
-pyenv.cfg
+
+.idea
+pyvenv.cfg
 /include
