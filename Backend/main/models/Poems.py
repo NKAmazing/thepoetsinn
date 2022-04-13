@@ -1,15 +1,13 @@
-from email.policy import default
-from turtle import title
 from .. import db
 import datetime
 
 
-class User(db.Model):
+class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(100), nullable=False)
     user_id = db.Column(db.Integer)
-    date_time = db.Column(db.Datetime, nullable=False, default=datetime.datetime.now())
+    date_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now())
     
 
     def __repr__(self):
@@ -21,7 +19,7 @@ class User(db.Model):
             'id': self.id,
             'title': str(self.title),
             'body': str(self.body),
-            'user_id': str(self.user_id),
+            'user_id': int(self.user_id),
             'date_time': str(self.date_time),
         }
         return poem_json
@@ -30,7 +28,7 @@ class User(db.Model):
         poem_json = {
             'id': self.id,
             'title': str(self.title),
-            'body': str(self.body)
+            'body': str(self.body),
         }
         return poem_json
     @staticmethod
@@ -42,7 +40,7 @@ class User(db.Model):
         body = poem_json.get('body')
         user_id = poem_json.get('user_id')
         date_time = poem_json.get('date_time')
-        return User(id=id,
+        return Poem(id=id,
                     title=title, 
                     body=body, 
                     user_id=user_id, 

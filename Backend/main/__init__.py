@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
+
 # importar libreria flask_restful
 from flask_restful import Api
 
@@ -8,7 +9,6 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
 # Inicializar API de Flask Restful
-
 api = Api()
 
 # Inicializar SQLAlchemy
@@ -45,12 +45,12 @@ def create_app():
     api.add_resource(resources.UsersResource, '/users')
 
     # Cargar a la API el recurso Punctuation e indicar ruta
-    api.add_resource(resources.PunctuationResource, '/punctuation/<id>')
+    api.add_resource(resources.RatingResource, '/rating/<id>')
 
     # Cargar a la API el recurso Punctuations e indicar ruta
-    api.add_resource(resources.PunctuationsResource, '/punctuations')
+    api.add_resource(resources.RatingsResource, '/ratings')
 
-    #Cargar la aplicación en la API de Flask Restful
+    #Cargar la aplicacion en la API de Flask Restful
     api.init_app(app)
     
     return app
