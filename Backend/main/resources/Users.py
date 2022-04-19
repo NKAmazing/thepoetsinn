@@ -29,7 +29,7 @@ class User(Resource):
             setattr(user, key, value)
         db.session.add(user)
         db.session.commit()
-        return user.to_json(), 201
+        return user.to_json_short(), 201
 
 
 class Users(Resource):
@@ -42,6 +42,8 @@ class Users(Resource):
     def post(self):
         # Obtener datos de la solicitud
         user = UserModel.from_json(request.get_json())
+        print(user)
         db.session.add(user)
         db.session.commit()
+        print(user)
         return user.to_json(), 201

@@ -1,5 +1,6 @@
 from .. import db
 import datetime
+from . import UserModel
 
 
 class Poem(db.Model):
@@ -9,6 +10,8 @@ class Poem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     date_time = db.Column(db.DateTime, nullable=False, default=datetime.datetime.now())
     
+    user = db.relationship('User', back_populates="poems", uselist=False, single_parent=True)
+    ratings = db.relationship('Rating', back_populates="poem", cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<Poem: %r %r %r %r >' % (self.title, self.body, self.user_id, self.date_time)
@@ -19,8 +22,9 @@ class Poem(db.Model):
             'id': self.id,
             'title': str(self.title),
             'body': str(self.body),
-            'user_id': int(self.user_id),
+            'user': self.user.to_json_short(),
             'date_time': str(self.date_time),
+            'ratings': [rating.to_json_short() for rating in self.ratings]
         }
         return poem_json
 
@@ -29,6 +33,7 @@ class Poem(db.Model):
             'id': self.id,
             'title': str(self.title),
             'body': str(self.body),
+            'user': self.user.to_json_short(),
         }
         return poem_json
     @staticmethod

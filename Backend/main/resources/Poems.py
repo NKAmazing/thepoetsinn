@@ -4,6 +4,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import PoemModel
+from main.models import UserModel
 
 
 # Utilizo una clase Resources como recurso
@@ -42,6 +43,9 @@ class Poems(Resource):
     def post(self):
         # Obtener datos de la solicitud
         poem = PoemModel.from_json(request.get_json())
+        # Verificar si existe el usuario
+        db.session.query(UserModel).get_or_404(poem.user_id)
+        # Agrega el poema
         db.session.add(poem)
         db.session.commit()
         return poem.to_json(), 201
