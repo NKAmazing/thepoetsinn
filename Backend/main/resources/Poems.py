@@ -5,6 +5,9 @@ from flask import request, jsonify
 from .. import db
 from main.models import PoemModel
 from main.models import UserModel
+from main.models import RatingModel
+from datetime import datetime
+from sqlalchemy import func
 
 
 # Utilizo una clase Resources como recurso
@@ -36,8 +39,41 @@ class Poem(Resource):
 class Poems(Resource):
     # Obtener lista de poemas
     def get(self):
-        poems = db.session.query(PoemModel).all()
-        return jsonify([poem.to_json_short() for poem in poems])
+        poems = db.session.query(PoemModel)
+        page = 1
+        perpage = 5
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "page":
+                    page = int(value)
+                if key == "perpage":
+                    perpage = int(value)
+                if key == "title":
+                    poems = poems.filter(PoemModel.title.like("%" + value + "%"))
+                if key == "user_id":
+                    poems = poems.filter(PoemModel.user_id == value)
+                if key == "date_time[gte]":
+                    poems = poems.filter(PoemModel.date_time >= datetime.strptime(value, '%d-%m-%Y'))
+                if key == "date_time[lte]":
+                    poems = poems.filter(PoemModel.date_time <= datetime.strptime(value, '%d-%m-%Y'))
+                if key == "username":
+                    poems = poems.filter(PoemModel.user.has(UserModel.username.like("%" + value + "%")))
+                if key == "sort_by":
+                    if value == "date_time":
+                        poems = poems.order_by(PoemModel.date_time)
+                    if value == "date_time[desc]":
+                        poems = poems.order_by(PoemModel.date_time.desc())
+                    if value == "rating":
+                        # poems = poems.order_by(func.avg(RatingModel.score).label('average'))
+                        poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score))
+                    if value == "rating[desc]":
+                        # poems = poems.order_by(func.avg(RatingModel.score).label('average'))
+                        poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score).desc())
+                    
+        poems = poems.paginate(page, perpage, True, 10)
+        return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
+        "total": poems.total, "pages": poems.pages, "page": page})
 
     # Insertar recurso
     def post(self):

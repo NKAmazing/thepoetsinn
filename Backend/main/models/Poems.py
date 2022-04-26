@@ -1,3 +1,5 @@
+from audioop import avg
+import statistics
 from .. import db
 import datetime
 from . import UserModel
@@ -15,16 +17,30 @@ class Poem(db.Model):
 
     def __repr__(self):
         return '<Poem: %r %r %r %r >' % (self.title, self.body, self.user_id, self.date_time)
+    
+    def avg_score(self):
+        list_score = []
+        if len(self.ratings) == 0:
+            avg = 0
+        else:
+            for rating in self.ratings:
+                score = rating.score
+                list_score.append(score)
+            avg = statistics.mean(list_score)
+
+        return avg
 
     # Convertir objeto en JSON
     def to_json(self):
+
         poem_json = { 
             'id': self.id,
             'title': str(self.title),
             'body': str(self.body),
             'user': self.user.to_json_short(),
             'date_time': str(self.date_time),
-            'ratings': [rating.to_json_short() for rating in self.ratings]
+            'ratings': [rating.to_json_short() for rating in self.ratings],
+            'rating': self.avg_score(),
         }
         return poem_json
 
@@ -34,6 +50,8 @@ class Poem(db.Model):
             'title': str(self.title),
             'body': str(self.body),
             'user': self.user.to_json_short(),
+            'date_time': str(self.date_time),
+            'rating': self.avg_score(),
         }
         return poem_json
     @staticmethod

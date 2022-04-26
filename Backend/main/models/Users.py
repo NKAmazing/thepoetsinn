@@ -22,7 +22,9 @@ class User(db.Model):
             # 'password': str(self.password),
             # 'role': str(self.role),
             # 'email': str(self.email),
-            'poems': [poem.to_json_short() for poem in self.poems],   
+            'poems': [poem.to_json_short() for poem in self.poems],
+            'poem_amount': len(self.poems),
+            'rating_amount': len(self.ratings),
         }
         return user_json
 
