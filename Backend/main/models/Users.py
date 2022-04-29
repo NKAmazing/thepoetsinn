@@ -19,9 +19,9 @@ class User(db.Model):
         user_json = { 
             'id': self.id,
             'username': str(self.username),
-            # 'password': str(self.password),
-            # 'role': str(self.role),
             # 'email': str(self.email),
+            # 'password': str(self.password),
+            'role': str(self.role),
             'poems': [poem.to_json_short() for poem in self.poems],
             'poem_amount': len(self.poems),
             'rating_amount': len(self.ratings),
