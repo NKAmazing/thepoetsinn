@@ -43,8 +43,10 @@ class Poems(Resource):
         page = 1
         perpage = 5
         if request.get_json():
+            # declaro un request de items como filters
             filters = request.get_json().items()
             for key, value in filters:
+                # itero con un if, todos los filtros correspondientes
                 if key == "page":
                     page = int(value)
                 if key == "perpage":
@@ -59,19 +61,22 @@ class Poems(Resource):
                     poems = poems.filter(PoemModel.date_time <= datetime.strptime(value, '%d-%m-%Y'))
                 if key == "username":
                     poems = poems.filter(PoemModel.user.has(UserModel.username.like("%" + value + "%")))
+                # agrego el sort by
                 if key == "sort_by":
+                    # ordeno por fecha
                     if value == "date_time":
                         poems = poems.order_by(PoemModel.date_time)
                     if value == "date_time[desc]":
                         poems = poems.order_by(PoemModel.date_time.desc())
                     if value == "rating":
-                        # poems = poems.order_by(func.avg(RatingModel.score).label('average'))
+                        # utilizo un outerjoin y luego un group by para obtener las calificaciones del poema, luego hago un promedio
                         poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score))
                     if value == "rating[desc]":
-                        # poems = poems.order_by(func.avg(RatingModel.score).label('average'))
+                        # misma operacion pero ahora en modo descendente
                         poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score).desc())
-                    
+        # hago el paginado de poemas pasandole la pagina y la cantidad de poemas por pagina, luego establezco un limite de poemas por pagina          
         poems = poems.paginate(page, perpage, True, 10)
+        # retorno el to json short, el total de poemas y la pagina
         return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
         "total": poems.total, "pages": poems.pages, "page": page})
 
