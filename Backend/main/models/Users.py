@@ -1,5 +1,5 @@
 from .. import db
-# from flask import jsonify
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,6 +10,17 @@ class User(db.Model):
 
     poems = db.relationship('Poem', back_populates="user", cascade="all, delete-orphan")
     ratings = db.relationship('Rating', back_populates="user", cascade="all, delete-orphan")
+
+    @property
+    def plain_password(self):
+        raise AttributeError("Not allowed")
+    
+    @plain_password.setter
+    def plain_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def validate_pass(self, password):
+        return check_password_hash(self.password, password)
 
     def __repr__(self):
         return '<User: %r %r %r %r >' % (self.username, self.password, self.role, self.email)
@@ -34,6 +45,27 @@ class User(db.Model):
             'username': str(self.username),
         }
         return user_json
+
+    def to_json(self):
+        user_json = { 
+            'id': self.id,
+            'username': str(self.username),
+            'email': str(self.email),
+            'role': str(self.role),
+            'poems': [poem.to_json_short() for poem in self.poems],
+            'poem_amount': len(self.poems),
+            'rating_amount': len(self.ratings),
+        }
+        return user_json
+
+    def to_json_public(self):
+        user_json = {
+            'id': self.id,
+            'username': str(self.username),
+            'poems': [poem.to_json_short() for poem in self.poems],
+            'poem_amount': len(self.poems),
+        }
+        return user_json
     @staticmethod
 
     # Convertir JSON a objeto
@@ -43,7 +75,7 @@ class User(db.Model):
         role = user_json.get('role')
         email = user_json.get('email')
         return User(username=username, 
-                    password=password, 
                     role=role, 
                     email=email,
+                    plain_password=password,
                     )

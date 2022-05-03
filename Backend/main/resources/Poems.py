@@ -1,5 +1,6 @@
 # Archivo para el recurso poemas
 
+from locale import currency
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
@@ -8,17 +9,27 @@ from main.models import UserModel
 from main.models import RatingModel
 from datetime import datetime
 from sqlalchemy import func
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
+from main.auth import decorators
 
 
 # Utilizo una clase Resources como recurso
 class Poem(Resource):
     
     # Obtengo recurso
+    @jwt_required(optional=True)
     def get(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
-        return poem.to_json()
+        # Verificar si se ha ingresado con token
+        current_identity = get_jwt_identity()
+        if current_identity:
+            return poem.to_json()
+        else:
+            return poem.to_json_public()
     
     # Eliminar recurso
+    @jwt_required()
     def delete(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         db.session.delete(poem)
@@ -26,6 +37,7 @@ class Poem(Resource):
         return '', 204
 
     # Modificar recurso
+    @jwt_required
     def put(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         data = request.get_json().items()
@@ -38,6 +50,7 @@ class Poem(Resource):
 
 class Poems(Resource):
     # Obtener lista de poemas
+    @jwt_required(optional=True)
     def get(self):
         poems = db.session.query(PoemModel)
         page = 1
@@ -88,6 +101,7 @@ class Poems(Resource):
         "total": poems.total, "pages": poems.pages, "page": page})
 
     # Insertar recurso
+    @admin_required
     def post(self):
         # Obtener datos de la solicitud
         poem = PoemModel.from_json(request.get_json())

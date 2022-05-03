@@ -53,6 +53,15 @@ class Poem(db.Model):
             'rating': self.avg_score(),
         }
         return poem_json
+    
+    def to_json_public(self):
+        poem_json = {
+            'id': self.id,
+            'title': str(self.title),
+            'body': str(self.body),
+            'rating': self.avg_score(),
+        }
+        return poem_json
     @staticmethod
 
     # Convertir JSON a objeto

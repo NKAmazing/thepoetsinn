@@ -7,12 +7,17 @@ from flask_restful import Api
 
 # importar sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
+# importar Flask JWT
+from flask_jwt_extended import JWTManager
 
 # Inicializar API de Flask Restful
 api = Api()
 
 # Inicializar SQLAlchemy
 db = SQLAlchemy()
+
+# Inicializar JWT
+jwt = JWTManager()
 
 def create_app():
 
@@ -53,4 +58,14 @@ def create_app():
     #Cargar la aplicacion en la API de Flask Restful
     api.init_app(app)
     
+    # Cargar clave secreta
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    #Cargar tiempo de expiracion de los tokens
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
+    jwt.init_app(app)
+
+    from main.auth import routes
+    # Importar bluesprint
+    app.register_blueprint(auth.routes.auth)
+
     return app
