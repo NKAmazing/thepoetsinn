@@ -61,6 +61,8 @@ class Poems(Resource):
                     poems = poems.filter(PoemModel.date_time <= datetime.strptime(value, '%d-%m-%Y'))
                 if key == "username":
                     poems = poems.filter(PoemModel.user.has(UserModel.username.like("%" + value + "%")))
+                if key == "rating":
+                    poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).having(func.avg(RatingModel.score) == float(value))
                 # agrego el sort by
                 if key == "sort_by":
                     # ordeno por fecha
@@ -74,6 +76,11 @@ class Poems(Resource):
                     if value == "rating[desc]":
                         # misma operacion pero ahora en modo descendente
                         poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score).desc())
+                    # ordeno por nombre de autor
+                    if value == "author_name":
+                        poems = poems.order_by(PoemModel.user)
+                    if value == "author_name[desc]":
+                        poems = poems.order_by(PoemModel.user.desc())
         # hago el paginado de poemas pasandole la pagina y la cantidad de poemas por pagina, luego establezco un limite de poemas por pagina          
         poems = poems.paginate(page, perpage, True, 10)
         # retorno el to json short, el total de poemas y la pagina

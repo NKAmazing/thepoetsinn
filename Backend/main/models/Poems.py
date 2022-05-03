@@ -1,4 +1,3 @@
-from audioop import avg
 import statistics
 from .. import db
 import datetime

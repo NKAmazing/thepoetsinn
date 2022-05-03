@@ -63,6 +63,12 @@ class Users(Resource):
                     if value == "poems[desc]":
                         # misma operacion pero ahora en modo descendente
                         users = users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(PoemModel.id).desc())
+                    # ordenamiento por nombre
+                    if value == "name":
+                        users = users.order_by(UserModel.username)
+                    # ordenamiento por nombre descendente
+                    if value == "name[desc]":
+                        users = users.order_by(UserModel.username.desc())
         # hago el paginado de poemas pasandole la pagina y la cantidad de poemas por pagina, luego establezco un limite de poemas por pagina          
         users = users.paginate(page, perpage, True, 10)
         # retorno el to json short, el total de poemas y la pagina
