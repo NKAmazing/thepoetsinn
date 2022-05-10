@@ -46,11 +46,12 @@ class User(db.Model):
         }
         return user_json
 
-    def to_json(self):
+    def to_json_admin(self):
         user_json = { 
             'id': self.id,
             'username': str(self.username),
             'email': str(self.email),
+            'password': str(self.password),
             'role': str(self.role),
             'poems': [poem.to_json_short() for poem in self.poems],
             'poem_amount': len(self.poems),

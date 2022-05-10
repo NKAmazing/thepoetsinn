@@ -30,28 +30,38 @@ class User(Resource):
             return user.to_json_public()
     
     # Eliminar recurso
-    @admin_required
+    @jwt_required()
     def delete(self, id):
+        user_id = get_jwt_identity()
         user = db.session.query(UserModel).get_or_404(id)
-        db.session.delete(user)
-        db.session.commit()
-        return '', 204
+        claims = get_jwt()
+        if claims['role'] == "admin" or user_id == id:
+            db.session.delete(user)
+            db.session.commit()
+            return '', 204
+        else:
+            return 'This user is not allowed to do that.', 403
 
     # Modificar recurso
     @jwt_required()
     def put(self, id):
-        user = db.session.query(UserModel).get_or_404(id)
-        data = request.get_json().items()
-        for key, value in data:
-            setattr(user, key, value)
-        db.session.add(user)
-        db.session.commit()
-        return user.to_json_short(), 201
+        user_id = get_jwt_identity()
+        claims = get_jwt()
+        if claims['role'] == "admin" or user_id == id:
+            user = db.session.query(UserModel).get_or_404(id)
+            data = request.get_json().items()
+            for key, value in data:
+                setattr(user, key, value)
+            db.session.add(user)
+            db.session.commit()
+            return user.to_json_short(), 201
+        else:
+            return 'This user is not allowed to do that.', 403
 
 
 class Users(Resource):
     # Obtener lista de usuarios
-    @admin_required()
+    @admin_required
     def get(self):
         # users = db.session.query(UserModel).all()
         users = db.session.query(UserModel)

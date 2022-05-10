@@ -5,6 +5,9 @@ from flask import request, jsonify
 from .. import db
 from main.models import RatingModel
 from main.models import PoemModel
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
+from main.auth.decorators import admin_required
+from main.auth import decorators
 
 
 # Utilizo una clase Resources como recurso
@@ -15,12 +18,18 @@ class Rating(Resource):
         rating = db.session.query(RatingModel).get_or_404(id)
         return rating.to_json()
     
+    @jwt_required()
     # Eliminar recurso
     def delete(self, id):
+        current_identity = get_jwt_identity()
         rating = db.session.query(RatingModel).get_or_404(id)
-        db.session.delete(rating)
-        db.session.commit()
-        return '', 204
+        claims = get_jwt()
+        if claims['role'] == "admin" or current_identity == rating.user_id:
+            db.session.delete(rating)
+            db.session.commit()
+            return '', 204
+        else:
+            return 'This user is not allowed to do that.', 403
 
     # Modificar recurso
     def put(self, id):
