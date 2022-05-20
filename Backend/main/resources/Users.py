@@ -60,6 +60,7 @@ class User(Resource):
 
 
 class Users(Resource):
+    
     # Obtener lista de usuarios
     @admin_required
     def get(self):
