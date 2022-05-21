@@ -1,6 +1,5 @@
 # Archivo para el recurso poemas
 
-from itertools import count
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db

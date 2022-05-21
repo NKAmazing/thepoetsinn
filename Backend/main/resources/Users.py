@@ -1,6 +1,5 @@
 # Archivo para el recurso usuarios
 
-from typing import Optional
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
@@ -21,11 +20,15 @@ class User(Resource):
         user = db.session.query(UserModel).get_or_404(id)
         #Obtener claims de adentro del JWT
         claims = get_jwt()
-        #Verificar que el rol sea admin
-        if claims['role'] == "admin":
-            return user.to_json_admin()
-        elif claims['role'] == "user":
-            return user.to_json()
+        # Verifica si logeo un usuario
+        if 'role' in claims:
+            # Verifica que el rol sea admin
+            if claims['role'] == "admin":
+                return user.to_json_admin()
+            # Verifica que el rol sea user
+            elif claims['role'] == "user":
+                return user.to_json()
+        # Si no logea nadie, muestra to json public
         else:
             return user.to_json_public()
     
@@ -33,6 +36,8 @@ class User(Resource):
     @jwt_required()
     def delete(self, id):
         user_id = get_jwt_identity()
+        user_id = int(user_id)
+        id = int(id)
         user = db.session.query(UserModel).get_or_404(id)
         claims = get_jwt()
         if claims['role'] == "admin" or user_id == id:
@@ -47,6 +52,8 @@ class User(Resource):
     def put(self, id):
         user_id = get_jwt_identity()
         claims = get_jwt()
+        id = int(id)
+        print(user_id, id)
         if claims['role'] == "admin" or user_id == id:
             user = db.session.query(UserModel).get_or_404(id)
             data = request.get_json().items()
