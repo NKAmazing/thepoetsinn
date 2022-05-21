@@ -45,8 +45,8 @@ class Poem(Resource):
     def put(self, id):
         current_identity = get_jwt_identity()
         claims = get_jwt()
+        poem = db.session.query(PoemModel).get_or_404(id)
         if current_identity == poem.user_id:
-            poem = db.session.query(PoemModel).get_or_404(id)
             data = request.get_json().items()
             for key, value in data:
                 setattr(poem, key, value)
@@ -65,7 +65,8 @@ class Poems(Resource):
         page = 1
         perpage = 5
         if current_identity:
-            poems = db.session.query(PoemModel).filter(PoemModel.user_id != current_identity).order_by(func.count(PoemModel.ratings))
+            poems = db.session.query(PoemModel).filter(PoemModel.user_id != current_identity)
+            poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.count(PoemModel.ratings))
         else:
             poems = db.session.query(PoemModel)
             if request.get_json():

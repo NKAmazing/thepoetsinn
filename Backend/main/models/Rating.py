@@ -2,6 +2,7 @@ from .. import db
 from . import UserModel, PoemModel
 
 class Rating(db.Model):
+    
     id = db.Column(db.Integer, primary_key=True)
     score = db.Column(db.Integer, nullable=False)
     commentary = db.Column(db.String(100), nullable=True)

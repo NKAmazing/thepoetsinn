@@ -36,8 +36,8 @@ class Rating(Resource):
     def put(self, id):
         current_identity = get_jwt_identity()
         claims = get_jwt()
+        rating = db.session.query(RatingModel).get_or_404(id)
         if current_identity == rating.user_id:
-            rating = db.session.query(RatingModel).get_or_404(id)
             data = request.get_json().items()
             for key, value in data:
                 setattr(rating, key, value)
@@ -58,9 +58,11 @@ class Ratings(Resource):
     # Insertar recurso
     @jwt_required()
     def post(self):
+        current_identity = get_jwt_identity()
         # Obtener datos de la solicitud
         rating = RatingModel.from_json(request.get_json())
-        # Verificar si existe el usuario
+        rating.user_id = current_identity
+        # Verificar si existe el poema
         db.session.query(PoemModel).get_or_404(rating.poem_id)
         # Agrega la calificacion
         db.session.add(rating)
