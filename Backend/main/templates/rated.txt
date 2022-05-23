@@ -1,0 +1,3 @@
+Hey {{user.username}}!
+
+Your Poem "{{poem.title}}" was rated by {{user_1.username}}. Keep it up!

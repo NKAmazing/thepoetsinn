@@ -8,6 +8,8 @@ from main.models import PoemModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from main.auth.decorators import admin_required
 from main.auth import decorators
+from flask_mail import Mail
+from main.mail.functions import sendMail
 
 
 # Utilizo una clase Resources como recurso
@@ -67,4 +69,5 @@ class Ratings(Resource):
         # Agrega la calificacion
         db.session.add(rating)
         db.session.commit()
+        sent = sendMail([rating.poem.user.email], "Your poem was rated!", 'rated', user = rating.poem.user, poem = rating.poem, user_1 = rating.user)
         return rating.to_json(), 201
