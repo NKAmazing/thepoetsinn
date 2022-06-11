@@ -58,6 +58,12 @@
 {
 	background-color:#414141;
 }
+.section-9 div[class*="col"]:nth-of-type(1)
+{
+	background-color:#212222;
+	color: #ffff;
+	font-size: xx-large;
+}
 
 body {
 	background-color:#3c404b;
