@@ -1,10 +1,10 @@
-.section-1 div[class*="col"]:nth-of-type(1)
+/* .section-1 div[class*="col"]:nth-of-type(1)
 {
-	background-color:#414141;
-}
+	background-color:#292929;
+} */
 .section-2 div[class*="col"]:nth-of-type(1)
 {
-	background-color:#3c404b;
+	background-color:#414141;
 }
 .section-2 div[class*="col"]:nth-of-type(2)
 {
