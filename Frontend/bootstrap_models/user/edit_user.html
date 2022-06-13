@@ -53,13 +53,26 @@
       <div class="row section-2"> 
         <p> </p>
         <div class="col -md-4">
+        <p><FONT COLOR="cyan">Enter actual email: </FONT></p>
         <div class="form-floating mb-3">
           <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
           <label for="floatingInput">Email address</label>
         </div>
+        <p><FONT COLOR="cyan">Enter new email: </FONT></p>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">New email address</label>
+        </div>
+        <p><FONT COLOR="cyan">Enter actual password: </FONT></p>
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
           <label for="floatingPassword">Password</label>
+        </div>
+        <p> </p>
+        <p><FONT COLOR="cyan">Enter new password: </FONT></p>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">New password</label>
         </div>
       </div>
       <p> </p>
@@ -82,25 +95,27 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to save it first</button>
-                <a class="btn btn-primary" href="main_menu.html" role="button">Discard changes</a>
+                <a class="btn btn-primary" href="profile.html" role="button">Discard changes</a>
                 </div>
             </div>
             </div>
         </div>
-                <a class="btn btn-primary" href="main_menu.html" role="button">Back to Home</a>
+        &nbsp;
+                <!-- <a class="btn btn-primary" href="main_menu.html" role="button">Back to Home</a>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a class="btn btn-success" href="profile.html" role="button">Save changes</a>
-                </div>
+                </div> -->
                 <!-- <div class="alert alert-success" role="alert">
                     A simple success alert—check it out!
                   </div> -->
                 <!-- <div id="liveAlertPlaceholder"></div>
                 <button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button> -->
-                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button id="btnSubmit" class="btn btn-success">Save changes</button>
                 <br></br>
-                <div id="myAlert" class="alert alert-danger collapse">
-                    <div class="alert alert-success" role="alert">
-                        A simple success alert—check it out!
+                <div id="myAlert" class="alert alert-success collapse">
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>Successfully Done!</strong> Your personal information has been updated!
+                      <a id="linkClose" href="profile.html" class=" btn btn-success" aria-label="Close">Ok</a>
                       </div>
                 </div>
       </div><!--Fin de la columna -->
@@ -117,6 +132,9 @@
             $('#btnSubmit').click(function () {
                 $('#myAlert').show('fade');
 
+            });
+            $('#linkClose').click(function () {
+                $('#myAlert').hide('fade');
             });
         });
     </script>
