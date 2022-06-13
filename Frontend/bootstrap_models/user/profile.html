@@ -26,6 +26,7 @@
                       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                       </button>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                           <li class="nav-item">
@@ -37,10 +38,8 @@
                           <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="create_poem.html">Upload a Poem</a>
                           </li>
-                          <!-- <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Rate a Poem</a>
-                          </li> -->
                         </ul>
+                      </div>
                       </div>
                     </div>
                 </nav>
@@ -48,11 +47,13 @@
       <!--Fila -->
 			<div class="row section-2">
 				<!--Columna -->
-				<div class="col-md-12">
-					<p> </p>
-          <p><div class="p-3 mb-2 bg-dark text-white">Username  <a class="btn btn-info" href="edit_user.html" role="button">Edit</a></div></p>
+				<div class="col-sm-2">
+					<br>
+          <p><div class="p-3 mb-2 bg-dark text-white"><h4>Username &nbsp;<a class="btn btn-info" href="edit_user.html" role="button">Edit</a></h4></div></p>
 				</div><!--Fin de la columna -->
-        <div class="col -md-12">
+      </div>
+        <div class="row">
+        <div class="col col-sm-6">
           <p><table class="table table-dark table-striped-columns">
             <thead>
               <tr>
@@ -91,15 +92,16 @@
           </table></p>
         </div>
 		  </div><!--Fin de la fila -->
-      <div class="row section-8">
-					<!-- <p class="text-light bg-dark">Username</p> -->
-          <!-- <p><div class="p-3 mb-2 bg-dark text-white">Username</div></p> -->
-          <div class="col-md-12">
-            <p> </p>
+      <div class="row">
+          <div class="col-sm-3">
+            <br/>
             <a class="btn btn-primary" href="main_menu.html" role="button">Back to Home</a>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <!-- <button class="btn btn-primary me-md-2" type="button">Button</button>
-              <button class="btn btn-primary" type="button">Button</button> -->
+          </div>
+          </div>
+          <div class="row section-11">
+            <div class="col-sm-12">
+              <br/>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Delete account
@@ -127,6 +129,7 @@
             <p> </p>
             <p> </p>
           </div><!--Fin de la columna -->
+        </div>
     </div>
     <!-- Incluir CDN Jquery-->
 	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
