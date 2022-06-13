@@ -64,6 +64,10 @@
 	color: #ffff;
 	font-size: xx-large;
 }
+.section-11 div[class*="col"]:nth-of-type(1)
+{
+	color: #ffff;
+}
 
 body {
 	background-color:#3c404b;
