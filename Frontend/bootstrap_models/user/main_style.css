@@ -1,7 +1,7 @@
-/* .section-1 div[class*="col"]:nth-of-type(1)
+.section-1 a
 {
-	background-color:#292929;
-} */
+	color: #2558ff;
+}
 .section-2 div[class*="col"]:nth-of-type(1)
 {
 	background-color:#414141;
@@ -41,6 +41,7 @@
 .section-5 div[class*="col"]:nth-of-type(3)
 {
 	background-color:#414141;
+
 }
 .section-5 div[class*="col"]:nth-of-type(4)
 {
@@ -73,11 +74,12 @@
 }
 .section-12 div[class*="col"]:nth-of-type(1)
 {
+	margin: 0px 10px 10px;
 	position: absolute; 
 	bottom: 0;
+	left: 0;
 
 }
-
 .custom-popover {
 	--bs-popover-max-width: 200px;
 	--bs-popover-border-color: var(--bs-primary);
@@ -85,6 +87,18 @@
 	--bs-popover-header-color: var(--bs-white);
 	--bs-popover-body-padding-x: 1rem;
 	--bs-popover-body-padding-y: .5rem;
+}
+.pagination li a{
+	background-color: rgb(32, 32, 32);
+	color: white;
+}
+.pagination li a:hover{
+	background-color: rgb(61, 60, 60);
+	color: white;
+}
+.pagination li a:focus{
+	background-color: rgb(32, 32, 32);
+	color: white;	
 }
 
 body {
