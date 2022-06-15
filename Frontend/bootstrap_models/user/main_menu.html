@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="main_style.css">
 	<!-- Incluir CDN CSS de Bootstrap-->
 	<!-- CSS only -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 	<style>
 		body {
 		  background-color: #414141;
@@ -21,7 +21,7 @@
 		<div class="container-fluid">
 			<!--Fila -->
 			<div class="row section-1">
-				<nav class="navbar navbar-expand-lg -dark bg-dark">
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 					<div class="container-fluid">
 					<a class="navbar-brand" href="main_menu.html">Super Poems</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,13 +31,13 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="profile.html">My Profile</a>
+							<a class="nav-link" aria-current="page" href="profile.html">My Profile</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="my_poems.html">My Poems</a>
+							<a class="nav-link" aria-current="page" href="my_poems.html">My Poems</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="create_poem.html">Upload a Poem</a>
+							<a class="nav-link" aria-current="page" href="create_poem.html">Upload a Poem</a>
 						</li>
 						</ul>
 					</div>
@@ -57,10 +57,11 @@
 		   </div><!--Fin de la fila -->
 
 		   <!--Fila -->
-			<div class="row section-10">				
+			<div class="row section-10">
+				<div class="col -sm-10">			
 					<nav class="navbar navbar-expand-lg -dark bg-dark">
 						<div class="container-fluid">
-						  <a class="navbar-brand" href="#">List of Poems</a>
+						  <a class="navbar-brand" href="#" style="color: #25c1ff;">List of Poems</a>
 						  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						  </button>
@@ -73,8 +74,10 @@
 						  </div>
 						</div>
 				  	</nav>
+				</div>	
 		   	</div><!--Fin de la fila -->
 		   <div class="row section-4">
+			<div class="col -sm-10">
 		   		<table class="table table-dark table-striped">
 					<thead>
 					<tr>
@@ -170,64 +173,9 @@
 						<td>4.8</td>
 						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
 					</tr>
-					<tr>
-						<th scope="row">13</th>
-						<td>Poem 13</td>
-						<td>Roger</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">14</th>
-						<td>Poem 14</td>
-						<td>Ron</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">15</th>
-						<td>Poem 15</td>
-						<td>Peter</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">16</th>
-						<td>Poem 16</td>
-						<td>Coby</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">17</th>
-						<td>Poem 17</td>
-						<td>Charles</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">18</th>
-						<td>Poem 18</td>
-						<td>John</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">19</th>
-						<td>Poem 19</td>
-						<td>Kathelin</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">20</th>
-						<td>Poem 20</td>
-						<td>Rose</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="read_poem.html" role="button">Read</a>
-					</tr>
 					</tbody>
 				</table>
+			</div>
 			</div><!--Fin de la fila -->
 		    <!--Fila -->
 			<div class="row section-5">
