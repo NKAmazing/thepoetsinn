@@ -39,7 +39,6 @@
                             <a class="nav-link" aria-current="page" href="create_poem.html">Upload a Poem</a>
                           </li>
                         </ul>
-                        
                       </div>
                     </div>
                   </div>
@@ -56,70 +55,238 @@
                       <p class="card-text">Some quick example text of the Poem's body.</p>
                     </div>
                   </div>
-                </div><!--Fin de la columna -->
-                <div class="row">
-                  <div class="col-sm-5">
-                  <div class="d-grid gap-2 d-md-block">
-                    <a class="btn btn-primary" href="main_menu.html" role="button">Back to Home</a>
-                    &nbsp;
-                    <button type="button" class="btn btn-dark"
-                      data-bs-toggle="popover" data-bs-placement="right"
-                      data-bs-custom-class="custom-popover"
-                      title="Poem's Details"
-                      data-bs-html="true"
-                      data-bs-content="- AUTHOR: User 1 <br/>- DATETIME: 17-05-2022
-                      ">
-                      Details +
-                    </button>
+                  <div class="row">
+                    <div class="col-sm-6">
+                    <div class="d-grid gap-2 d-md-block">
+                      <a class="btn btn-primary" href="main_menu.html" role="button">Back to Home</a>
                       &nbsp;
-                      
-                      <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Rate
+                      <button type="button" class="btn btn-dark"
+                        data-bs-toggle="popover" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-popover"
+                        title="Poem's Details"
+                        data-bs-html="true"
+                        data-bs-content="- AUTHOR: User 1 <br/>- DATETIME: 17-05-2022
+                        ">
+                        Details +
                       </button>
-                    
-                    <div class="collapse" id="collapseExample">
-                      <p>
-                        <div class="card text-bg-dark mb-3" style="width: 100%; height: 300px;">
-                          <div class="card-header"><h5>Rate the Poem</h5></div>
-                          <div class="card-body">
-                            <h5 class="card-title">
-                              <div class="btn-group" role="group" aria-label="Basic example">
-                              <button type="button" class="btn btn-primary">1</button>
-                              <button type="button" class="btn btn-primary">2</button>
-                              <button type="button" class="btn btn-primary">3</button>
-                              <button type="button" class="btn btn-primary">4</button>
-                              <button type="button" class="btn btn-primary">5</button>
-                            </div></h5>
-                            <div class="form-group">
-                              <label for="exampleFormControlTextarea1">Comment: </label>
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write here"></textarea>
-                            </div>
-                            <br>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-primary">Rate</button>
+                        &nbsp;
+                        
+                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                          Rate
+                        </button>
+                      
+                      <div class="collapse" id="collapseExample">
+                        <p>
+                          <div class="card text-bg-dark mb-3" style="width: 100%; height: 300px;">
+                            <div class="card-header"><h5>Rate the Poem</h5></div>
+                            <div class="card-body">
+                              <h5 class="card-title">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-primary">1</button>
+                                <button type="button" class="btn btn-primary">2</button>
+                                <button type="button" class="btn btn-primary">3</button>
+                                <button type="button" class="btn btn-primary">4</button>
+                                <button type="button" class="btn btn-primary">5</button>
+                              </div></h5>
+                              <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Comment: </label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write here"></textarea>
+                              </div>
+                              <br>
+                              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <button type="button" class="btn btn-primary">Rate</button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                    </p>
+                      </p>
+                      </div>
+                      <br>
                     </div>
-                  
-                    <br>
+                  </div>                
+                  <div class="col-sm-6">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-dark"
+                      data-bs-toggle="tooltip" data-bs-placement="top"
+                      data-bs-custom-class="custom-tooltip"
+                      title="Score: 4.9 of 5 stars.">
+                      Avg Score 4.9
+                    </button>
                   </div>
-                </div>                
-                <div class="col-sm-3">
-                  <button type="button" class="btn btn-dark"
-                    data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-custom-class="custom-tooltip"
-                    title="Score: 4.9 of 5 stars.">
-                    Score 4.9
-                  </button>
-            </div>
-            </div>
+                  </div>
+              
+              </div>
+                </div><!--Fin de la columna -->
+                <div class="col-sm-1">
+                  <br>
+                </div>
+                <div class="col-sm-4">
+                  <br>
+                  <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;"><h5>Ratings: </h5></div></p>
+                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
+                    <div class="card-header">User</div>
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="Score:">
+                          Score:
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="5 of 5 stars.">
+                          5
+                        </button>
+                      </div></h5>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Commentary: </label>
+                        <p> </p>
+                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
+                      </div>
+                      <br>
+                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary"
+                        data-bs-toggle="popover" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-popover"
+                        title="Poem's Details"
+                        data-bs-html="true"
+                        data-bs-content="- USER: User 1 <br/>- DATETIME: 18-05-2022
+                        ">
+                        Details +
+                        </button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
+                    <div class="card-header">User</div>
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="Score:">
+                          Score:
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="5 of 5 stars.">
+                          5
+                        </button>
+                      </div></h5>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Commentary: </label>
+                        <p> </p>
+                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
+                      </div>
+                      <br>
+                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary"
+                        data-bs-toggle="popover" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-popover"
+                        title="Poem's Details"
+                        data-bs-html="true"
+                        data-bs-content="- USER: User 1 <br/>- DATETIME: 18-05-2022
+                        ">
+                        Details +
+                        </button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
+                    <div class="card-header">User</div>
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="Score:">
+                          Score:
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="5 of 5 stars.">
+                          5
+                        </button>
+                      </div></h5>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Commentary: </label>
+                        <p> </p>
+                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
+                      </div>
+                      <br>
+                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary"
+                        data-bs-toggle="popover" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-popover"
+                        title="Poem's Details"
+                        data-bs-html="true"
+                        data-bs-content="- USER: User 1 <br/>- DATETIME: 18-05-2022
+                        ">
+                        Details +
+                        </button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
+                    <div class="card-header">User</div>
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                          <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="Score:">
+                          Score:
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                          data-bs-toggle="tooltip" data-bs-placement="top"
+                          data-bs-custom-class="custom-tooltip"
+                          title="5 of 5 stars.">
+                          5
+                        </button>
+                      </div></h5>
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Commentary: </label>
+                        <p> </p>
+                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
+                      </div>
+                      <br>
+                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-primary"
+                        data-bs-toggle="popover" data-bs-placement="bottom"
+                        data-bs-custom-class="custom-popover"
+                        title="Poem's Details"
+                        data-bs-html="true"
+                        data-bs-content="- USER: User 1 <br/>- DATETIME: 18-05-2022
+                        ">
+                        Details +
+                        </button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                
+            
             
                   
             
-          </div>
-              </div>
+            </div>
+            
+            </div>
                 
             </div>
         </div>
