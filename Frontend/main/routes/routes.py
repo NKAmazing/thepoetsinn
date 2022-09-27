@@ -1,5 +1,6 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, Response
-
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, Response, make_response
+import requests
+import json
 
 
 app = Blueprint('app', __name__, url_prefix='/')
@@ -14,7 +15,29 @@ def read_poem():
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    api_url = "http://127.0.0.1:8500/auth/login"
+    
+    data = {"email": "teirione@hotmail.com", "password": "tatizapata"}
+
+    headers = {"Content-Type": "application/json"}
+
+    response = requests.post(api_url, json = data, headers = headers)
+
+    print(response.status_code)
+    print(response.text)
+
+    # Obtener el token desde response
+    token = json.loads(response.text)
+    token = token["access_token"]
+    print(token)
+
+    # Guardar el token en las cookies y devuelve la pagina
+    resp = make_response(render_template("login.html"))
+    resp.set_cookie("access_token", token)
+
+    return resp
+
+    # return render_template('login.html')
 
 @app.route('/home')
 def main_menu_user():
