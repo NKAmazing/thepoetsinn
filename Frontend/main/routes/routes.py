@@ -1,3 +1,4 @@
+from http.client import ResponseNotReady
 from flask import Flask, Blueprint, render_template, request, redirect, url_for, Response, make_response
 import requests
 import json
@@ -41,7 +42,25 @@ def login():
 
 @app.route('/home')
 def main_menu_user():
-    return render_template('main_menu_user.html')
+    api_url = "http://127.0.0.1:8500/poems"
+    data = {"page": 1,"perpage": 12}
+    jwt = request.cookies.get("access_token")
+    print(jwt)
+    headers = {"Content-Type": "application/json", "Authorization": "BEARER {}".format(jwt)}
+    response = requests.get(api_url, json=data, headers=headers)
+    print(response.status_code)
+
+    # obtener lista de poemas en json
+    poems = json.loads(response.text)
+    # print(poems)
+
+    list_poems = poems["poems"]
+    # print(list_poems)
+    for poem in list_poems:
+        print(poem)  
+    print(type(list_poems))
+
+    return render_template('main_menu_user.html', poems=list_poems)
 
 @app.route('/read/poem/rate')
 def read_poem_user():

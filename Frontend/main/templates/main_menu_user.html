@@ -89,6 +89,17 @@
 					</tr>
 					</thead>
 					<tbody>
+						{% for poem in poems %}
+						<tr>
+							<td>{{poem.id}}</td>
+							<td>{{poem.title}}</td>
+							<td>{{poem.user.username}}</td>
+							<td>{{poem.rating}}</td>
+							<td><a class="btn btn-primary" href="/read/poem/rate" role="button">Read</a>
+						</tr>
+						{% endfor %}
+					</tbody>
+					<!-- <tbody>
 					<tr>
 						<th scope="row">1</th>
 						<td>Poem 1</td>
@@ -173,7 +184,7 @@
 						<td>4.8</td>
 						<td><a class="btn btn-primary" href="/read/poem/rate" role="button">Read</a>
 					</tr>
-					</tbody>
+					</tbody> -->
 				</table>
 			</div>
 			</div><!--Fin de la fila -->
