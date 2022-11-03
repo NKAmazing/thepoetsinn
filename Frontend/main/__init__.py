@@ -9,6 +9,8 @@ def create_app():
 
     load_dotenv()
 
+    app.config["API_URL"] = os.getenv("API_URL")
+
     app.register_blueprint(routes.app)
 
     return app

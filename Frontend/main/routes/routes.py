@@ -1,7 +1,9 @@
+import email
 from http.client import ResponseNotReady
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, Response, make_response
+from flask import Flask, Blueprint, current_app, render_template, request, redirect, url_for, Response, make_response
 import requests
 import json
+from . import functions as f
 
 
 app = Blueprint('app', __name__, url_prefix='/')
@@ -14,31 +16,47 @@ def main_menu():
 def read_poem():
     return render_template('read_poem.html')
 
-@app.route('/login')
+@app.route('/login', methods=["GET", "POST"])
 def login():
-    api_url = "http://127.0.0.1:8500/auth/login"
-    
-    data = {"email": "teirione@hotmail.com", "password": "tatizapata"}
+    if (request.method == "POST"):
+        # Obtener datos del formulario - Esto lo traigo del HTML con los name de los inputs.
+        email = request.form.get("email")
+        password = request.form.get("password")
+        
+        if email != None and password != None:
 
-    headers = {"Content-Type": "application/json"}
+            api_url = f'{current_app.config["API_URL"]}/auth/login'
+            # Envio de logueo
+            data = {"email": email, "password":password}
+            headers = {"Content-Type" : "application/json"}
 
-    response = requests.post(api_url, json = data, headers = headers)
+            response = requests.post(api_url, json=data, headers=headers)
 
-    print(response.status_code)
-    print(response.text)
+            print(response.text)
 
-    # Obtener el token desde response
-    token = json.loads(response.text)
-    token = token["access_token"]
-    print(token)
+            if (response.ok):
+                # Obtener el token desde response.
+                response = json.loads(response.text)
+                token = response["access_token"]
+                user_id = str(response["id"])
 
-    # Guardar el token en las cookies y devuelve la pagina
-    resp = make_response(render_template("login.html"))
-    resp.set_cookie("access_token", token)
+                response = f.get_poems()
 
-    return resp
+                poems = json.loads(response.text)
 
-    # return render_template('login.html')
+                list_poems = poems["poems"]
+                user = f.get_user(user_id)
+                user = json.loads(user.text)
+
+                resp = make_response(render_template("main_menu_user.html", poems=list_poems, user=user, jwt=token))
+                resp.set_cookie("access_token", token)
+                resp.set_cookie("id", user_id)
+                
+                return resp
+            
+        return render_template("login.html", error="Wrong user or password")
+    else:
+        return render_template("login.html")
 
 @app.route('/home')
 def main_menu_user():
