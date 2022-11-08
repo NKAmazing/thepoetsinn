@@ -1,58 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Read Poem's name</title>
-        <meta charset="utf-8">
-		<!--Colocar el viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--Incluyo CSS para dar color a las columnas -->
-	<link rel="stylesheet" href="/static/style/main_style_user.css">
-	<!-- Incluir CDN CSS de Bootstrap-->
-	<!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <style>
-    body {
-      background-color: #414141;
-    }
-  </style>
-    </head>
-    <body>
+{% extends 'base.html' %}
+
+{% block title %}Read Poem{% endblock %}
+
+		{% block content %}
         <div class="container-fluid">
 			<!--Fila -->
-			<div class="row section-1">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div class="container-fluid">
-                      <a class="navbar-brand" href="/home">Super Poems</a>
-                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                      </button>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                          <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/my-profile">My Profile</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/my-poems">My Poems</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/create-poem">Upload a Poem</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </nav>
-              </div> <!-- Fin de la fila -->
               <div class="row">
                 <br>
                 <div class="col-sm-6">
                   <br>
                   <div class="card text-bg-dark mb-3" style="width: 100%; height: 500px;">
-                    <div class="card-header">Author</div>
+                    <div class="card-header">{{poem.user.username}}</div>
                     <div class="card-body">
-                      <h5 class="card-title">Poem Title</h5>
-                      <p class="card-text">Some quick example text of the Poem's body.</p>
+                      <h5 class="card-title">{{poem.title}}</h5>
+                      <p class="card-text">{{poem.body}}</p>
                     </div>
                   </div>
                   <div class="row">
@@ -70,10 +31,11 @@
                         Details +
                       </button>
                         &nbsp;
-                        
+                        {% if request.cookies.get("access_token") %}
                         <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                           Rate
                         </button>
+                        {% endif %}
                       
                       <div class="collapse" id="collapseExample">
                         <p>
@@ -282,14 +244,4 @@
             </div>
             
             </div>
-                
-            </div>
-        </div>
-    <!-- Incluir CDN Jquery-->
-	<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
-	<!-- JavaScript Bundle with Popper -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
-  <script src="/Frontend/main/templates/app.js" charset="utf-8"></script>
-	</body>
-</html>
+        {% endblock %}

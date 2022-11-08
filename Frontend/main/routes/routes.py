@@ -48,7 +48,8 @@ def login():
                 user = f.get_user(user_id)
                 user = json.loads(user.text)
 
-                resp = make_response(render_template("main_menu_user.html", poems=list_poems, user=user, jwt=token))
+                # resp = make_response(render_template("main_menu_user.html", poems=list_poems, user=user, jwt=token))
+                resp = make_response(redirect(url_for("app.main_menu_user")))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
                 
@@ -60,29 +61,34 @@ def login():
 
 @app.route('/home')
 def main_menu_user():
-    api_url = "http://127.0.0.1:8500/poems"
-    data = {"page": 1,"perpage": 12}
-    jwt = request.cookies.get("access_token")
-    print(jwt)
-    headers = {"Content-Type": "application/json", "Authorization": "BEARER {}".format(jwt)}
-    response = requests.get(api_url, json=data, headers=headers)
-    print(response.status_code)
+    if request.cookies.get("access_token"):
+        api_url = "http://127.0.0.1:8500/poems"
+        data = {"page": 1,"perpage": 12}
+        jwt = request.cookies.get("access_token")
+        print(jwt)
+        headers = {"Content-Type": "application/json", "Authorization": "BEARER {}".format(jwt)}
+        response = requests.get(api_url, json=data, headers=headers)
+        print(response.status_code)
 
-    # obtener lista de poemas en json
-    poems = json.loads(response.text)
-    # print(poems)
+        # obtener lista de poemas en json
+        poems = json.loads(response.text)
+        # print(poems)
 
-    list_poems = poems["poems"]
-    # print(list_poems)
-    for poem in list_poems:
-        print(poem)  
-    print(type(list_poems))
+        list_poems = poems["poems"]
+        # print(list_poems)
+        for poem in list_poems:
+            print(poem)  
+        print(type(list_poems))
 
-    return render_template('main_menu_user.html', poems=list_poems)
+        return render_template('main_menu_user.html', poems=list_poems)
+    else:
+        return redirect(url_for("app.login"))
 
-@app.route('/read/poem/rate')
-def read_poem_user():
-    return render_template('read_poem_user.html')
+@app.route('/read/poem/rate/<int:id>' )
+def read_poem_user(id):
+    poem = f.get_poem(id)
+    poem = json.loads(poem.text)
+    return render_template('read_poem_user.html', poem=poem)
 
 @app.route('/my-profile')
 def profile():

@@ -17,15 +17,16 @@ from main.auth import decorators
 class Poem(Resource):
     
     # Obtengo recurso
-    @jwt_required(optional=True)
+    # @jwt_required(optional=True)
     def get(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         # Verificar si se ha ingresado con token
-        current_identity = get_jwt_identity()
-        if current_identity:
-            return poem.to_json()
-        else:
-            return poem.to_json_public()
+        # current_identity = get_jwt_identity()
+        # if current_identity:
+        #     return poem.to_json()
+        # else:
+        #     return poem.to_json_public()
+        return poem.to_json()
     
     # Eliminar recurso
     @jwt_required()
@@ -109,10 +110,11 @@ class Poems(Resource):
                         if value == "author_name[desc]":
                             poems = poems.order_by(PoemModel.user.desc())
         # hago el paginado de poemas pasandole la pagina y la cantidad de poemas por pagina, luego establezco un limite de poemas por pagina          
-        poems = poems.paginate(page, perpage, True, 10)
+        poems = poems.paginate(page=page, per_page=perpage, error_out=False)
         # retorno el to json short, el total de poemas y la pagina
         return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
         "total": poems.total, "pages": poems.pages, "page": page})
+        # return jsonify({"poems":[poem.to_json_short() for poem in poems.items]})
 
     # Insertar recurso
     @jwt_required()
