@@ -35,15 +35,14 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" style="color: #ff2525;" href="/logout">Log out</a>
                         </li>
-                        {% for user in users %}
+                        
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{url_for('app.profile', id=user.id)}}">My Profile</a>
+                            <a class="nav-link" aria-current="page" href="{{url_for('app.profile')}}">My Profile</a>
                         </li>
                         
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{url_for('app.my_poems', id=user.id)}}">My Poems</a>
+                            <a class="nav-link" aria-current="page" href="{{url_for('app.my_poems')}}">My Poems</a>
                         </li>
-                        {% endfor %}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/create-poem">Upload a Poem</a>
                         </li>

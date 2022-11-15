@@ -8,13 +8,13 @@ from . import functions as f
 
 app = Blueprint('app', __name__, url_prefix='/')
 
-# @app.route('/')
-# def main_menu():
-#     return render_template('main_menu.html')
+@app.route('/')
+def main_menu():
+    return render_template('main_menu.html')
 
-# @app.route('/read/poem')
-# def read_poem():
-#     return render_template('read_poem.html')
+@app.route('/read/poem')
+def read_poem():
+    return render_template('read_poem.html')
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -90,20 +90,25 @@ def read_poem_user(id):
     poem = json.loads(poem.text)
     rating = f.get_ratings_by_poem_id(id)
     rating = json.loads(rating.text)
+    print(rating)
+    print(type(rating))
     return render_template('read_poem_user.html', poem=poem, rating=rating)
 
-@app.route('/my-profile(<int:id>')
-def profile(id):
+@app.route('/my-profile')
+def profile():
     if request.cookies.get('access_token'):
         jwt = f.get_jwt()
+        id = f.get_id()
         user = f.get_user_info(id)
         user = json.loads(user.text)
+        print(user)
         return render_template('profile.html', jwt=jwt, user = user)
     else:
         return redirect('app.login')
 
 @app.route('/edit-profile')
-def edit_user(id):
+def edit_user():
+    id = f.get_id()
     user = f.get_user(id)
     user = json.loads(user.text)
     return render_template('edit_user.html', user=user)
@@ -144,17 +149,17 @@ def read_my_poem(id):
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
         resp = f.get_ratings_by_poem_id(id)
-        marks = json.loads(resp.text)
-        return render_template('read_my_poem.html', jwt=jwt, poem=poem, marks=marks)
+        ratings = json.loads(resp.text)
+        return render_template('read_my_poem.html', jwt=jwt, poem=poem, ratings=ratings)
     else:
         return redirect(url_for('app.login'))
 
-@app.route('/my-poems/<int:id>')
-def my_poems(id):
+@app.route('/my-poems')
+def my_poems():
     if request.cookies.get('access_token'):
         jwt = f.get_jwt()
-        user = f.get_user(id)
-        resp = f.get_poems_by_id(user["id"])
+        id = f.get_id()
+        resp = f.get_poems_by_id(id)
         poems = json.loads(resp.text)
         poems_list = poems["poems"]
         return render_template('my_poems.html', jwt=jwt, poems = poems_list)
