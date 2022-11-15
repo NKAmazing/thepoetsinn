@@ -12,17 +12,17 @@
           <div class="col col-sm-5">
         <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 800px;">  
         <p> </p>
-        
+        <form method="POST" id="form2" action="/create-poem">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label" style="color:white;">Title:</label>
-            <input type="text" class="form-control form-control-lg" id="formGroupExampleInput" placeholder="Write here" style="width: 300px;">
+            <input name="title" type="text" class="form-control form-control-lg" id="formGroupExampleInput" placeholder="Write here" style="width: 300px;">
           </div>
       
       <div class="row">
         <div class="mb-3">
           <div class="form-group">
             <label for="exampleFormControlTextarea1" style="color: white;">Body: <p> </p></label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
+            <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
           </div>
         </div>
       </div>   
@@ -65,11 +65,13 @@
           <a id="linkClose" href="/home" class=" btn btn-success" aria-label="Close">Great!</a>
           </div>
         </div>
+      
     </div>
     </div>
     </div>
     </div>
     </div>
+    </form>
     </div>
   </div>
   {% endblock %}

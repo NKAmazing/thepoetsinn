@@ -84,28 +84,71 @@ def main_menu_user():
     else:
         return redirect(url_for("app.login"))
 
-@app.route('/read/poem/rate/<int:id>' )
+@app.route('/read/poem/rate/<int:id>')
 def read_poem_user(id):
     poem = f.get_poem(id)
     poem = json.loads(poem.text)
-    return render_template('read_poem_user.html', poem=poem)
+    rating = f.get_ratings_by_poem_id(id)
+    rating = json.loads(rating.text)
+    return render_template('read_poem_user.html', poem=poem, rating=rating)
 
 @app.route('/my-profile')
 def profile():
     return render_template('profile.html')
 
 @app.route('/edit-profile')
-def edit_user():
-    return render_template('edit_user.html')
+def edit_user(id):
+    user = f.get_user(id)
+    user = json.loads(user.text)
+    return render_template('edit_user.html', user=user)
 
-@app.route('/create-poem')
+@app.route('/create-poem', methods=['GET', 'POST'])
 def create_poem():
-    return render_template('create_poem.html')
+    jwt = f.get_jwt()
+    if (jwt):
+        if (request.method == "POST"):
+        
+            title = request.form.get("title")
+            body = request.form.get("body")
 
-@app.route('/read/my-poem')
-def read_my_poem():
-    return render_template('read_my_poem.html')
+            id = f.get_id()
+
+            data = {"user_id": id, "title": title, "body": body}
+            headers = f.get_headers(without_token=False)
+
+            if title != "" and body != "":
+                response = requests.post(f'{current_app.config["API_URL"]}/poems', json=data, headers=headers)
+
+                if response.ok:
+                    response = f.json_load(response)
+                    return redirect(url_for('app.read_poem_user', id=response["id"], jwt=jwt))
+                else:
+                    return redirect(url_for('app.create_poem'))
+            else:
+                    return redirect(url_for('app.create_poem'))
+        else:
+            return render_template('create_poem.html', jwt=f.get_jwt())
+    else:
+        return redirect(url_for('app.login'))
+
+@app.route('/read/my-poem/<int:id>')
+def read_my_poem(id):
+    if request.cookies.get('access_token'):
+        jwt = f.get_jwt()
+        poem = f.get_poem(id)
+        poem = json.loads(poem.text)
+        resp = f.get_ratings_by_poem_id(id)
+        marks = json.loads(resp.text)
+        return render_template('read_my_poem.html', jwt=jwt, poem=poem, marks=marks)
+    else:
+        return redirect(url_for('app.login'))
 
 @app.route('/my-poems')
 def my_poems():
     return render_template('my_poems.html')
+
+@app.route('/logout')
+def logout():
+    resp = make_response(redirect('login'))
+    resp.set_cookie('access_token', '', expires=0)
+    return resp
