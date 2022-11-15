@@ -28,18 +28,22 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" style="color: #ff2525;" href="/logout">Log out</a>
                         </li>
+                        {% for user in users %}
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/my-profile">My Profile</a>
+                            <a class="nav-link" aria-current="page" href="{{url_for('app.profile', id=user.id)}}">My Profile</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/my-poems">My Poems</a>
+                            <a class="nav-link" aria-current="page" href="{{url_for('app.my_poems', id=user.id)}}">My Poems</a>
                         </li>
+                        {% endfor %}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/create-poem">Upload a Poem</a>
                         </li>

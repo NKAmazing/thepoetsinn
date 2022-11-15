@@ -7,9 +7,10 @@
       <!--Fila -->
 			<div class="row section-2">
 				<!--Columna -->
+        {% for user in users %}
 				<div class="col-sm-2">
 					<br>
-          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>Username &nbsp;<a class="btn btn-info" href="/edit-profile" role="button">Edit</a></h4></div></p>
+          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>{{user.username}}&nbsp;<a class="btn btn-info" href="/edit-profile" role="button">Edit</a></h4></div></p>
 				</div><!--Fin de la columna -->
       </div>
         <div class="row">
@@ -25,12 +26,12 @@
               <tbody>
                 <tr>
                   <th scope="row">Email</th>
-                  <td>email@example.com</td>
+                  <td>{{user.email}}</td>
                   <td><a class="btn btn-info" href="/edit-profile" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Password</th>
-                  <td> </td>
+                  <td>{{user.password}}</td>
                   <td><a class="btn btn-info" href="/edit-profile" role="button">Edit</a></td>
                 </tr>
                 <tr>
@@ -68,6 +69,7 @@
               </tr>
           </tbody>
         </div>
+        {% endfor %}
 		  </div><!--Fin de la fila -->
       
           <div class="row section-11">
