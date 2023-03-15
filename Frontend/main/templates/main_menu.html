@@ -84,90 +84,15 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td>Poem 1</td>
-						<td>Otto</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>Poem 2</td>
-						<td>Roger</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Poem 3</td>
-						<td>Shen</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">4</th>
-						<td>Poem 4</td>
-						<td>Kim</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">5</th>
-						<td>Poem 5</td>
-						<td>Rykard</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">6</th>
-						<td>Poem 6</td>
-						<td>Luke</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">7</th>
-						<td>Poem 7</td>
-						<td>Tom</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">8</th>
-						<td>Poem 8</td>
-						<td>Eren</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">9</th>
-						<td>Poem 9</td>
-						<td>Sean</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">10</th>
-						<td>Poem 10</td>
-						<td>Arthur</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">11</th>
-						<td>Poem 11</td>
-						<td>Robert</td>
-						<td>4.9</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
-					<tr>
-						<th scope="row">12</th>
-						<td>Poem 12</td>
-						<td>Kim</td>
-						<td>4.8</td>
-						<td><a class="btn btn-primary" href="/read/poem" role="button">Read</a>
-					</tr>
+						{% for poem in poems %}
+						<tr>
+							<td>{{poem.id}}</td>
+							<td>{{poem.title}}</td>
+							<td>{{poem.user.username}}</td>
+							<td>{{poem.rating}}</td>
+							<td><a class="btn btn-primary" href="{{url_for('app.read_my_poem', id=poem.id)}}" role="button">Read</a>
+						</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</div>

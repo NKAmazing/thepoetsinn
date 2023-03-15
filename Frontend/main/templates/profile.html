@@ -26,16 +26,16 @@
                 <tr>
                   <th scope="row">Email</th>
                   <td>{{user.email}}</td>
-                  <td><a class="btn btn-info" href="/edit-profile" role="button">Edit</a></td>
+                  <td><a class="btn btn-info" href="{{url_for('app.edit_user')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Password</th>
                   <td>{{user.password}}</td>
-                  <td><a class="btn btn-info" href="/edit-profile" role="button">Edit</a></td>
+                  <td><a class="btn btn-info" href="{{url_for('app.edit_user')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Role</th>
-                  <td>User</td>
+                  <td>{{user.role}}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -53,12 +53,12 @@
             <tbody>
               <tr>
                 <th scope="row">Poems</th>
-                <td>5</td>
+                <td>{{user.poem_amount}}</td>
                 <td></td>
               </tr>
               <tr>
                 <th scope="row">Ratings</th>
-                <td>12</td>
+                <td>{{user.rating_amount}}</td>
                 <td></td>
               </tr>
               <tr>
@@ -104,7 +104,7 @@
         <div class="row section-12">
           <div class="col-sm-3">
             <br/>
-            <a class="btn btn-primary" href="/home" role="button">Back to Home</a>
+            <a class="btn btn-primary" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
             <p> </p>
           </div>
         </div>
