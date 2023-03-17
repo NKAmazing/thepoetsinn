@@ -105,3 +105,10 @@ def get_id():
 def redirect_to(url):
     return redirect(url_for(url))
 #--------------- Utilidades -----------------#
+
+#Editar un usuario.
+def edit_user(id, name, email, password):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    data = {"id":id, "name": name, "email": email, "passw": password}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
