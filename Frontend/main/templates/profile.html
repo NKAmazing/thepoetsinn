@@ -9,7 +9,7 @@
 				<!--Columna -->
 				<div class="col-sm-2">
 					<br>
-          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>{{user.username}}&nbsp;<a class="btn btn-info" href="/edit-profile" role="button">Edit</a></h4></div></p>
+          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>{{user.username}}&nbsp;<a class="btn btn-info" href="{{url_for('app.edit_username')}}" role="button">Edit</a></h4></div></p>
 				</div><!--Fin de la columna -->
       </div>
         <div class="row">
@@ -26,12 +26,12 @@
                 <tr>
                   <th scope="row">Email</th>
                   <td>{{user.email}}</td>
-                  <td><a class="btn btn-info" href="{{url_for('app.edit_user')}}" role="button">Edit</a></td>
+                  <td><a class="btn btn-info" href="{{url_for('app.edit_email')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Password</th>
                   <td>{{user.password}}</td>
-                  <td><a class="btn btn-info" href="{{url_for('app.edit_user')}}" role="button">Edit</a></td>
+                  <td><a class="btn btn-info" href="{{url_for('app.edit_password')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Role</th>

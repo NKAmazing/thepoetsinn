@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit your User{% endblock %}
+
+		{% block content %}
+      <div class="container-fluid">
+      <div class="row"> 
+        <p> </p>
+        <div class="col-sm-3">
+        <p><FONT COLOR="blue">Enter new username: </FONT></p>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="floatingInput" placeholder="Username">
+          <label for="floatingInput">New Username</label>
+        </div>
+        </div>
+      </div>
+      <p> </p>
+      <div class="row section-12"> 
+      <div class="col-md-12">
+          <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Back to profile
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">You are quitting edit mode.</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Do you want to discard the changes?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to save it first</button>
+                <a class="btn btn-primary" href="/my-profile" role="button">Discard changes</a>
+                </div>
+            </div>
+            </div>
+        </div>
+        <br>
+        &nbsp;
+      </div><!--Fin de la columna -->
+      </div>
+      <div class="row">
+        <div class="col-sm-5">
+      <button id="btnSubmit" class="btn btn-success" type="submit">Save changes</button>
+                <br></br>
+                <div id="myAlert" class="alert alert-success collapse">
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>Successfully Done!</strong> Your personal information has been updated!
+                      &nbsp;
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <a id="linkClose" href="{{url_for('app.profile')}}" class=" btn btn-success" aria-label="Close">Nice!</a>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+    </div>
+{% endblock %}
