@@ -10,11 +10,24 @@ app = Blueprint('app', __name__, url_prefix='/')
 
 @app.route('/')
 def main_menu():
-    return render_template('main_menu.html')
+    api_url = "http://127.0.0.1:8500/poems"
+    data = {"page": 1,"perpage": 12}
+    headers = {"Content-Type": "application/json"}
+    response = requests.get(api_url, json=data, headers=headers)
+    print(response.status_code)
+    poems = json.loads(response.text)
+    list_poems = poems["poems"]
+    return render_template('main_menu.html', poems=list_poems)
 
-@app.route('/read/poem')
-def read_poem():
-    return render_template('read_poem.html')
+@app.route('/read/poem/<int:id>')
+def read_poem(id):
+    poem = f.get_poem(id)
+    poem = json.loads(poem.text)
+    rating = f.get_ratings_by_poem_id(id)
+    rating = json.loads(rating.text)
+    print(rating)
+    print(type(rating))
+    return render_template('read_poem.html', poem=poem, rating=rating)
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
@@ -106,12 +119,31 @@ def profile():
     else:
         return redirect('app.login')
 
-@app.route('/edit-profile')
+@app.route('/edit-profile', methods=['GET', 'POST'])
 def edit_user():
-    id = f.get_id()
-    user = f.get_user(id)
-    user = json.loads(user.text)
-    return render_template('edit_user.html', user=user)
+    jwt = f.get_jwt()
+    if jwt:
+        if request.method == "POST":
+            username = request.form.get("username")
+            email = request.form.get("email")
+            password = request.form.get("password")
+            id = f.get_id()
+            data = {"username": username, "email": email, "password": password}
+            headers = f.get_headers(without_token=False)
+            response = requests.put(f'{current_app.config["API_URL"]}/users/{id}', json=data, headers=headers)
+            if response.ok:
+                response = f.json_load(response)
+                return redirect(url_for('app.profile'))
+            else:
+                return render_template('edit_user.html', error="Something went wrong")
+        else:
+            return render_template('edit_user.html')
+    else:
+        return redirect(url_for('app.login'))        
+    # id = f.get_id()
+    # user = f.get_user(id)
+    # user = json.loads(user.text)
+    # return render_template('edit_user.html', user=user)
 
 @app.route('/create-poem', methods=['GET', 'POST'])
 def create_poem():
