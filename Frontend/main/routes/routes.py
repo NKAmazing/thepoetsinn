@@ -119,71 +119,80 @@ def profile():
     else:
         return redirect('app.login')
 
-@app.route('/edit-username', methods=['GET', 'POST'])
+@app.route('/edit_username', methods=['GET', 'POST'])
 def edit_username():
     jwt = f.get_jwt()
     if jwt:
+        user_id = f.get_id()
+        user_info = f.get_user_info(user_id)
         if request.method == 'POST':
-            username = request.form['username']
-            user_info = f.get_user_info(f.get_id())
-            user_id = str(user_info["id"])
-            print(user_id)
-            if username != "":
-                response = f.edit_user(user_id, username)
+            new_username = request.form['username']
+            response = f.edit_username(user_id, new_username)
+            if new_username != "":
+                print(new_username)
                 if response.ok:
-                    flash("Account successfully edited", "success")
-                    return make_response(redirect(url_for('app.profile')))
-                else:
-                    flash("Failed to edit account", "error")
+                    flash('Username successfully updated!', 'success')
+                    print("Username successfully updated!")
                     return redirect(url_for('app.profile'))
+                else:
+                    flash('Failed to update username.', 'error')
             else:
-                return redirect(url_for('app.profile'))
+                flash('Please enter a username.', 'error')
+                return redirect(url_for('app.edit_username'))
         else:
-            return render_template('profile.html', jwt = jwt)
+            return render_template('edit_username.html', user=user_info)
     else:
         return redirect(url_for('app.login'))
     
 @app.route('/edit-email', methods=['GET', 'POST'])
 def edit_email():
-    return render_template('edit_user_email.html')
-    # jwt = f.get_jwt()
-    # if jwt:
-    #     if request.method == "POST":
-    #         email = request.form.get("email")
-    #         id = f.get_id()
-    #         data = {"email": email}
-    #         headers = f.get_headers(without_token=False)
-    #         response = requests.put(f'{current_app.config["API_URL"]}/users/{id}', json=data, headers=headers)
-    #         if response.ok:
-    #             response = f.json_load(response)
-    #             return redirect(url_for('app.profile'))
-    #         else:
-    #             return render_template('edit_user_email.html', error="Something went wrong")
-    #     else:
-    #         return render_template('edit_user_email.html')
-    # else:
-    #     return redirect(url_for('app.login'))
+    jwt = f.get_jwt()
+    if jwt:
+        user_id = f.get_id()
+        user_info = f.get_user_info(user_id)
+        if request.method == 'POST':
+            new_email = request.form['email']
+            response = f.edit_email(user_id, new_email)
+            if new_email != "":
+                print(new_email)
+                if response.ok:
+                    flash('Email successfully updated!', 'success')
+                    print("Email successfully updated!")
+                    return redirect(url_for('app.profile'))
+                else:
+                    flash('Failed to update email.', 'error')
+            else:
+                flash('Please enter an email.', 'error')
+                return redirect(url_for('app.edit_email'))
+        else:
+            return render_template('edit_user_email.html', user=user_info)
+    else:
+        return redirect(url_for('app.login'))
     
 @app.route('/edit-password', methods=['GET', 'POST'])
 def edit_password():
-    return render_template('edit_user_password.html')
-    # jwt = f.get_jwt()
-    # if jwt:
-    #     if request.method == "POST":
-    #         password = request.form.get("password")
-    #         id = f.get_id()
-    #         data = {"password": password}
-    #         headers = f.get_headers(without_token=False)
-    #         response = requests.put(f'{current_app.config["API_URL"]}/users/{id}', json=data, headers=headers)
-    #         if response.ok:
-    #             response = f.json_load(response)
-    #             return redirect(url_for('app.profile'))
-    #         else:
-    #             return render_template('edit_user_password.html', error="Something went wrong")
-    #     else:
-    #         return render_template('edit_user_password.html')
-    # else:
-    #     return redirect(url_for('app.login'))
+    jwt = f.get_jwt()
+    if jwt:
+        user_id = f.get_id()
+        user_info = f.get_user_info(user_id)
+        if request.method == 'POST':
+            new_password = request.form['password']
+            response = f.edit_password(user_id, new_password)
+            if new_password != "":
+                print(new_password)
+                if response.ok:
+                    flash('Password successfully updated!', 'success')
+                    print("Password successfully updated!")
+                    return redirect(url_for('app.profile'))
+                else:
+                    flash('Failed to update password.', 'error')
+            else:
+                flash('Please enter a password.', 'error')
+                return redirect(url_for('app.edit_password'))
+        else:
+            return render_template('edit_user_password.html', user=user_info)
+    else:
+        return redirect(url_for('app.login'))
 
 # @app.route('/edit-profile', methods=['GET', 'POST'])
 # def edit_user():

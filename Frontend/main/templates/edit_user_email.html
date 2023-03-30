@@ -4,12 +4,13 @@
 
 		{% block content %}
       <div class="container-fluid">
+      <form method="POST" action="{{ url_for('app.edit_email') }}">
       <div class="row"> 
         <p> </p>
         <div class="col-sm-3">
         <p><FONT COLOR="cyan">Enter new email: </FONT></p>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+          <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
           <label for="floatingInput">New email address</label>
         </div>
       </div>
@@ -45,7 +46,7 @@
       </div>
       <div class="row">
         <div class="col-sm-5">
-      <button id="btnSubmit" class="btn btn-success">Save changes</button>
+      <button id="btnSubmit" class="btn btn-success" type="submit">Save changes</button>
                 <br></br>
                 <div id="myAlert" class="alert alert-success collapse">
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -58,5 +59,6 @@
                 </div>
               </div>
             </div>
+      </form>
     </div>
 {% endblock %}

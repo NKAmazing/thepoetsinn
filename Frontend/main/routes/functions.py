@@ -107,8 +107,29 @@ def redirect_to(url):
 #--------------- Utilidades -----------------#
 
 #Editar un usuario.
-def edit_user(id, name, email, password):
+def edit_user(id, username, email, password):
     api_url = f'{current_app.config["API_URL"]}/user/{id}'
-    data = {"id":id, "name": name, "email": email, "passw": password}
+    data = {"id":id, "username": username, "email": email, "passw": password}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
+
+# Editar un nombre de usuario.
+def edit_username(id, username):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    data = {"id":id, "username": username}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
+
+# Editar un email de usuario.
+def edit_email(id, email):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    data = {"id":id, "email": email}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
+
+# Editar un password de usuario.
+def edit_password(id, password):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    data = {"id":id, "password": password}
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
