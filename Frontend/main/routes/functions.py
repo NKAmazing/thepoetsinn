@@ -20,13 +20,19 @@ def get_poem(id):
     headers = get_headers()
     return requests.get(api_url, headers=headers)
 
-
 #Obtengo todos los poemas de la base de datos.
-def get_poems(page=1, perpage=3):
+def get_poems(jwt = None, page = 1, perpage = 3):
     api_url = f'{current_app.config["API_URL"]}/poems'
     data = {"page": page, "perpage": perpage}
-    headers = get_headers()
-    return requests.get(api_url, json=data, headers=headers)
+    if jwt:
+        headers = get_headers(jwt = jwt)
+    else:
+        headers = get_headers(without_token = True)
+    return requests.get(api_url, json = data, headers = headers)
+
+# Obtener la pagina de los poemas.
+def get_poems_page():
+    return request.cookies.get("poems_page")
 
 #--------------- Poems -----------------#
 
@@ -133,3 +139,6 @@ def edit_password(id, password):
     data = {"id":id, "password": password}
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
+
+def get_json(resp):
+    return json.loads(resp.text)

@@ -10,14 +10,29 @@ app = Blueprint('app', __name__, url_prefix='/')
 
 @app.route('/')
 def main_menu():
-    api_url = "http://127.0.0.1:8500/poems"
-    data = {"page": 1,"perpage": 12}
-    headers = {"Content-Type": "application/json"}
-    response = requests.get(api_url, json=data, headers=headers)
-    print(response.status_code)
-    poems = json.loads(response.text)
+    # Paginacion
+    try:
+        page = int(request.form.get('n_page'))
+    except:
+        page = request.form.get("n_page")
+        if (page == "< Back"):
+            page = int(f.get_poems_page()) - 1
+        elif (page == "Next >"):
+            page = int(f.get_poems_page()) + 1
+        else:
+            page = f.get_poems_page()
+            if (page == None):
+                page = 1
+            else:
+                page = int(page)
+    # Obtener los poemas
+    response = f.get_poems(page=page)
+    poems = f.get_json(response)
     list_poems = poems["poems"]
-    return render_template('main_menu.html', poems=list_poems)
+    # Redireccionar a función de vista
+    response = make_response(render_template('main_menu.html', poems = list_poems, page = int(page)))
+    response.set_cookie("poems_page", str(page))
+    return response
 
 @app.route('/read/poem/<int:id>')
 def read_poem(id):
