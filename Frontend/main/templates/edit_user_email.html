@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to save it first</button>
-                <a class="btn btn-primary" href="/my-profile" role="button">Discard changes</a>
+                <a class="btn btn-primary" href="{{ url_for('app.profile') }}" role="button">Discard changes</a>
                 </div>
             </div>
             </div>
@@ -53,7 +53,7 @@
                       <strong>Successfully Done!</strong> Your personal information has been updated!
                       &nbsp;
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <a id="linkClose" href="/my-profile" class=" btn btn-success" aria-label="Close">Nice!</a>
+                      <a id="linkClose" href="{{ url_for('app.profile') }}" class=" btn btn-success" aria-label="Close">Nice!</a>
                       </div>
                     </div>
                 </div>

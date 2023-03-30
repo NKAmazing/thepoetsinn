@@ -194,32 +194,6 @@ def edit_password():
     else:
         return redirect(url_for('app.login'))
 
-# @app.route('/edit-profile', methods=['GET', 'POST'])
-# def edit_user():
-#     jwt = f.get_jwt()
-#     if jwt:
-#         if request.method == "POST":
-#             username = request.form.get("username")
-#             email = request.form.get("email")
-#             password = request.form.get("password")
-#             id = f.get_id()
-#             data = {"username": username, "email": email, "password": password}
-#             headers = f.get_headers(without_token=False)
-#             response = requests.put(f'{current_app.config["API_URL"]}/users/{id}', json=data, headers=headers)
-#             if response.ok:
-#                 response = f.json_load(response)
-#                 return redirect(url_for('app.profile'))
-#             else:
-#                 return render_template('edit_username.html', error="Something went wrong")
-#         else:
-#             return render_template('edit_username.html')
-#     else:
-#         return redirect(url_for('app.login'))        
-#     # id = f.get_id()
-#     # user = f.get_user(id)
-#     # user = json.loads(user.text)
-#     # return render_template('edit_user.html', user=user)
-
 @app.route('/create-poem', methods=['GET', 'POST'])
 def create_poem():
     jwt = f.get_jwt()
