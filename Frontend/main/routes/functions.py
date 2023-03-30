@@ -21,7 +21,7 @@ def get_poem(id):
     return requests.get(api_url, headers=headers)
 
 #Obtengo todos los poemas de la base de datos.
-def get_poems(jwt = None, page = 1, perpage = 3):
+def get_poems(jwt = None, page = 1, perpage = 6):
     api_url = f'{current_app.config["API_URL"]}/poems'
     data = {"page": page, "perpage": perpage}
     if jwt:
