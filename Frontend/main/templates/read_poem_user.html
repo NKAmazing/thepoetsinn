@@ -19,7 +19,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                     <div class="d-grid gap-2 d-md-block">
-                      <a class="btn btn-primary" href="/home" role="button">Back to Home</a>
+                      <a class="btn btn-primary" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
                       &nbsp;
                       <button type="button" class="btn btn-dark"
                         data-bs-toggle="popover" data-bs-placement="bottom"
@@ -81,8 +81,54 @@
                 <div class="col-sm-1">
                   <br>
                 </div>
+                {% if ratings %}
+                    {% for rating in ratings %}
+                        <div class="card-header">{{rating.user.username}}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-custom-class="custom-tooltip"
+                                            title="Score:">
+                                        Score:
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-custom-class="custom-tooltip"
+                                            title="5 of 5 stars.">
+                                        {{rating.score}}
+                                    </button>
+                                </div>
+                            </h5>
+                            <div method="GET" class="form-group">
+                                <label for="exampleFormControlTextarea1">Commentary: </label>
+                                <p> </p>
+                                <p class="card-text">{{rating.commentary}}</p>
+                            </div>
+                            <br>
+                            <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button type="button" class="btn btn-primary"
+                                            data-bs-toggle="popover" data-bs-placement="bottom"
+                                            data-bs-custom-class="custom-popover"
+                                            title="Rating Details"
+                                            data-bs-html="true"
+                                            data-bs-content="- USER: {{rating.user.username}} <br/>- DATETIME: {{rating.timestamp}}"
+                                    >
+                                        Details +
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                    <p>No ratings available.</p>
+                {% endif %}
+
+                <!-- {% for rating in ratings %}
                 <div class="col-sm-4">
-                  {% for rating in ratings %}
                   <br>
                   <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;"><h5>Ratings: </h5></div></p>
                   <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
@@ -108,7 +154,6 @@
                         <p> </p>
                         <p class="card-text">{{rating.commentary}}</p>
                       </div>
-                      
                       <br>
                       <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -125,125 +170,8 @@
                     </div>
                     </div>
                   </div>
-                  {% endfor %}
-                  <!-- <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
-                    <div class="card-header">User</div>
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="Score:">
-                          Score:
-                        </button>
-                        <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="5 of 5 stars.">
-                          5
-                        </button>
-                      </div></h5>
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Commentary: </label>
-                        <p> </p>
-                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
-                      </div>
-                      <br>
-                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-primary"
-                        data-bs-toggle="popover" data-bs-placement="bottom"
-                        data-bs-custom-class="custom-popover"
-                        title="Rating Details"
-                        data-bs-html="true"
-                        data-bs-content="- USER: User 2 <br/>- DATETIME: 18-05-2022
-                        ">
-                        Details +
-                        </button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
-                    <div class="card-header">User</div>
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="Score:">
-                          Score:
-                        </button>
-                        <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="5 of 5 stars.">
-                          5
-                        </button>
-                      </div></h5>
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Commentary: </label>
-                        <p> </p>
-                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
-                      </div>
-                      <br>
-                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-primary"
-                        data-bs-toggle="popover" data-bs-placement="bottom"
-                        data-bs-custom-class="custom-popover"
-                        title="Rating Details"
-                        data-bs-html="true"
-                        data-bs-content="- USER: User 3 <br/>- DATETIME: 18-05-2022
-                        ">
-                        Details +
-                        </button>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
-                    <div class="card-header">User</div>
-                    <div class="card-body">
-                      <h5 class="card-title">
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="Score:">
-                          Score:
-                        </button>
-                        <button type="button" class="btn btn-primary"
-                          data-bs-toggle="tooltip" data-bs-placement="top"
-                          data-bs-custom-class="custom-tooltip"
-                          title="5 of 5 stars.">
-                          5
-                        </button>
-                      </div></h5>
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Commentary: </label>
-                        <p> </p>
-                        <p class="card-text">Some quick example text of the commentary of the Poem's Rating.</p>
-                      </div>
-                      <br>
-                      <div class="row" style="position: absolute; bottom: 0; right: 0; margin: 0 0 10px;">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button type="button" class="btn btn-primary"
-                        data-bs-toggle="popover" data-bs-placement="bottom"
-                        data-bs-custom-class="custom-popover"
-                        title="Rating Details"
-                        data-bs-html="true"
-                        data-bs-content="- USER: User 4 <br/>- DATETIME: 18-05-2022
-                        ">
-                        Details +
-                        </button>
-                      </div>
-                    </div> -->
-                    <!-- </div>
-                  </div> -->
-                  
+                </div>
+                {% endfor %} -->
                 </div>               
             </div>
             
