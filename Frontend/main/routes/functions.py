@@ -4,7 +4,7 @@ import requests, json
 #--------------- Poems -----------------#
 
 #Obtengo los poemas del poeta ayudandome del id del mismo.
-def get_poems_by_id(id, page = 1, perpage = 3):
+def get_poems_by_id(id, page = 1, perpage = 10):
     api_url = f'{current_app.config["API_URL"]}/poems'
     # Envio de la pagina y cuantos datos por pagina.
     data = {"page": page, "perpage": perpage, "user_id": id}
@@ -79,6 +79,20 @@ def get_ratings_by_poem_id(id):
 
 #--------------- Calificaciones -----------------#
 
+def get_ratings_by_user_id(id):
+    api_url = f'{current_app.config["API_URL"]}/ratings'
+
+    data = {"user_id": id}
+    headers = get_headers()
+    return requests.get(api_url, json = data, headers = headers)
+
+
+#Agregar una calificacion a un poema.
+def add_rating(user_id, poem_id, score, commentary):
+    api_url = f'{current_app.config["API_URL"]}/ratings'
+    data = {"user_id": user_id, "poem_id": poem_id, "score": score, "commentary": commentary}
+    headers = get_headers(without_token=False)
+    return requests.post(api_url, json = data, headers = headers)
 
 #--------------- Utilidades -----------------#
 
@@ -110,6 +124,7 @@ def get_id():
 
 def redirect_to(url):
     return redirect(url_for(url))
+
 #--------------- Utilidades -----------------#
 
 #Editar un usuario.

@@ -1,77 +1,77 @@
 {% extends 'base.html' %}
 
-		{% block title %}Create your poem!{% endblock %}
+{% block title %}Create your poem!{% endblock %}
 
-		{% block content %}
-      <div class="container-fluid">
-      <div class="row section-2">
-        <div class="col-sm-3">
-          <br>
-        </div>
-        <div class="col col-sm-5">
-          <div class="col col-sm-5">
+{% block content %}
+<div class="container-fluid">
+  <div class="row section-2">
+    <div class="col-sm-3">
+      <br>
+    </div>
+    <div class="col col-sm-5">
+      <div class="col col-sm-5">
         <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 800px;">  
         <p> </p>
-        <form method="POST" id="form2" action="/create-poem">
+        <form method="POST" id="form2" action="{{url_for('app.create_poem')}}">
           <div class="mb-3">
             <label for="formGroupExampleInput" class="form-label" style="color:white;">Title:</label>
             <input name="title" type="text" class="form-control form-control-lg" id="formGroupExampleInput" placeholder="Write here" style="width: 300px;">
           </div>
       
+          <div class="row">
+            <div class="mb-3">
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1" style="color: white;">Body: <p> </p></label>
+                <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
+              </div>
+            </div>
+          </div>   
+        </div></p>
+      </div>
       <div class="row">
-        <div class="mb-3">
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1" style="color: white;">Body: <p> </p></label>
-            <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
+        <div class="col-sm-6">
+          <div class="d-grid gap-2 d-md-block">
+            &nbsp;
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Back to Home
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">You are quitting creation mode.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to discard the changes?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to finish it first</button>
+                    <a class="btn btn-primary" href="/home" role="button">Discard changes</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            &nbsp;
+            <button id="btnSubmit" class="btn btn-success" type="submit">Upload Poem</button>
+            <br></br>
+            {% if request.method == 'POST' %}
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class=flashes>
+                    {% for message in messages %}
+                      <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+            {% endif %}
           </div>
         </div>
-      </div>   
-    </div></p>
-    </div>
-    <div class="row">
-    <div class="col-sm-6">
-    <div class="d-grid gap-2 d-md-block">
-      &nbsp;
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Back to Home
-    </button>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">You are quitting creation mode.</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            Do you want to discard the changes?
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to finish it first</button>
-            <a class="btn btn-primary" href="/home" role="button">Discard changes</a>
-            </div>
-        </div>
-        </div>
-    </div>
-    &nbsp;
-    <button id="btnSubmit" class="btn btn-success">Upload Poem</button>
-    <br></br>
-    <div id="myAlert" class="alert alert-success collapse">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <strong>Successfully Done!</strong> Your poem has been created!
-          &nbsp;
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a id="linkClose" href="/home" class=" btn btn-success" aria-label="Close">Great!</a>
-          </div>
-        </div>
-      
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+      </div>
     </form>
-    </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}
