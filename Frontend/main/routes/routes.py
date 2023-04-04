@@ -129,8 +129,12 @@ def read_poem_user(id):
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
         rating = f.get_ratings_by_poem_id(id)
-        rating = json.loads(rating.text)
-        
+        ratings = json.loads(rating.text)
+        print(type(rating))
+        rating = [{'commentary': 'great!', 'id': 5, 'poem': {'body': 'text34', 'date_time': '2022-04-19 19:51:30.050240', 'id': 1, 'rating': 4.375, 'title': 'New Poem', 'user': {'id': 6, 'username': 'Nico'}}, 'score': 5, 'user': {'id': 6, 'username': 'Nico'}}]
+
+        # print(rating)
+        print(len(rating))
         if request.method == 'POST':
             # obtengo el id del usuario
             user_id = f.get_id()
@@ -138,7 +142,7 @@ def read_poem_user(id):
             commentary = request.form['commentary']
             rating = f.add_rating(user_id, id, score, commentary)
         
-        return render_template('read_poem_user.html', poem=poem, rating=rating)
+        return render_template('read_poem_user.html', poem=poem, ratings=ratings)
     else:
         return redirect(url_for("app.login"))
 

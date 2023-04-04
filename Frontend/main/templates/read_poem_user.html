@@ -89,15 +89,20 @@
                     </button>
                   </div>
                   </div>
+             
               
               </div>
+             
                 </div><!--Fin de la columna -->
                 <div class="col-sm-1">
+                  
                   <br>
                 </div>
-                {% if ratings %}
+                <!-- {% if ratings %} -->
+                <div class="col-sm-5">
                     {% for rating in ratings %}
-                        <div class="card-header">{{rating.user.username}}</div>
+                    
+                        <div class="card-header">{{rating.commentary}}</div>
                         <div class="card-body">
                             <h5 class="card-title">
                                 <div class="btn-group" role="group" aria-label="Basic example">
@@ -137,9 +142,9 @@
                         </div>
                         <br>
                     {% endfor %}
-                {% else %}
+                <!-- {% else %}
                     <p>No ratings available.</p>
-                {% endif %}
+                {% endif %} -->
 
                 <!-- {% for rating in ratings %}
                 <div class="col-sm-4">
@@ -188,6 +193,7 @@
                 {% endfor %} -->
                 </div>               
             </div>
+          </div>
             
             </div>
         {% endblock %}
