@@ -4,7 +4,7 @@
 <i>A welcoming place where all the poets of the world can feel comfortable and in good company.</i>
 #
 
-Welcome to the Poet's Inn! 
+Welcome to The Poet's Inn! 
 
 This is a website where you will find a wide variety of poems of all kinds of genres and ideas.
 
