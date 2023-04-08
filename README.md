@@ -2,7 +2,7 @@
 
 ![eddie-mendoza-tavern-town](https://user-images.githubusercontent.com/83615373/230704922-dc779290-3fbb-4e24-8885-9ec66dc34a6c.jpg)
 <i>A welcoming place where all the poets of the world can feel comfortable and in good company.</i>
-
+#
 
 Welcome to the Poet's Inn! 
 
@@ -14,6 +14,7 @@ On this website you can:
 - Receive ratings for your work
 
 
+More information in the coming weeks...
 
 
 
@@ -22,9 +23,7 @@ On this website you can:
 
 
 
-
-
-
+#
 Credits:
 - Programmer: Nicolas Mayoral
 - Instructors: Andrea Navarro and Matias Navarro
