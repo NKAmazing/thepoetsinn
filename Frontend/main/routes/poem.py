@@ -86,7 +86,7 @@ def read_my_poem(id):
         return render_template('read_my_poem.html', jwt=jwt, poem=poem, ratings=ratings)
     else:
         return redirect(url_for('app.login'))
-
+    
 @poem.route('/my-poems')
 def my_poems():
     if request.cookies.get('access_token'):
@@ -98,3 +98,60 @@ def my_poems():
         return render_template('my_poems.html', jwt=jwt, poems = poems_list)
     else:
         return redirect(url_for('app.login'))
+    
+# Editar poemas
+@poem.route('/edit-poem/<int:id>', methods=['GET', 'POST'])
+def edit_poem(id):
+    jwt = f.get_jwt()
+    if (jwt):
+        # Obtener los datos del poema
+        poem = f.get_poem(id)
+        poem = json.loads(poem.text)
+        if (request.method == "POST"):
+            # Obtener los datos del formulario
+            title = request.form.get("title")
+            body = request.form.get("body")
+            # Verifico que no esten vacios
+            if title != "" and body != "":
+                # Hago el request
+                response = f.edit_poem(id, title, body)
+                # Verifico que el request haya sido exitoso
+                if response.ok:
+                    return make_response(redirect(url_for('poem.read_my_poem', id=id)))
+                else:
+                    return redirect(url_for('poem.edit_poem', id=id))
+            else:
+                return redirect(url_for('poem.edit_poem', id=id))
+        else:
+            return render_template('edit_poem.html', jwt=jwt, poem=poem)
+    else:
+        return redirect(url_for('app.login'))
+    
+# # Editar poemas
+# @poem.route('/edit-poem/<int:id>', methods=['GET', 'POST'])
+# def edit_poem(id):
+#     jwt = f.get_jwt()
+#     if (jwt):
+#         poem = f.get_poem(id)
+#         poem = json.loads(poem.text)
+#         if (request.method == "POST"):
+#             title = request.form.get("title")
+#             body = request.form.get("body")
+
+#             data = {"title": title, "body": body}
+#             headers = f.get_headers(without_token=False)
+
+#             if title != "" and body != "":
+#                 response = requests.put(f'{current_app.config["API_URL"]}/poems/{id}', json=data, headers=headers)
+
+#                 if response.ok:
+#                     response = f.json_load(response)
+#                     return redirect(url_for('poem.read_my_poem', id=response["id"], jwt=jwt))
+#                 else:
+#                     return redirect(url_for('poem.edit_poem', id=id))
+#             else:
+#                     return redirect(url_for('poem.edit_poem', id=id))
+#         else:
+#             return render_template('edit_poem.html', jwt=jwt, poem=poem)
+#     else:
+#         return redirect(url_for('app.login'))

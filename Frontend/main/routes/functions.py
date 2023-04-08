@@ -34,6 +34,13 @@ def get_poems(jwt = None, page = 1, perpage = 6):
 def get_poems_page():
     return request.cookies.get("poems_page")
 
+# Editar un poema en especifico.
+def edit_poem(id, title, body):
+    api_url = f'{current_app.config["API_URL"]}/poem/{id}'
+    data = {"title": title, "body": body}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
+
 #--------------- Poems -----------------#
 
 
