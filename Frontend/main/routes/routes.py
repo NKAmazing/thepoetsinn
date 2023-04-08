@@ -32,16 +32,6 @@ def main_menu():
     response.set_cookie("poems_page", str(page))
     return response
 
-@app.route('/read/poem/<int:id>')
-def read_poem(id):
-    poem = f.get_poem(id)
-    poem = json.loads(poem.text)
-    rating = f.get_ratings_by_poem_id(id)
-    rating = json.loads(rating.text)
-    print(rating)
-    print(type(rating))
-    return render_template('read_poem.html', poem=poem, rating=rating)
-
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if (request.method == "POST"):
@@ -109,17 +99,14 @@ def main_menu_user():
         return render_template('main_menu_user.html', poems=list_poems)
     else:
         return redirect(url_for("app.login"))
-
-# @app.route('/read/poem/rate/<int:id>')
-# def read_poem_user(id):
-#     # Obtener poemas
-#     poem = f.get_poem(id)
-#     poem = json.loads(poem.text)
-#     rating = f.get_ratings_by_poem_id(id)
-#     rating = json.loads(rating.text)
-#     print(rating)
-#     print(type(rating))
-#     return render_template('read_poem_user.html', poem=poem, rating=rating)
+    
+@app.route('/read/poem/<int:id>')
+def read_poem(id):
+    poem = f.get_poem(id)
+    poem = json.loads(poem.text)
+    rating = f.get_ratings_by_poem_id(id)
+    ratings = json.loads(rating.text)
+    return render_template('read_poem.html', poem=poem, ratings=ratings)
 
 @app.route('/read/poem/rate/<int:id>', methods=['GET', 'POST'])
 def read_poem_user(id):
@@ -130,11 +117,7 @@ def read_poem_user(id):
         poem = json.loads(poem.text)
         rating = f.get_ratings_by_poem_id(id)
         ratings = json.loads(rating.text)
-        print(type(rating))
-        rating = [{'commentary': 'great!', 'id': 5, 'poem': {'body': 'text34', 'date_time': '2022-04-19 19:51:30.050240', 'id': 1, 'rating': 4.375, 'title': 'New Poem', 'user': {'id': 6, 'username': 'Nico'}}, 'score': 5, 'user': {'id': 6, 'username': 'Nico'}}]
-
-        # print(rating)
-        print(len(rating))
+        # Agregar un rating
         if request.method == 'POST':
             # obtengo el id del usuario
             user_id = f.get_id()
