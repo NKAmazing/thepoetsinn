@@ -90,7 +90,7 @@
 							<td>{{poem.title}}</td>
 							<td>{{poem.user.username}}</td>
 							<td>{{poem.rating}}</td>
-							<td><a class="btn btn-primary" href="{{url_for('app.read_poem', id=poem.id)}}" role="button">Read</a>
+							<td><a class="btn btn-primary" href="{{url_for('poem.read_poem', id=poem.id)}}" role="button">Read</a>
 						</tr>
 						{% endfor %}
 					</tbody>

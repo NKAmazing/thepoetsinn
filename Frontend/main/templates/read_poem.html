@@ -49,6 +49,7 @@
                 <div class="col-sm-1">
                   <br>
                 </div>
+                {% if ratings %}
                 <div class="col-sm-4">
                   <br>
                   <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;"><h5>Ratings: </h5></div></p>
@@ -81,6 +82,7 @@
                   </div>
                   {% endfor %}
                 </div>
+                {% endif %}
             </div>
             </div>
     {% endblock %}

@@ -4,7 +4,7 @@
 
 		{% block content %}
       <div class="container-fluid">
-      <form method="POST" action="{{ url_for('app.edit_email') }}">
+      <form method="POST" action="{{ url_for('user.edit_email') }}">
       <div class="row"> 
         <p> </p>
         <div class="col-sm-3">
@@ -35,7 +35,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to save it first</button>
-                <a class="btn btn-primary" href="{{ url_for('app.profile') }}" role="button">Discard changes</a>
+                <a class="btn btn-primary" href="{{ url_for('user.profile') }}" role="button">Discard changes</a>
                 </div>
             </div>
             </div>
@@ -53,7 +53,7 @@
                       <strong>Successfully Done!</strong> Your personal information has been updated!
                       &nbsp;
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <a id="linkClose" href="{{ url_for('app.profile') }}" class=" btn btn-success" aria-label="Close">Nice!</a>
+                      <a id="linkClose" href="{{ url_for('user.profile') }}" class=" btn btn-success" aria-label="Close">Nice!</a>
                       </div>
                     </div>
                 </div>
