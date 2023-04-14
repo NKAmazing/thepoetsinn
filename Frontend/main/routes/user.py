@@ -32,12 +32,12 @@ def edit_username():
                 if response.ok:
                     flash('Username successfully updated!', 'success')
                     print("Username successfully updated!")
-                    return redirect(url_for('app.profile'))
+                    return redirect(url_for('user.profile'))
                 else:
                     flash('Failed to update username.', 'error')
             else:
                 flash('Please enter a username.', 'error')
-                return redirect(url_for('app.edit_username'))
+                return redirect(url_for('user.edit_username'))
         else:
             return render_template('edit_username.html', user=user_info)
     else:
@@ -57,12 +57,12 @@ def edit_email():
                 if response.ok:
                     flash('Email successfully updated!', 'success')
                     print("Email successfully updated!")
-                    return redirect(url_for('app.profile'))
+                    return redirect(url_for('user.profile'))
                 else:
                     flash('Failed to update email.', 'error')
             else:
                 flash('Please enter an email.', 'error')
-                return redirect(url_for('app.edit_email'))
+                return redirect(url_for('user.edit_email'))
         else:
             return render_template('edit_user_email.html', user=user_info)
     else:
@@ -82,12 +82,12 @@ def edit_password():
                 if response.ok:
                     flash('Password successfully updated!', 'success')
                     print("Password successfully updated!")
-                    return redirect(url_for('app.profile'))
+                    return redirect(url_for('user.profile'))
                 else:
                     flash('Failed to update password.', 'error')
             else:
                 flash('Please enter a password.', 'error')
-                return redirect(url_for('app.edit_password'))
+                return redirect(url_for('user.edit_password'))
         else:
             return render_template('edit_user_password.html', user=user_info)
     else:
