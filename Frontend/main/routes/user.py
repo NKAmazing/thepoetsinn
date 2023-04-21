@@ -13,7 +13,6 @@ def profile():
         id = f.get_id()
         user = f.get_user_info(id)
         user = json.loads(user.text)
-        print(user)
         return render_template('profile.html', jwt=jwt, user = user)
     else:
         return redirect('app.login')
@@ -28,7 +27,6 @@ def edit_username():
             new_username = request.form['username']
             response = f.edit_username(user_id, new_username)
             if new_username != "":
-                print(new_username)
                 if response.ok:
                     flash('Username successfully updated!', 'success')
                     print("Username successfully updated!")
@@ -53,7 +51,6 @@ def edit_email():
             new_email = request.form['email']
             response = f.edit_email(user_id, new_email)
             if new_email != "":
-                print(new_email)
                 if response.ok:
                     flash('Email successfully updated!', 'success')
                     print("Email successfully updated!")

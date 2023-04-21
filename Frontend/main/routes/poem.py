@@ -44,7 +44,6 @@ def create_poem():
         user_id = f.get_id()
         user_ratings = f.get_ratings_by_user_id(user_id)
         user_ratings = json.loads(user_ratings.text)
-        print(user_ratings)
         if len(user_ratings) >= 5:
             
             if (request.method == "POST"):
@@ -126,32 +125,3 @@ def edit_poem(id):
             return render_template('edit_poem.html', jwt=jwt, poem=poem)
     else:
         return redirect(url_for('app.login'))
-    
-# # Editar poemas
-# @poem.route('/edit-poem/<int:id>', methods=['GET', 'POST'])
-# def edit_poem(id):
-#     jwt = f.get_jwt()
-#     if (jwt):
-#         poem = f.get_poem(id)
-#         poem = json.loads(poem.text)
-#         if (request.method == "POST"):
-#             title = request.form.get("title")
-#             body = request.form.get("body")
-
-#             data = {"title": title, "body": body}
-#             headers = f.get_headers(without_token=False)
-
-#             if title != "" and body != "":
-#                 response = requests.put(f'{current_app.config["API_URL"]}/poems/{id}', json=data, headers=headers)
-
-#                 if response.ok:
-#                     response = f.json_load(response)
-#                     return redirect(url_for('poem.read_my_poem', id=response["id"], jwt=jwt))
-#                 else:
-#                     return redirect(url_for('poem.edit_poem', id=id))
-#             else:
-#                     return redirect(url_for('poem.edit_poem', id=id))
-#         else:
-#             return render_template('edit_poem.html', jwt=jwt, poem=poem)
-#     else:
-#         return redirect(url_for('app.login'))
