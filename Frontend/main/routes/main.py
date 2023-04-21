@@ -6,6 +6,28 @@ from . import functions as f
 
 app = Blueprint('app', __name__, url_prefix='/')
 
+@app.route('/register', methods=["GET", "POST"])
+def register():
+    if (request.method == "POST"):
+        # Obtener datos del formulario - Esto lo traigo del HTML con los name de los inputs.
+        username = request.form.get("username")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if username != None and email != None and password != None:
+            api_url = f'{current_app.config["API_URL"]}/users'
+            # Envio de registro
+            data = {"username": username, "email": email, "password":password}
+            headers = {"Content-Type" : "application/json"}
+            response = requests.post(api_url, json=data, headers=headers)
+            if (response.ok):
+                return redirect(url_for("app.login"))
+        else:
+            return render_template("register.html", error="You must complete all the data fields to be able to register.")
+    else:
+        return render_template("register.html")
+
+
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if (request.method == "POST"):

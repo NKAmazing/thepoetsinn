@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+		{% block title %}Register your account{% endblock %}
+
+		{% block content %}
+		<!--Contenedor -->
+		<div class="container-fluid">
+			<!--Fila -->
+			<div class="row section-2">
+				<!--Columna -->
+				<div class="col-md-12">
+					<p> </p>
+				</div><!--Fin de la columna -->
+		   </div><!--Fin de la fila -->
+
+		   <div class="row">
+			<div class="col-sm-4">
+
+			</div>
+			<div class="col-sm-3">
+			<p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;">
+				<p style="color: #2558ff; text-align: center; font-size: x-large;">Super Poems</p>
+			<form action="/register" method="POST">
+                <div class="mb-3">
+                    <label for="exampleInputUsername1" class="form-label" style="color: white;">Username</label>
+                    <input name="username" type="username" class="form-control" id="exampleInputUsername1">
+                  </div>
+				<div class="mb-3">
+				  <label for="exampleInputEmail1" class="form-label" style="color: white;">Email address</label>
+				  <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+				  <div id="emailHelp" class="form-text" style="color: white;">We'll never share your email with anyone else.</div>
+				</div>
+				<div class="mb-3">
+				  <label for="exampleInputPassword1" class="form-label" style="color: white;">Password</label>
+				  <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+				</div>
+				<button type="submit" class="btn btn-warning">Register</button>
+			  </form>
+			</div>
+			</div></p>
+		   </div>
+
+        </div><!-- Fin del contenedor -->
+		{% endblock %}
