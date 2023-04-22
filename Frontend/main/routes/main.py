@@ -105,7 +105,7 @@ def main_menu():
 def main_menu_user():
     if request.cookies.get("access_token"):
         api_url = "http://127.0.0.1:8500/poems"
-        data = {"page": 1,"perpage": 12}
+        data = {"page": 1,"perpage": 8}
         jwt = request.cookies.get("access_token")
         headers = {"Content-Type": "application/json", "Authorization": "BEARER {}".format(jwt)}
         response = requests.get(api_url, json=data, headers=headers)

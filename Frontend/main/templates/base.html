@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
         {% block head %}
-		<title>{% block title %}{% endblock %} - Poem website</title>
+		<title>{% block title %}{% endblock %} - The Poet's Inn</title>
 		<meta charset="utf-8">
 		<!--Colocar el viewport -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +14,7 @@
 	<style>
 		body {
 		  background-color: #414141;
+          background-image: url("/static/img/background3.jpg");
 		}
 	  </style>
       {% endblock %}
@@ -24,7 +25,7 @@
             <div class="row section-1">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <a class="navbar-brand" href="/home">Super Poems</a>
+                    <a class="navbar-brand" href="/home">The Poet's Inn</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -58,7 +59,7 @@
             <div class="row section-1">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <a class="navbar-brand" href="/">Super Poems</a>
+                    <a class="navbar-brand" href="/">The Poet's Inn</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -79,7 +80,6 @@
             
             </div><!--Fin de la fila -->
         {% endif %}
-
         {% block content %}
         {% endblock %}
         </div><!-- Fin del contenedor -->
