@@ -65,7 +65,8 @@ def edit_email():
             return render_template('edit_user_email.html', user=user_info)
     else:
         return redirect(url_for('app.login'))
-    
+
+# Editar contraseña    
 @user.route('/edit-password', methods=['GET', 'POST'])
 def edit_password():
     jwt = f.get_jwt()

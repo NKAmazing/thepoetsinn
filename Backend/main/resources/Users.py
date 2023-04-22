@@ -59,7 +59,7 @@ class User(Resource):
             data = request.get_json().items()
             for key, value in data:
                 if (key == "password"): 
-                # TODO: Averiguar como funciona generate_password
+                # Si el campo es password, se genera el hash con el metodo generate_password
                     value = user.generate_password(value)
                 setattr(user, key, value)
             db.session.add(user)

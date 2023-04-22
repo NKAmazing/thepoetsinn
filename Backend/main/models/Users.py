@@ -20,9 +20,11 @@ class User(db.Model):
     def plain_password(self, password):
         self.password = generate_password_hash(password)
 
+    # Generar hash de password
     def generate_password(self, password):
         return generate_password_hash(password)
 
+    # Verificar hash de password
     def validate_pass(self, password):
         return check_password_hash(self.password, password)
 
