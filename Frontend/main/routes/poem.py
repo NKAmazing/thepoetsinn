@@ -9,27 +9,36 @@ poem = Blueprint('poem', __name__, url_prefix='/poem')
 
 @poem.route('/read/poem/<int:id>')
 def read_poem(id):
+    # Obtener poema
     poem = f.get_poem(id)
     poem = json.loads(poem.text)
+
+    # Obtener ratings
     rating = f.get_ratings_by_poem_id(id)
     ratings = json.loads(rating.text)
+
     return render_template('read_poem.html', poem=poem, ratings=ratings)
 
 @poem.route('/read/poem/rate/<int:id>', methods=['GET', 'POST'])
 def read_poem_user(id):
     jwt = f.get_jwt()
     if jwt:
-        # Obtener poemas
+        # Obtener poema
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
         rating = f.get_ratings_by_poem_id(id)
         ratings = json.loads(rating.text)
+
         # Agregar un rating
         if request.method == 'POST':
-            # obtengo el id del usuario
+            # Obtengo el id del usuario
             user_id = f.get_id()
+
+            # Obtengo el score y el comentario
             score = request.form['score']
             commentary = request.form['commentary']
+
+            # Agrego el rating
             rating = f.add_rating(user_id, id, score, commentary)
         
         return render_template('read_poem_user.html', poem=poem, ratings=ratings)
@@ -47,25 +56,24 @@ def create_poem():
         if len(user_ratings) >= 5:
             
             if (request.method == "POST"):
-            
+                # Obtengo el titulo y el body del poema
                 title = request.form.get("title")
                 body = request.form.get("body")
 
-                id = f.get_id()
-
-                data = {"user_id": id, "title": title, "body": body}
-                headers = f.get_headers(without_token=False)
-
                 if title != "" and body != "":
-                    response = requests.post(f'{current_app.config["API_URL"]}/poems', json=data, headers=headers)
-
+                    # Agrego el poema
+                    response = f.add_poem(user_id, title, body)
                     if response.ok:
                         response = f.json_load(response)
-                        return redirect(url_for('app.read_poem_user', id=response["id"], jwt=jwt))
+                        flash('Poem created successfully.', 'success')
+                        return redirect(url_for('poem.read_poem_user', id=response["id"], jwt=jwt))
                     else:
-                        return redirect(url_for('app.create_poem'))
+                        # Muestro un error y redirijo al usuario a la pagina de creacion de poemas
+                        flash('Something went wrong.', 'error')
+                        return redirect(url_for('poem.create_poem'))
                 else:
-                        return redirect(url_for('app.create_poem'))
+                        flash('Error creating poem. You must fill all the fields before creating a poem.', 'error')
+                        return redirect(url_for('poem.create_poem'))
             else:
                 return render_template('create_poem.html', jwt=jwt)
         else:

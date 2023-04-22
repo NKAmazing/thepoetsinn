@@ -34,12 +34,21 @@ def get_poems(jwt = None, page = 1, perpage = 6):
 def get_poems_page():
     return request.cookies.get("poems_page")
 
+# Agregar un poema.
+def add_poem(user_id, title, body):
+    api_url = f'{current_app.config["API_URL"]}/poems'
+    data = {"user_id": user_id, "title": title, "body": body}
+    headers = get_headers(without_token = False)
+    return requests.post(api_url, json = data, headers = headers)
+
 # Editar un poema en especifico.
 def edit_poem(id, title, body):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
     data = {"title": title, "body": body}
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
+
+# Eliminar un poema en especifico.
 
 #--------------- Poems -----------------#
 
@@ -181,3 +190,12 @@ def register(username, email, password, role):
 
     # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
     return requests.post(api_url, json = data, headers = headers)
+
+# Loguear un usuario.
+def login(email, password):
+    api_url = f'{current_app.config["API_URL"]}/auth/login'
+    # Envio de logueo
+    data = {"email": email, "password":password}
+    headers = {"Content-Type" : "application/json"}
+    # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
+    return requests.post(api_url, json=data, headers=headers)

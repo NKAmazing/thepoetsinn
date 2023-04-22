@@ -16,12 +16,17 @@ def register():
         role = "user"
 
         if username != None and email != None and password != None:
+            # Hago el registro.
             response = f.register(username, email, password, role)
             if (response.ok):
+                # Muestro mensaje de exito.
                 flash("Registered user successfully!", "success")
+                # Redirecciono al login.
                 return redirect(url_for("app.login"))
         else:
+            # Muestro mensaje de error.
             flash("You must complete all the data fields to be able to register.", "error")
+            # Redirecciono al registro.
             return render_template("register.html", error="Error registering user. Data incomplete.")
     else:
         return render_template("register.html")
@@ -35,28 +40,19 @@ def login():
         password = request.form.get("password")
         
         if email != None and password != None:
-
-            api_url = f'{current_app.config["API_URL"]}/auth/login'
-            # Envio de logueo
-            data = {"email": email, "password":password}
-            headers = {"Content-Type" : "application/json"}
-
-            response = requests.post(api_url, json=data, headers=headers)
-
+            # Hago el login.
+            response = f.login(email, password)
             if (response.ok):
                 # Obtener el token desde response.
                 response = json.loads(response.text)
                 token = response["access_token"]
+                # Obtengo el id del usuario.
                 user_id = str(response["id"])
-                # Obtener los poemas.
-                response = f.get_poems()
-                # Cargo los poemas en un formato json.
-                poems = json.loads(response.text)
-
-                list_poems = poems["poems"]
+                # Obtengo la informacion del usuario.
                 user = f.get_user(user_id)
+                # Obtengo el usuario en formato json.
                 user = json.loads(user.text)
-                # Hago el response.
+                # Hago el response redireccionando al main menu.
                 resp = make_response(redirect(url_for("app.main_menu_user")))
                 # Seteo el token en el response.
                 resp.set_cookie("access_token", token)
@@ -71,7 +67,9 @@ def login():
     
 @app.route('/logout')
 def logout():
+    # Redirecciono al login.
     resp = make_response(redirect('login'))
+    # Elimino el token.
     resp.set_cookie('access_token', '', expires=0)
     return resp
 
@@ -103,18 +101,15 @@ def main_menu():
 
 @app.route('/home')
 def main_menu_user():
-    if request.cookies.get("access_token"):
-        api_url = "http://127.0.0.1:8500/poems"
-        data = {"page": 1,"perpage": 8}
-        jwt = request.cookies.get("access_token")
-        headers = {"Content-Type": "application/json", "Authorization": "BEARER {}".format(jwt)}
-        response = requests.get(api_url, json=data, headers=headers)
-
-        # obtener lista de poemas en json
+    jwt = f.get_jwt()
+    if jwt:
+        # Hago la petición a la API para obtener los poemas.
+        response = f.get_poems()
+        # Obtener poemas en json
         poems = json.loads(response.text)
-
+        # Obtener lista de poemas
         list_poems = poems["poems"]
-
+        
         return render_template('main_menu_user.html', poems=list_poems)
     else:
         return redirect(url_for("app.login"))

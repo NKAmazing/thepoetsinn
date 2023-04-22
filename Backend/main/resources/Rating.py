@@ -54,6 +54,13 @@ class Ratings(Resource):
 
     # Obtener lista de puntuaciones
     def get(self):
+
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "poem_id":
+                    return self.show_ratings_by_poem_id(value)
+
         ratings = db.session.query(RatingModel).all()
         return jsonify([rating.to_json() for rating in ratings])
     
@@ -71,3 +78,9 @@ class Ratings(Resource):
         db.session.commit()
         sent = sendMail([rating.poem.user.email], "Your poem was rated!", 'rated', user = rating.poem.user, poem = rating.poem, user_1 = rating.user)
         return rating.to_json(), 201
+
+    # Obtener lista de puntuaciones por id de poema
+    def show_ratings_by_poem_id(self, id):
+        ratings = db.session.query(RatingModel)
+        ratings = ratings.filter(RatingModel.poem.has(PoemModel.id == id)).all()
+        return jsonify([rating.to_json() for rating in ratings])

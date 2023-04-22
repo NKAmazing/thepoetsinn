@@ -122,7 +122,7 @@ class Poems(Resource):
         current_identity = get_jwt_identity()
         user = db.session.query(UserModel).get_or_404(current_identity)
         # Verificar si el usuario cumple con la condicion
-        if len(user.poems) == 0 or (len(user.ratings))/(len(user.poems)) >= 5:
+        if len(user.poems) == 0 or (len(user.ratings))/(len(user.poems)) >= 0:
             # Obtener datos de la solicitud
             poem = PoemModel.from_json(request.get_json())
             poem.user_id = current_identity
