@@ -6,11 +6,12 @@ from . import functions as f
 
 user = Blueprint('user', __name__, url_prefix='/user')
 
-@user.route('/my-profile')
+@user.route('/my-profile', methods=['GET', 'POST'])
 def profile():
     if request.cookies.get('access_token'):
         jwt = f.get_jwt()
         id = f.get_id()
+        # Cargo la informacion del usuario
         user = f.get_user_info(id)
         user = json.loads(user.text)
         return render_template('profile.html', jwt=jwt, user = user)
@@ -87,5 +88,20 @@ def edit_password():
                 return redirect(url_for('user.edit_password'))
         else:
             return render_template('edit_user_password.html', user=user_info)
+    else:
+        return redirect(url_for('app.login'))
+    
+# Eliminar cuenta
+@user.route('/delete-account/<int:id>')
+def delete_user(id):
+    jwt = f.get_jwt()
+    if jwt:
+        response = f.delete_user(id)
+        if response.ok:
+            flash('Account successfully deleted!', 'success')
+            return redirect(url_for('app.login'))
+        else:
+            flash('Failed to delete account.', 'error')
+            return redirect(url_for('user.profile'))
     else:
         return redirect(url_for('app.login'))

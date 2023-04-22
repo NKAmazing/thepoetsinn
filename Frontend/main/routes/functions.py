@@ -46,7 +46,7 @@ def edit_poem(id, title, body):
 
 #--------------- User -----------------#
 
-#Obtengo los datos del usuario.
+# Obtengo los datos del usuario.
 def get_user_info(id):
     api_url = f'{current_app.config["API_URL"]}/user/{id}'
     #Obtengo el jwt del logue e instancio el header y le agrego el jwt.
@@ -56,20 +56,26 @@ def get_user_info(id):
     return requests.get(api_url, headers=headers)
 
 
-#Obtener un usuario en especifico.
+# Obtener un usuario en especifico.
 def get_user(id):
     api_url = f'{current_app.config["API_URL"]}/user/{id}'
     headers = get_headers()
     return requests.get(api_url, headers=headers)
 
 
-#Obtengo el nombre del usuario
+# Obtengo el nombre del usuario
 def get_username(user_id):
     headers = get_headers()
     api_url = f'{current_app.config["API_URL"]}/user/{user_id}'
     response = requests.get(api_url, headers=headers)
     user = json.loads(response.text)
     return user["name"]
+
+# Borrar cuenta de usuario.
+def delete_user(id):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    headers = get_headers(without_token=False)
+    return requests.delete(api_url, headers=headers)
 
 #--------------- User -----------------#
 
