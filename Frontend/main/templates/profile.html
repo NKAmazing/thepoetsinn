@@ -7,7 +7,7 @@
       <br>
 				<!--Columna -->
 				<div class="col-sm-2">
-          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>{{user.username}}&nbsp;<a class="btn btn-info" href="{{url_for('user.edit_username')}}" role="button">Edit</a></h4></div></p>
+          <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px;"><h4>{{user.username}}&nbsp;<a class="btn btn-warning" href="{{url_for('user.edit_username')}}" role="button">Edit</a></h4></div></p>
 				</div><!--Fin de la columna -->
       
         <div class="row section-10">
@@ -24,16 +24,16 @@
                 <tr>
                   <th scope="row">Email</th>
                   <td>{{user.email}}</td>
-                  <td><a class="btn btn-info" href="{{url_for('user.edit_email')}}" role="button">Edit</a></td>
+                  <td><a class="btn btn-warning" href="{{url_for('user.edit_email')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Password</th>
-                  <td>{{user.password}}</td>
-                  <td><a class="btn btn-info" href="{{url_for('user.edit_password')}}" role="button">Edit</a></td>
+                  <td>**********</td>
+                  <td><a class="btn btn-warning" href="{{url_for('user.edit_password')}}" role="button">Edit</a></td>
                 </tr>
                 <tr>
                   <th scope="row">Role</th>
-                  <td>{{user.role}}</td>
+                  <td>{{user.role.capitalize()}}</td>
                   <td></td>
                 </tr>
               </tbody>
@@ -67,12 +67,9 @@
           </tbody>
         </div>
 		  </div><!--Fin de la fila -->
-      
-          
-            
         <div class="row section-11">
           <div class="col-sm-12">
-            <a class="btn btn-primary" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
+            <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
             <form action="{{url_for('user.delete_user', id=user.id)}}" method="delete">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <!-- Button trigger modal -->

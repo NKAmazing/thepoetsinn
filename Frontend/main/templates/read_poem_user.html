@@ -19,7 +19,7 @@
                   <div class="row">
                     <div class="col-sm-6">
                     <div class="d-grid gap-2 d-md-block">
-                      <a class="btn btn-primary" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
+                      <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
                       &nbsp;
                       <button type="button" class="btn btn-dark"
                         data-bs-toggle="popover" data-bs-placement="bottom"
@@ -58,7 +58,7 @@
                                           </div>
                                           <br>
                                           <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                              <button type="submit" class="btn btn-primary">Rate</button>
+                                              <button type="submit" class="btn btn-success">Rate</button>
                                           </div>
                                       </div>
                                   </div>
@@ -90,23 +90,23 @@
                 {% if ratings %}
                 <div class="col-sm-4">
                   <br>
-                  <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;"><h5>Ratings: </h5></div></p>
+                  <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 115px;"><h4>Ratings </h4></div></p>
                   {% for rating in ratings %}
                   <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
                     <div class="card-header">{{rating.user.username}}</div>
                     <div class="card-body">
                       <h5 class="card-title">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-primary"
+                          <button type="button" class="btn btn-danger"
                           data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-custom-class="custom-tooltip"
-                          title="Score:">
+                          title="Score:" disabled>
                           Score:
                         </button>
-                        <button type="button" class="btn btn-primary"
+                        <button type="button" class="btn btn-danger"
                           data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-custom-class="custom-tooltip"
-                          title="5 of 5 stars.">
+                          title="5 of 5 stars." disabled>
                           {{rating.score}}
                         </button>
                       </div></h5>
