@@ -51,8 +51,8 @@
                 <td>{{poem.title}}</td>
                 <td>You</td>
                 <td>{{poem.rating}}</td>
-                <td><a class="btn btn-primary" href="{{url_for('poem.read_my_poem', id=poem.id)}}" role="button">Read</a>
-                <td><a class="btn btn-primary" href="{{url_for('poem.edit_poem', id=poem.id)}}" role="button">Edit</a>
+                <td><a class="btn btn-success" href="{{url_for('poem.read_my_poem', id=poem.id)}}" role="button">Read</a>
+                <td><a class="btn btn-warning" href="{{url_for('poem.edit_poem', id=poem.id)}}" role="button">Edit</a>
               </tr>
                 {% endfor %}
             </table>

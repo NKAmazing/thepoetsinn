@@ -8,8 +8,8 @@ user = Blueprint('user', __name__, url_prefix='/user')
 
 @user.route('/my-profile', methods=['GET', 'POST'])
 def profile():
-    if request.cookies.get('access_token'):
-        jwt = f.get_jwt()
+    jwt = f.get_jwt()
+    if jwt:
         id = f.get_id()
         # Cargo la informacion del usuario
         user = f.get_user_info(id)
