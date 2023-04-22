@@ -49,6 +49,11 @@ def edit_poem(id, title, body):
     return requests.put(api_url, json = data, headers = headers)
 
 # Eliminar un poema en especifico.
+def delete_poem(id):
+    api_url = f'{current_app.config["API_URL"]}/poem/{id}'
+    headers = get_headers(without_token=False)
+    return requests.delete(api_url, headers=headers)
+
 
 #--------------- Poems -----------------#
 

@@ -133,3 +133,18 @@ def edit_poem(id):
             return render_template('edit_poem.html', jwt=jwt, poem=poem)
     else:
         return redirect(url_for('app.login'))
+    
+# Eliminar poemas
+@poem.route('/delete-poem/<int:id>')
+def delete_poem(id):
+    jwt = f.get_jwt()
+    if jwt:
+        response = f.delete_poem(id)
+        if response.ok:
+            flash('Poem successfully deleted.', 'success')
+            return redirect(url_for('poem.my_poems'))
+        else:
+            flash('Something went wrong.', 'error')
+            return redirect(url_for('poem.my_poems'))
+    else:
+        return redirect(url_for('app.login'))

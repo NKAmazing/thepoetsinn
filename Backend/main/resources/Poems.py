@@ -17,16 +17,15 @@ from main.auth import decorators
 class Poem(Resource):
     
     # Obtengo recurso
-    # @jwt_required(optional=True)
+    @jwt_required(optional=True)
     def get(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         # Verificar si se ha ingresado con token
-        # current_identity = get_jwt_identity()
-        # if current_identity:
-        #     return poem.to_json()
-        # else:
-        #     return poem.to_json_public()
-        return poem.to_json()
+        current_identity = get_jwt_identity()
+        if current_identity:
+            return poem.to_json()
+        else:
+            return poem.to_json()
     
     # Eliminar recurso
     @jwt_required()
@@ -37,7 +36,7 @@ class Poem(Resource):
         if claims['role'] == "admin" or current_identity == poem.user_id:
             db.session.delete(poem)
             db.session.commit()
-            return '', 204
+            return 'This poem was successfully deleted.', 204
         else:
             return 'This user is not allowed to do that.', 403
 

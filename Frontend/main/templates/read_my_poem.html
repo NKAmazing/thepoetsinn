@@ -33,6 +33,7 @@
                         Details +
                       </button>
                         &nbsp;
+                        <form action="{{url_for('poem.delete_poem', id=poem.id)}}" method="delete"> 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Delete poem
@@ -51,11 +52,12 @@
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger">Yes</button>
+                                <button type="submit" class="btn btn-danger">Yes</button>
                                 </div>
                             </div>
                             </div>
                         </div>
+                        </form>
                       <br>
                     </div>
                   </div>                
