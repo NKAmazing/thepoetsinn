@@ -20,6 +20,9 @@ class User(db.Model):
     def plain_password(self, password):
         self.password = generate_password_hash(password)
 
+    def generate_password(self, password):
+        return generate_password_hash(password)
+
     def validate_pass(self, password):
         return check_password_hash(self.password, password)
 
@@ -32,7 +35,6 @@ class User(db.Model):
             'id': self.id,
             'username': str(self.username),
             'email': str(self.email),
-            # 'password': str(self.password),
             'role': str(self.role),
             'poems': [poem.to_json_short() for poem in self.poems],
             'poem_amount': len(self.poems),

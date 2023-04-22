@@ -58,9 +58,9 @@ class User(Resource):
             user = db.session.query(UserModel).get_or_404(id)
             data = request.get_json().items()
             for key, value in data:
-                # if (key == "password"): 
+                if (key == "password"): 
                 # TODO: Averiguar como funciona generate_password
-                #     value = user.generate_password(value)
+                    value = user.generate_password(value)
                 setattr(user, key, value)
             db.session.add(user)
             db.session.commit()
