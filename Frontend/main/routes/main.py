@@ -13,17 +13,16 @@ def register():
         username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
+        role = "user"
 
         if username != None and email != None and password != None:
-            api_url = f'{current_app.config["API_URL"]}/users'
-            # Envio de registro
-            data = {"username": username, "email": email, "password":password}
-            headers = {"Content-Type" : "application/json"}
-            response = requests.post(api_url, json=data, headers=headers)
+            response = f.register(username, email, password, role)
             if (response.ok):
+                flash("Registered user successfully!", "success")
                 return redirect(url_for("app.login"))
         else:
-            return render_template("register.html", error="You must complete all the data fields to be able to register.")
+            flash("You must complete all the data fields to be able to register.", "error")
+            return render_template("register.html", error="Error registering user. Data incomplete.")
     else:
         return render_template("register.html")
 
@@ -49,18 +48,19 @@ def login():
                 response = json.loads(response.text)
                 token = response["access_token"]
                 user_id = str(response["id"])
-
+                # Obtener los poemas.
                 response = f.get_poems()
-
+                # Cargo los poemas en un formato json.
                 poems = json.loads(response.text)
 
                 list_poems = poems["poems"]
                 user = f.get_user(user_id)
                 user = json.loads(user.text)
-
-                # resp = make_response(render_template("main_menu_user.html", poems=list_poems, user=user, jwt=token))
+                # Hago el response.
                 resp = make_response(redirect(url_for("app.main_menu_user")))
+                # Seteo el token en el response.
                 resp.set_cookie("access_token", token)
+                # Seteo el id en el response.
                 resp.set_cookie("id", user_id)
                 
                 return resp

@@ -27,3 +27,25 @@ def login():
         return data, 200
     else:
         return 'Incorrect password', 401
+    
+
+# Metodo de registro
+@auth.route('/register', methods=['POST'])
+def register():
+    # Obtener usuario
+    user = UserModel.from_json(request.get_json())
+    # Verificar si el mail ya existe en la base de datos
+    exists = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
+    # Si existe el email, retorna error de email duplicado
+    if exists:
+        return 'Duplicated email', 409
+    else:
+        try:
+            # Agregar user a base de datos
+            db.session.add(user)
+            db.session.commit()
+        except Exception as error:
+            # En caso de fallar, cancelar y devolver error.
+            db.session.rollback()
+            return str(error), 409
+        return user.to_json() , 201

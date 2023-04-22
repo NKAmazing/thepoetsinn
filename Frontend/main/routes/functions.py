@@ -164,3 +164,14 @@ def edit_password(id, password):
 
 def get_json(resp):
     return json.loads(resp.text)
+
+# Registrar un usuario.
+def register(username, email, password, role):
+    api_url = f'{current_app.config["API_URL"]}/auth/register'
+
+    # Envio de logueo.
+    data = {"username": username, "email": email, "password": password, "role": role}
+    headers = get_headers(without_token = True)
+
+    # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
+    return requests.post(api_url, json = data, headers = headers)
