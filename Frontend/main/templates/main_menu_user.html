@@ -51,27 +51,10 @@
 						{% endfor %}
 					</tbody>
 				</table>
-			</div>
+				</div>
 			</div><!--Fin de la fila -->
-		    <!--Fila -->
-			<div class="row section-5">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-					</ul>
-				</nav>
-			</div><!--Fin de la fila -->
-		</div><!-- Fin del contenedor -->
-	{% endblock %}
+			<!-- Agregar enlaces de navegación -->
+				<a href="{{ url_for('app.main_menu_user', page=page-1) }}">Anterior</a>
+				<a href="{{ url_for('app.main_menu_user', page=page+1) }}">Siguiente</a>
+			</div><!--Fin del contenedor -->  
+		{% endblock %}

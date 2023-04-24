@@ -3,6 +3,8 @@ from flask import Flask, Blueprint, current_app, render_template, request, redir
 import requests
 import json
 from . import functions as f
+from flask_paginate import Pagination, get_page_parameter
+
 
 app = Blueprint('app', __name__, url_prefix='/')
 
@@ -77,9 +79,9 @@ def logout():
 def main_menu():
     # Paginacion
     try:
-        page = int(request.form.get('n_page'))
+        page = int(request.form.get('_page'))
     except:
-        page = request.form.get("n_page")
+        page = request.form.get("_page")
         if (page == "< Back"):
             page = int(f.get_poems_page()) - 1
         elif (page == "Next >"):
@@ -99,17 +101,43 @@ def main_menu():
     response.set_cookie("poems_page", str(page))
     return response
 
+# @app.route('/home')
+# def main_menu_user():
+#     jwt = f.get_jwt()
+#     if jwt:
+#         # Hago la petición a la API para obtener los poemas.
+#         response = f.get_poems()
+#         # Obtener poemas en json
+#         poems = json.loads(response.text)
+#         # Obtener lista de poemas
+#         list_poems = poems["poems"]
+        
+#         return render_template('main_menu_user.html', poems=list_poems)
+#     else:
+#         return redirect(url_for("app.login"))
+
 @app.route('/home')
 def main_menu_user():
+    # Obtener el número de página actual y la cantidad de elementos por página
+    page = int(request.args.get('page', 1))
+    per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+
     jwt = f.get_jwt()
     if jwt:
         # Hago la petición a la API para obtener los poemas.
-        response = f.get_poems()
+        response = f.get_poems(page=page, perpage=per_page)
         # Obtener poemas en json
         poems = json.loads(response.text)
         # Obtener lista de poemas
         list_poems = poems["poems"]
-        
-        return render_template('main_menu_user.html', poems=list_poems)
+
+        # Calcular el rango de elementos a mostrar en la página actual
+        start = (page - 1) * per_page
+        end = start + per_page
+        poems_paginated = list_poems[start:end]
+
+        return render_template('main_menu_user.html', poems=poems_paginated, page=page)
     else:
         return redirect(url_for("app.login"))
+
+
