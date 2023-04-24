@@ -9,52 +9,40 @@
 
 		   <!--Fila -->
 			<div class="row section-10">
-				<div class="col -sm-10">			
-					<nav class="navbar navbar-expand-lg -dark bg-dark">
-						<div class="container-fluid">
-						  <a class="navbar-brand" href="#" style="color: #ffe600">List of Poems</a>
-						  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						  </button>
-						  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-							</form>
-							&nbsp;
-						  </div>
+				<div class="card-body d-flex justify-content-center">
+					{% for poem in poems %}
+						<div class="card text-bg-dark mb-3" style="width: 18rem;">
+							<img class="poem-img" src="/static/img/logo2.png">
+							<div class="card-body">
+							<h5 class="card-title">{{poem.title}}</h5>
+							<p class="card-text">Author: {{poem.user.username}}</p>
+							<p class="card-text">Rating: {{poem.rating}}</p>
+							<a href="{{url_for('poem.read_poem_user', id=poem.id)}}" class="btn btn-success">Read</a>
+							</div>
 						</div>
-				  	</nav>
-				</div>	
-		   	</div><!--Fin de la fila -->
-		   <div class="row section-4">
-			<div class="col -sm-10">
-		   		<table class="table table-dark table-striped">
-					<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Poem's Name</th>
-						<th scope="col">Author</th>
-						<th scope="col">Rating</th>
-						<th scope="col"></th>
-					</tr>
-					</thead>
-					<tbody>
-						{% for poem in poems %}
-						<tr>
-							<td>{{poem.id}}</td>
-							<td>{{poem.title}}</td>
-							<td>{{poem.user.username}}</td>
-							<td>{{poem.rating}}</td>
-							<td><a class="btn btn-success" href="{{url_for('poem.read_poem_user', id=poem.id)}}" role="button">Read</a>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-				</div>
+					{% endfor %}	
+				</div><!--Fin de la fila -->
 			</div><!--Fin de la fila -->
-			<!-- Agregar enlaces de navegación -->
-				<a href="{{ url_for('app.main_menu_user', page=page-1) }}">Anterior</a>
-				<a href="{{ url_for('app.main_menu_user', page=page+1) }}">Siguiente</a>
+				<!-- PAGINACION -->
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+					<li class="page-item">
+						<a class="page-link" href="{{ url_for('app.main_menu_user', page=page-1) }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span> Previous
+						</a>
+					</li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item">
+						<a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
+							Next <span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					</ul>
+				</nav>
+
+
+
 			</div><!--Fin del contenedor -->  
 		{% endblock %}

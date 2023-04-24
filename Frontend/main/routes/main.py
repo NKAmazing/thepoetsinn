@@ -77,14 +77,20 @@ def logout():
 
 @app.route('/')
 def main_menu():
-    # Paginacion
+
+     # Obtener valores del formulario en html
+    filter_title = request.form.get("filter_title")
+    filter_author = request.form.get("filter_author")
+    filter_rating = request.form.get("filter_rating")
+
+ # Paginacion
     try:
-        page = int(request.form.get('_page'))
+        page = int(request.form.get("_page"))
     except:
         page = request.form.get("_page")
-        if (page == "< Back"):
+        if (page == "< Atras"):
             page = int(f.get_poems_page()) - 1
-        elif (page == "Next >"):
+        elif (page == "Siguiente >"):
             page = int(f.get_poems_page()) + 1
         else:
             page = f.get_poems_page()
@@ -92,12 +98,17 @@ def main_menu():
                 page = 1
             else:
                 page = int(page)
-    # Obtener los poemas
-    response = f.get_poems(page=page)
-    poems = f.get_json(response)
-    list_poems = poems["poems"]
-    # Redireccionar a función de vista
-    response = make_response(render_template('main_menu.html', poems = list_poems, page = int(page)))
+
+    if(request.method == "POST" and (filter_title != "" or filter_author != "" or filter_rating != None)):
+        # Obtener los poemas.
+        response = f.get_poems_by_filters(title= filter_title, author= filter_author, rating= filter_rating, page = page)
+    else:
+        # Obtener los poemas
+        response = f.get_poems(page=page)
+        poems = f.get_json(response)
+        list_poems = poems["poems"]
+        # Redireccionar a función de vista
+        response = make_response(render_template('main_menu.html', poems = list_poems, page = int(page)))
     response.set_cookie("poems_page", str(page))
     return response
 
