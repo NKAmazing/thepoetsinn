@@ -76,41 +76,38 @@ def logout():
     resp.set_cookie('access_token', '', expires=0)
     return resp
 
+# @app.route('/')
+# def main_menu():
+#     # Obtener el número de página actual y la cantidad de elementos por página
+#     page = int(request.args.get('page', 1))
+#     per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+    
+#     # Obtener los poemas
+#     response = f.get_poems(page=page, perpage=per_page)
+#     poems = f.get_json(response)
+#     list_poems = poems["poems"]
+#     # Redireccionar a función de vista
+#     response = make_response(render_template('main_menu.html', poems = list_poems, page = page))
+#     # response.set_cookie("poems_page", str(page))
+#     return response
+
 @app.route('/')
 def main_menu():
-
-     # Obtener valores del formulario en html
-    filter_title = request.form.get("filter_title")
-    filter_author = request.form.get("filter_author")
-    filter_rating = request.form.get("filter_rating")
-
- # Paginacion
-    try:
-        page = int(request.form.get("_page"))
-    except:
-        page = request.form.get("_page")
-        if (page == "< Atras"):
-            page = int(f.get_poems_page()) - 1
-        elif (page == "Siguiente >"):
-            page = int(f.get_poems_page()) + 1
-        else:
-            page = f.get_poems_page()
-            if (page == None):
-                page = 1
-            else:
-                page = int(page)
-
-    if(request.method == "POST" and (filter_title != "" or filter_author != "" or filter_rating != None)):
-        # Obtener los poemas.
-        response = f.get_poems_by_filters(title= filter_title, author= filter_author, rating= filter_rating, page = page)
-    else:
-        # Obtener los poemas
-        response = f.get_poems(page=page)
-        poems = f.get_json(response)
-        list_poems = poems["poems"]
-        # Redireccionar a función de vista
-        response = make_response(render_template('main_menu.html', poems = list_poems, page = int(page)))
-    response.set_cookie("poems_page", str(page))
+    # Obtener el número de página actual y la cantidad de elementos por página
+    page = int(request.args.get('page', 1))
+    per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+    
+    # Obtener los poemas
+    response = f.get_poems(page=page, perpage=per_page)
+    poems = f.get_json(response)
+    list_poems = poems["poems"]
+    
+    # Definir opciones de filtro
+    filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
+    
+    # Redireccionar a función de vista
+    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, filter_options=filter_options))
+    # response.set_cookie("poems_page", str(page))
     return response
 
 # @app.route('/home')

@@ -23,23 +23,19 @@
 							</form>
 							&nbsp;
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								<!-- Agrega el menú desplegable de filtros -->
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
-										Filters
+									Filters
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="#">Username</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">User ID</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Rating</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Title</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Datetime [gte]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Datetime [lte]</a></li>
-									  </ul>
+									{% for filter_option in filter_options %}
+									<li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter=filter_option) }}">{{ filter_option }}</a></li>
+									{% if not loop.last %}
+									<li><hr class="dropdown-divider"></li>
+									{% endif %}
+									{% endfor %}
+									</ul>
 								</li>
 								<li class="nav-item dropdown">
 								  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
