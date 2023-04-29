@@ -26,19 +26,23 @@
 				<!-- PAGINACION -->
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
+					{% if page > 1 %}
 					<li class="page-item">
 						<a class="page-link" href="{{ url_for('app.main_menu_user', page=page-1) }}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span> Previous
 						</a>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					{% endif %}
+					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=1) }}">1</a></li>
+					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=2) }}">2</a></li>
+					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=3) }}">3</a></li>
+					{% if poems %}
 					<li class="page-item">
 						<a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
 							Next <span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
+					{% endif %}
 					</ul>
 				</nav>
 

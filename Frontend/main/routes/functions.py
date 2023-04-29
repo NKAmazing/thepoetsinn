@@ -1,9 +1,10 @@
 from flask import request, current_app
 import requests, json
+import math
 
 #--------------- Poems -----------------#
 
-#Obtengo los poemas del poeta ayudandome del id del mismo.
+# Obtengo los poemas del poeta ayudandome del id del mismo.
 def get_poems_by_id(id, page = 1, perpage = 10):
     api_url = f'{current_app.config["API_URL"]}/poems'
     # Envio de la pagina y cuantos datos por pagina.
@@ -14,13 +15,13 @@ def get_poems_by_id(id, page = 1, perpage = 10):
     return requests.get(api_url, json = data, headers = headers)
 
 
-#Obtengo un poema en especifico.
+# Obtengo un poema en especifico.
 def get_poem(id):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
     headers = get_headers()
     return requests.get(api_url, headers=headers)
 
-#Obtengo todos los poemas de la base de datos.
+# Obtengo todos los poemas de la base de datos.
 def get_poems(jwt = None, page = 1, perpage = 6):
     api_url = f'{current_app.config["API_URL"]}/poems'
     data = {"page": page, "perpage": perpage}
@@ -30,6 +31,7 @@ def get_poems(jwt = None, page = 1, perpage = 6):
         headers = get_headers(without_token = True)
     return requests.get(api_url, json = data, headers = headers)
 
+# Obtener poemas por filtros.
 def get_poems_by_filters(title = "", author = "", rating = None, page = 1, perpage = 3):
     api_url = f'{current_app.config["API_URL"]}/poems'
     # Envio de la pagina y cuantos datos por pagina.

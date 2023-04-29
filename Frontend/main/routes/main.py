@@ -4,6 +4,7 @@ import requests
 import json
 from . import functions as f
 from flask_paginate import Pagination, get_page_parameter
+from math import ceil
 
 
 app = Blueprint('app', __name__, url_prefix='/')
@@ -142,13 +143,21 @@ def main_menu_user():
         # Obtener lista de poemas
         list_poems = poems["poems"]
 
+        # # Calcular el número de páginas
+        # total_pages = f.get_total_pages(page=page, per_page=per_page)
+        # print("Esto es total pages: ", total_pages)
+
         # Calcular el rango de elementos a mostrar en la página actual
         start = (page - 1) * per_page
         end = start + per_page
-        poems_paginated = list_poems[start:end]
+        # poems_paginated = list_poems[start:end]
+        # print(poems_paginated)
 
-        return render_template('main_menu_user.html', poems=poems_paginated, page=page)
+        return render_template('main_menu_user.html', poems=list_poems, page=page)
     else:
         return redirect(url_for("app.login"))
+
+
+
 
 
