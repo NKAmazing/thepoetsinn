@@ -89,23 +89,25 @@
 			</div><!--Fin de la fila -->
 		    <!--Fila -->
 			<!-- PAGINATION -->
-			<nav class = "mt-3" aria-label="Page navigation example">
+			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="< Back" {% if page == 1 %} hidden {% endif %}></li>
-				
-				{% if page < 3 %}
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="1"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="2"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="3"/></li>
-				{% else %}
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="{{page - 2}}"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="{{page - 1}}"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="{{page}}"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="{{page + 1}}"/></li>
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="{{page + 2}}"/></li>
+				{% if page > 1 %}
+				<li class="page-item">
+					<a class="page-link" href="{{ url_for('app.main_menu', page=page-1) }}" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span> Previous
+					</a>
+				</li>
 				{% endif %}
-				
-				<li class="page-item"><input type="submit" class="page-link" name="_page" value="Next >"/></li>
+				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=1) }}">1</a></li>
+				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=2) }}">2</a></li>
+				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=3) }}">3</a></li>
+				{% if poems %}
+				<li class="page-item">
+					<a class="page-link" href="{{ url_for('app.main_menu', page=page+1) }}" aria-label="Next">
+						Next <span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				{% endif %}
 				</ul>
 			</nav>
 		</div><!-- Fin del contenedor -->
