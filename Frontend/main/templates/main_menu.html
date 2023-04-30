@@ -17,14 +17,23 @@
 							<span class="navbar-toggler-icon"></span>
 						  </button>
 						  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<form class="d-flex" role="search">
-							<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-							<button class="btn btn-success" type="submit">Search</button>
-							</form>
+							<!-- {% if filter_option is not none and filter_option %}
+								<form class="d-flex" role="search" method="POST" action="{{ url_for('main_menu_filter') }}">
+									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="filter_value">
+									<button class="btn btn-success" type="submit">Search</button>
+								</form>
+							{% endif %} -->
+							<div id="filterForm" style="display: none;">
+								<form method="post" class="d-flex" role="search">
+									<label for="filter_value">Filter Value:</label>
+									<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" type="text" name="filter_value" id="filter_value">
+									<input class="btn btn-success" type="submit" value="Search">
+								</form>
+							</div>							
 							&nbsp;
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<!-- Agrega el menú desplegable de filtros -->
-								<li class="nav-item dropdown">
+								<!-- <li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
 									Filters
 									</a>
@@ -36,7 +45,22 @@
 									{% endif %}
 									{% endfor %}
 									</ul>
-								</li>
+								</li> -->
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
+										Filters
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="filterMenu">
+										<!-- <select class="form-select" name="filter_option" aria-label="Default select example"> -->
+										{% for filter_opt in filter_options %}
+											<li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter_option=filter_opt) }}">{{ filter_opt}}</a></li>
+											{% if not loop.last %}
+												<li><hr class="dropdown-divider"></li>
+											{% endif %}
+										{% endfor %}
+										<!-- </select> -->
+									</ul>
+								</li>								
 								<li class="nav-item dropdown">
 								  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
 									Sort by
@@ -112,4 +136,22 @@
 				</ul>
 			</nav>
 		</div><!-- Fin del contenedor -->
+		{% endblock %}
+		<!-- Agrego scripts -->
+		{% block scripts %}
+		<script>
+			$(document).ready(function() {
+				$('#filterMenu').on('click', 'a', function(e) {
+					// Evita que la página se recargue al hacer clic en un enlace del menú desplegable
+					e.preventDefault();
+			
+					// Muestra el formulario solo si se hace clic en una opción de filtro
+					if ($(this).attr('href').indexOf('filter_option=') !== -1) {
+						$('#filterForm').show();
+					} else {
+						$('#filterForm').hide();
+					}
+				});
+			});
+			</script>			
 		{% endblock %}

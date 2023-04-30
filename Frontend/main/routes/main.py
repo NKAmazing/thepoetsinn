@@ -78,7 +78,7 @@ def logout():
     return resp
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def main_menu():
     # Obtener el número de página actual y la cantidad de elementos por página
     page = int(request.args.get('page', 1))
@@ -99,11 +99,56 @@ def main_menu():
     
     # Definir opciones de filtro
     filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
-    
+
+    # Obtener el valor de la opcion de filtro ingresado por el usuario
+    filter_option = request.form.get("filter_option")
+
+    print("Opcion de filtro: ", filter_option)
+
+    # Si el usuario eligio una opcion de filtro
+    if request.method == "POST":
+        # Obtener el valor de la opcion de filtro ingresado por el usuario
+        filter_value = request.form.get("filter_value")
+
+        print("Valor de filtro: ", filter_value)
+
+        response = f.get_poems_by_filters(filter_option=filter_option, filter_value=filter_value, page=page, perpage=per_page)
+        poems = f.get_json(response)
+        list_poems = poems["poems"]
+        for poem in list_poems:
+            print("Poema: ", poem)
+
+        total_poems = len(list_poems)
+
+        # Calcular el numero de paginas
+        total_pages = ceil(total_poems / per_page)
+
+        response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_option=filter_option))
+        return response
+
+
     # Redireccionar a función de vista
     response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options))
     # response.set_cookie("poems_page", str(page))
     return response
+
+# @app.route('/filter', methods=["GET", "POST"])
+# def main_menu_filter():
+#     # Obtener el número de página actual y la cantidad de elementos por página
+#     page = int(request.args.get('page', 1))
+#     per_page = 6
+    
+#     # # Calcular el numero de poemas
+#     # total_poems = f.count_poems()
+#     # # Convierto su valor a int
+#     # total_poems = int(total_poems.text)
+
+#     # # Calcular el numero de paginas
+#     # total_pages = ceil(total_poems / per_page)
+    
+
+
+    
 
 
 @app.route('/home')
