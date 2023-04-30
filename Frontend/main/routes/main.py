@@ -132,24 +132,6 @@ def main_menu():
     # response.set_cookie("poems_page", str(page))
     return response
 
-# @app.route('/filter', methods=["GET", "POST"])
-# def main_menu_filter():
-#     # Obtener el número de página actual y la cantidad de elementos por página
-#     page = int(request.args.get('page', 1))
-#     per_page = 6
-    
-#     # # Calcular el numero de poemas
-#     # total_poems = f.count_poems()
-#     # # Convierto su valor a int
-#     # total_poems = int(total_poems.text)
-
-#     # # Calcular el numero de paginas
-#     # total_pages = ceil(total_poems / per_page)
-    
-
-
-    
-
 
 @app.route('/home')
 def main_menu_user():

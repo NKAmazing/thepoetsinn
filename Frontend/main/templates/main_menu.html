@@ -53,7 +53,7 @@
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="filterMenu">
 										<!-- <select class="form-select" name="filter_option" aria-label="Default select example"> -->
 										{% for filter_opt in filter_options %}
-											<li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter_option=filter_opt) }}">{{ filter_opt}}</a></li>
+											<li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter_option=filter_opt) }}" name="filter_option" value="{{ filter_option }}">{{ filter_opt}}</a></li>
 											{% if not loop.last %}
 												<li><hr class="dropdown-divider"></li>
 											{% endif %}
