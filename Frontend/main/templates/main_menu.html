@@ -87,8 +87,7 @@
 				</table>
 			</div>
 			</div><!--Fin de la fila -->
-		    <!--Fila -->
-			<!-- PAGINATION -->
+			<!-- PAGINACION -->
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 				{% if page > 1 %}
@@ -98,15 +97,17 @@
 					</a>
 				</li>
 				{% endif %}
-				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=1) }}">1</a></li>
-				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=2) }}">2</a></li>
-				<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu', page=3) }}">3</a></li>
-				{% if poems %}
-				<li class="page-item">
-					<a class="page-link" href="{{ url_for('app.main_menu', page=page+1) }}" aria-label="Next">
-						Next <span aria-hidden="true">&raquo;</span>
-					</a>
-				</li>
+				{% for p in range(1, total_pages + 1) %}
+					<li class="page-item {% if p == page %}active{% endif %}">
+						<a class="page-link" href="{{ url_for('app.main_menu', page=p) }}">{{ p }}</a>
+					</li>
+				{% endfor %}
+				{% if page < total_pages %}
+					<li class="page-item">
+						<a class="page-link" href="{{ url_for('app.main_menu', page=page+1) }}" aria-label="Next">
+							Next <span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
 				{% endif %}
 				</ul>
 			</nav>

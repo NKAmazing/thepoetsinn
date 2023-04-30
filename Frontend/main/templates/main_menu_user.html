@@ -33,20 +33,19 @@
 						</a>
 					</li>
 					{% endif %}
-					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=1) }}">1</a></li>
-					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=2) }}">2</a></li>
-					<li class="page-item"><a class="page-link" href="{{ url_for('app.main_menu_user', page=3) }}">3</a></li>
-					{% if poems %}
-					<li class="page-item">
-						<a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
-							Next <span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
+					{% for p in range(1, total_pages + 1) %}
+						<li class="page-item {% if p == page %}active{% endif %}">
+							<a class="page-link" href="{{ url_for('app.main_menu_user', page=p) }}">{{ p }}</a>
+						</li>
+					{% endfor %}
+					{% if page < total_pages %}
+						<li class="page-item">
+							<a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
+								Next <span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
 					{% endif %}
 					</ul>
 				</nav>
-
-
-
 			</div><!--Fin del contenedor -->  
 		{% endblock %}

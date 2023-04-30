@@ -67,7 +67,8 @@ def login():
         return render_template("login.html", error="Wrong user or password")
     else:
         return render_template("login.html")
-    
+
+
 @app.route('/logout')
 def logout():
     # Redirecciono al login.
@@ -76,20 +77,6 @@ def logout():
     resp.set_cookie('access_token', '', expires=0)
     return resp
 
-# @app.route('/')
-# def main_menu():
-#     # Obtener el número de página actual y la cantidad de elementos por página
-#     page = int(request.args.get('page', 1))
-#     per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
-    
-#     # Obtener los poemas
-#     response = f.get_poems(page=page, perpage=per_page)
-#     poems = f.get_json(response)
-#     list_poems = poems["poems"]
-#     # Redireccionar a función de vista
-#     response = make_response(render_template('main_menu.html', poems = list_poems, page = page))
-#     # response.set_cookie("poems_page", str(page))
-#     return response
 
 @app.route('/')
 def main_menu():
@@ -101,29 +88,23 @@ def main_menu():
     response = f.get_poems(page=page, perpage=per_page)
     poems = f.get_json(response)
     list_poems = poems["poems"]
+
+    # Calcular el numero de poemas
+    total_poems = f.count_poems()
+    # Convierto su valor a int
+    total_poems = int(total_poems.text)
+
+    # Calcular el numero de paginas
+    total_pages = ceil(total_poems / per_page)
     
     # Definir opciones de filtro
     filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
     
     # Redireccionar a función de vista
-    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, filter_options=filter_options))
+    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options))
     # response.set_cookie("poems_page", str(page))
     return response
 
-# @app.route('/home')
-# def main_menu_user():
-#     jwt = f.get_jwt()
-#     if jwt:
-#         # Hago la petición a la API para obtener los poemas.
-#         response = f.get_poems()
-#         # Obtener poemas en json
-#         poems = json.loads(response.text)
-#         # Obtener lista de poemas
-#         list_poems = poems["poems"]
-        
-#         return render_template('main_menu_user.html', poems=list_poems)
-#     else:
-#         return redirect(url_for("app.login"))
 
 @app.route('/home')
 def main_menu_user():
@@ -140,17 +121,15 @@ def main_menu_user():
         # Obtener lista de poemas
         list_poems = poems["poems"]
 
-        # # Calcular el número de páginas
-        # total_pages = f.get_total_pages(page=page, per_page=per_page)
-        # print("Esto es total pages: ", total_pages)
+        # Calcular el numero de poemas
+        total_poems = f.count_poems()
+        # Convierto su valor a int
+        total_poems = int(total_poems.text)
 
-        # Calcular el rango de elementos a mostrar en la página actual
-        start = (page - 1) * per_page
-        end = start + per_page
-        # poems_paginated = list_poems[start:end]
-        # print(poems_paginated)
+        # Calcular el numero de paginas
+        total_pages = ceil(total_poems / per_page)
 
-        return render_template('main_menu_user.html', poems=list_poems, page=page)
+        return render_template('main_menu_user.html', poems=list_poems, page=page, total_pages=total_pages)
     else:
         return redirect(url_for("app.login"))
 

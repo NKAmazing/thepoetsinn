@@ -31,6 +31,11 @@ def get_poems(jwt = None, page = 1, perpage = 6):
         headers = get_headers(without_token = True)
     return requests.get(api_url, json = data, headers = headers)
 
+def count_poems():
+    api_url = f'{current_app.config["API_URL"]}/poems/count'
+    headers = get_headers(without_token = True)
+    return requests.get(api_url, headers = headers)
+
 # Obtener poemas por filtros.
 def get_poems_by_filters(title = "", author = "", rating = None, page = 1, perpage = 3):
     api_url = f'{current_app.config["API_URL"]}/poems'

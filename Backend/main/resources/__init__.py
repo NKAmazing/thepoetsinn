@@ -4,3 +4,4 @@ from .Rating import Rating as RatingResource
 from .Rating import Ratings as RatingsResource
 from .Users import User as UserResource
 from .Users import Users as UsersResource
+from .PoemsCount import PoemsCount as PoemsCountResource

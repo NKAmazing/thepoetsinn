@@ -54,11 +54,15 @@ def create_app():
     # Cargar a la API el recurso Users e indicar ruta
     api.add_resource(resources.UsersResource, '/users')
 
-    # Cargar a la API el recurso Punctuation e indicar ruta
+    # Cargar a la API el recurso Rating e indicar ruta
     api.add_resource(resources.RatingResource, '/rating/<id>')
 
-    # Cargar a la API el recurso Punctuations e indicar ruta
+    # Cargar a la API el recurso Ratings e indicar ruta
     api.add_resource(resources.RatingsResource, '/ratings')
+
+    # Cargar a la API el recurso PoemsCount e indicar ruta
+    api.add_resource(resources.PoemsCountResource, '/poems/count')
+
 
     #Cargar la aplicacion en la API de Flask Restful
     api.init_app(app)
