@@ -13,19 +13,41 @@ On this website you can:
 - Read other people's poems
 - Receive ratings for your work
 
+#
+<h3 align="center">
 
-More information in the coming weeks...
+![image](https://user-images.githubusercontent.com/83615373/235422196-2b308c64-0241-4fbe-85c9-c3c83a3b98b9.png)
 
+*Programacion I*
 
+</h3>
 
+The Poet's Inn website was created as a project designed during the course of the subject 'Programacion I' of the Software Engineering career at 'Universidad of Mendoza'. 
 
+The objective of the project was to create a web page of poems in which we had to do a Full-Stack development incorporating both tools already known by the student as well as new ones seen during the course in 2022.
 
+These are some of the working tools used:
 
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) 
 
 
 #
 Credits:
-- Programmer: Nicolas Mayoral
+- Developer: Nicolas Mayoral
 - Instructors: Andrea Navarro and Matias Navarro
 
 - Art Designer: Eddie Mendoza - https://www.artstation.com/eddie
+
+- Institution: <i>Universidad de Mendoza - Facultad de Ingenieria</i>
+
+![um-cover](https://user-images.githubusercontent.com/83615373/235419081-c36fcb36-c412-4317-b40a-7cad5e937339.png)
+
+                
