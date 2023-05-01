@@ -96,6 +96,12 @@ def get_poems_by_sort(sort_option, page = 1, perpage = 3):
     elif (sort_option == "Rating [Desc]"):
         sort_option = "rating[desc]"
         data = {"page": page, "perpage": perpage, dict_key: sort_option}
+    elif (sort_option == "Author [Asc]"):
+        sort_option = "author_name"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
+    elif (sort_option == "Author [Desc]"):
+        sort_option = "author_name[desc]"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
 
     # Para obtener ordenamiento, solo se puede en usuarios sin token.
     headers = get_headers(without_token = True)

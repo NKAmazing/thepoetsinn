@@ -101,7 +101,7 @@ def main_menu():
     filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
 
     # Definir opciones de ordenamiento
-    sort_options = ['Datetime [Asc]', 'Datetime [Desc]', 'Rating [Asc]', 'Rating [Desc]']
+    sort_options = ['Datetime [Asc]', 'Datetime [Desc]', 'Rating [Asc]', 'Rating [Desc]', 'Author [Asc]', 'Author [Desc]']
 
     # Obtener el valor de la opcion de filtro ingresado por el usuario
     filter_option = request.args.get("filter_option")

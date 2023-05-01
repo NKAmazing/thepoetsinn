@@ -44,6 +44,7 @@
 						 <th scope="col">Poem's Name</th>
 						 <th scope="col">Author</th>
 						 <th scope="col">Rating</th>
+						 <th scope="col">Datetime</th>
 						 <th scope="col"></th>
 					 </tr>
 					 </thead>
@@ -60,6 +61,7 @@
 							 <td>{{poem.title}}</td>
 							 <td>{{poem.user.username}}</td>
 							 <td>{{poem.rating}}</td>
+							 <td>{{poem.date_time}}</td>
 							 <td><a class="btn btn-success" href="{{url_for('poem.read_poem', id=poem.id)}}" role="button">Read</a>
 						 </tr>
 						 {% endfor %}

@@ -45,7 +45,7 @@
 								  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
 									Sort by
 								  </a>
-								  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<!-- Opciones de Ordenamiento -->
 										{% for sort_opt in sort_options %}
 										  <li><a class="dropdown-item" href="{{ url_for('app.main_menu', sort_option=sort_opt) }}">{{ sort_opt }}</a></li>
@@ -53,18 +53,7 @@
 										  <li><hr class="dropdown-divider"></li>
 									  		{% endif %}
 										{% endfor %}
-										<!-- <li><a class="dropdown-item" href="#">Datetime [Asc]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Datetime [Desc]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Rating [Asc]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Rating [Desc]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Author name [Asc]</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item" href="#">Author name [Desc]</a></li> -->
-								  </ul>
+								  	</ul>
 								</li>
 							</ul>
 						  </div>
@@ -81,6 +70,7 @@
 						<th scope="col">Poem's Name</th>
 						<th scope="col">Author</th>
 						<th scope="col">Rating</th>
+						<th scope="col">Datetime</th>
 						<th scope="col"></th>
 					</tr>
 					</thead>
@@ -97,6 +87,7 @@
 							<td>{{poem.title}}</td>
 							<td>{{poem.user.username}}</td>
 							<td>{{poem.rating}}</td>
+							<td>{{poem.date_time}}</td>
 							<td><a class="btn btn-success" href="{{url_for('poem.read_poem', id=poem.id)}}" role="button">Read</a>
 						</tr>
 						{% endfor %}

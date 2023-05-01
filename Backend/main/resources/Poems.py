@@ -105,9 +105,9 @@ class Poems(Resource):
                             poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.avg(RatingModel.score).desc())
                         # ordeno por nombre de autor
                         if value == "author_name":
-                            poems = poems.order_by(PoemModel.user)
+                            poems = poems.join(PoemModel.user).order_by(UserModel.username)
                         if value == "author_name[desc]":
-                            poems = poems.order_by(PoemModel.user.desc())
+                            poems = poems.join(PoemModel.user).order_by(UserModel.username.desc())
         # hago el paginado de poemas pasandole la pagina y la cantidad de poemas por pagina, luego establezco un limite de poemas por pagina          
         poems = poems.paginate(page=page, per_page=perpage, error_out=False)
         # retorno el to json short, el total de poemas y la pagina
