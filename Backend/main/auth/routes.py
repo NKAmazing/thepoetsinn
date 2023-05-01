@@ -4,7 +4,7 @@ from .. import db
 from main.models import UserModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 
-#Blueprint para acceder a los metodos de autenticacion
+# Blueprint para acceder a los metodos de autenticacion
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 # Metodo de logeo

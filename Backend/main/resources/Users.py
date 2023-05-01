@@ -18,7 +18,7 @@ class User(Resource):
     @jwt_required(optional=True)
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        #Obtener claims de adentro del JWT
+        # Obtener claims de adentro del JWT
         claims = get_jwt()
         # Verifica si logeo un usuario
         if 'role' in claims:
@@ -40,6 +40,7 @@ class User(Resource):
         id = int(id)
         user = db.session.query(UserModel).get_or_404(id)
         claims = get_jwt()
+        # Verificar si el usuario es admin o el creador del poema
         if claims['role'] == "admin" or user_id == id:
             db.session.delete(user)
             db.session.commit()
@@ -54,6 +55,7 @@ class User(Resource):
         claims = get_jwt()
         id = int(id)
         print(user_id, id)
+        # Verificar si el usuario es admin o el creador del poema
         if claims['role'] == "admin" or user_id == id:
             user = db.session.query(UserModel).get_or_404(id)
             data = request.get_json().items()
@@ -74,7 +76,6 @@ class Users(Resource):
     # Obtener lista de usuarios
     @admin_required
     def get(self):
-        # users = db.session.query(UserModel).all()
         users = db.session.query(UserModel)
         page = 1
         perpage = 5

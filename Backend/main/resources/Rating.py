@@ -26,6 +26,7 @@ class Rating(Resource):
         current_identity = get_jwt_identity()
         rating = db.session.query(RatingModel).get_or_404(id)
         claims = get_jwt()
+        # Verificar si el usuario es admin o el creador de la puntuacion
         if claims['role'] == "admin" or current_identity == rating.user_id:
             db.session.delete(rating)
             db.session.commit()
@@ -39,6 +40,7 @@ class Rating(Resource):
         current_identity = get_jwt_identity()
         claims = get_jwt()
         rating = db.session.query(RatingModel).get_or_404(id)
+        # Verificar si el usuario es admin o el creador de la puntuacion
         if current_identity == rating.user_id:
             data = request.get_json().items()
             for key, value in data:

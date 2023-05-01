@@ -3,7 +3,7 @@ from .. import db
 import datetime
 from . import UserModel
 
-
+# Modelo de Poema
 class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -17,6 +17,7 @@ class Poem(db.Model):
     def __repr__(self):
         return '<Poem: %r %r %r %r >' % (self.title, self.body, self.user_id, self.date_time)
     
+    # Calcular promedio de calificaciones
     def avg_score(self):
         list_score = []
         if len(self.ratings) == 0:

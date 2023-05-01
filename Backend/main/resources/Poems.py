@@ -33,6 +33,7 @@ class Poem(Resource):
         current_identity = get_jwt_identity()
         poem = db.session.query(PoemModel).get_or_404(id)
         claims = get_jwt()
+        # Verificar si el usuario es admin o el creador del poema
         if claims['role'] == "admin" or current_identity == poem.user_id:
             db.session.delete(poem)
             db.session.commit()
@@ -46,6 +47,7 @@ class Poem(Resource):
         current_identity = get_jwt_identity()
         claims = get_jwt()
         poem = db.session.query(PoemModel).get_or_404(id)
+        # Verificar si el usuario es admin o el creador del poema
         if current_identity == poem.user_id:
             data = request.get_json().items()
             for key, value in data:
@@ -58,16 +60,20 @@ class Poem(Resource):
 
 
 class Poems(Resource):
+
     # Obtener lista de poemas
     @jwt_required(optional=True)
     def get(self):
         current_identity = get_jwt_identity()
         page = 1
         perpage = 5
+        # Verificar si se ha ingresado con token
         if current_identity:
+            # Obtengo todos los poemas que no son del usuario actual
             poems = db.session.query(PoemModel).filter(PoemModel.user_id != current_identity)
             poems = poems.outerjoin(PoemModel.ratings).group_by(PoemModel.id).order_by(func.count(PoemModel.ratings))
         else:
+            # Obtengo todos los poemas
             poems = db.session.query(PoemModel)
             if request.get_json():
                 # declaro un request de items como filters
@@ -113,7 +119,6 @@ class Poems(Resource):
         # retorno el to json short, el total de poemas y la pagina
         return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
         "total": poems.total, "pages": poems.pages, "page": page})
-        # return jsonify({"poems":[poem.to_json_short() for poem in poems.items]})
 
     # Insertar recurso
     @jwt_required()

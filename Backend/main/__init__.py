@@ -30,12 +30,12 @@ def create_app():
 
     load_dotenv()
 
-    #Si no existe el archivo de base de datos crearlo (solo valido si se utiliza SQLite)
+    # Si no existe el archivo de base de datos crearlo (solo valido si se utiliza SQLite)
     if not os.path.exists(os.getenv('DB_PATH')+os.getenv('DB_NAME')):
         os.mknod(os.getenv('DB_PATH')+os.getenv('DB_NAME'))
 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    #Url de configuracion de base de datos
+    # Url de configuracion de base de datos
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DB_PATH')+os.getenv('DB_NAME')
     db.init_app(app)
 
@@ -64,7 +64,7 @@ def create_app():
     api.add_resource(resources.PoemsCountResource, '/poems/count')
 
 
-    #Cargar la aplicacion en la API de Flask Restful
+    # Cargar la aplicacion en la API de Flask Restful
     api.init_app(app)
     
     # Cargar clave secreta

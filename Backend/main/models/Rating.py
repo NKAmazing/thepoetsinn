@@ -1,6 +1,7 @@
 from .. import db
 from . import UserModel, PoemModel
 
+# Modelo de Rating
 class Rating(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
