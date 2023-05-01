@@ -69,26 +69,6 @@ def get_poems_by_filters(filter_option, filter_value, page = 1, perpage = 3):
     # Creamos el response y le enviamos el data y headers.
     return requests.get(api_url, json = data, headers = headers)
 
-# # Obtener poemas por filtros.
-# def get_poems_by_filters(title = "", author = "", rating = None, page = 1, perpage = 3):
-#     api_url = f'{current_app.config["API_URL"]}/poems'
-#     # Envio de la pagina y cuantos datos por pagina.
-
-#     if (title == None):
-#         title = ""
-#     if (author == None):
-#         author = ""
-#     if (rating == None):
-#         data = {"page": page, "perpage": perpage, "title": title, "username": author}
-#     else:
-#         data = {"page": page, "perpage": perpage, "title": title, "username": author, "rating": int(rating)}
-
-#     # Para obtener filtros, solo se puede en usuarios sin token.
-#     headers = get_headers(without_token = True)
-
-#     # Creamos el response y le enviamos el data y headers.
-#     return requests.get(api_url, json = data, headers = headers)
-
 
 # Obtener la pagina de los poemas.
 def get_poems_page():

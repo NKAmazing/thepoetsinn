@@ -101,34 +101,29 @@ def main_menu():
     filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
 
     # Obtener el valor de la opcion de filtro ingresado por el usuario
-    filter_option = request.form.get("filter_option")
-
-    print("Opcion de filtro: ", filter_option)
+    filter_option = request.args.get("filter_option")
 
     # Si el usuario eligio una opcion de filtro
     if request.method == "POST":
+
         # Obtener el valor de la opcion de filtro ingresado por el usuario
         filter_value = request.form.get("filter_value")
-
-        print("Valor de filtro: ", filter_value)
 
         response = f.get_poems_by_filters(filter_option=filter_option, filter_value=filter_value, page=page, perpage=per_page)
         poems = f.get_json(response)
         list_poems = poems["poems"]
-        for poem in list_poems:
-            print("Poema: ", poem)
 
         total_poems = len(list_poems)
 
         # Calcular el numero de paginas
         total_pages = ceil(total_poems / per_page)
 
-        response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_option=filter_option))
+        response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_option=filter_option, filter_value=filter_value, filter_options=filter_options))
         return response
 
 
     # Redireccionar a función de vista
-    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options))
+    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options, filter_option=filter_option))
     # response.set_cookie("poems_page", str(page))
     return response
 
