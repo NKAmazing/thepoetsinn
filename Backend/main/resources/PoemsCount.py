@@ -20,14 +20,3 @@ class PoemsCount(Resource):
     def get(self):
         total_poems = db.session.query(PoemModel).count()
         return total_poems, 200
-        
-    # # @app.route('/poems/count', methods=['GET'])
-    # # Obtener cantidad de poemas
-    # @jwt_required(optional=True)
-    # def count(self):
-    #     current_identity = get_jwt_identity()
-    #     if current_identity:
-    #         poems_count = db.session.query(func.count(PoemModel.id)).filter(PoemModel.user_id != current_identity).scalar()
-    #     else:
-    #         poems_count = db.session.query(func.count(PoemModel.id)).scalar()
-    #     return jsonify({"count": poems_count})

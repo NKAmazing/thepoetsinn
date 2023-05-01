@@ -79,6 +79,12 @@
 					</thead>
 					<tbody>
 						{% for poem in poems %}
+						<!-- Si no hay poemas disponibles muestro un mensaje en pantalla -->
+						{% if not poems %}
+						<tr>
+							<td colspan="5">No poems available</td>
+						</tr>
+						{% endif %}
 						<tr>
 							<td>{{poem.id}}</td>
 							<td>{{poem.title}}</td>

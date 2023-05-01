@@ -106,6 +106,9 @@ def main_menu():
     # Si el usuario eligio una opcion de filtro
     if request.method == "POST":
 
+        # Asigno un valor mas grande de perpage
+        per_page = 1000
+
         # Obtener el valor de la opcion de filtro ingresado por el usuario
         filter_value = request.form.get("filter_value")
 

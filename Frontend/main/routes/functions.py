@@ -21,6 +21,7 @@ def get_poem(id):
     headers = get_headers()
     return requests.get(api_url, headers=headers)
 
+
 # Obtengo todos los poemas de la base de datos.
 def get_poems(jwt = None, page = 1, perpage = 6):
     api_url = f'{current_app.config["API_URL"]}/poems'
@@ -31,10 +32,13 @@ def get_poems(jwt = None, page = 1, perpage = 6):
         headers = get_headers(without_token = True)
     return requests.get(api_url, json = data, headers = headers)
 
+
+# Obtengo el numero de poemas.
 def count_poems():
     api_url = f'{current_app.config["API_URL"]}/poems/count'
     headers = get_headers(without_token = True)
     return requests.get(api_url, headers = headers)
+
 
 # Obtener poemas por filtros.
 def get_poems_by_filters(filter_option, filter_value, page = 1, perpage = 3):
@@ -74,6 +78,7 @@ def get_poems_by_filters(filter_option, filter_value, page = 1, perpage = 3):
 def get_poems_page():
     return request.cookies.get("poems_page")
 
+
 # Agregar un poema.
 def add_poem(user_id, title, body):
     api_url = f'{current_app.config["API_URL"]}/poems'
@@ -81,12 +86,14 @@ def add_poem(user_id, title, body):
     headers = get_headers(without_token = False)
     return requests.post(api_url, json = data, headers = headers)
 
+
 # Editar un poema en especifico.
 def edit_poem(id, title, body):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
     data = {"title": title, "body": body}
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
+
 
 # Eliminar un poema en especifico.
 def delete_poem(id):
