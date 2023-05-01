@@ -1,24 +1,23 @@
 {% extends 'base.html' %}
 
-		{% block title %}Welcome to The Poet's Inn!{% endblock %}
+{% block title %}Welcome to The Poet's Inn!{% endblock %}
 		
 
-		{% block content %}
-		<!--Contenedor -->
-		<div class="container-fluid">
-		   <br>
-
-		   <!--Fila -->
-			<div class="row section-10">
-				<div class="col -sm-10">				
-					<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-						<div class="container-fluid">
-						  <a class="navbar-brand" href="{{ url_for('app.main_menu') }}" style="color: #00fff2;">List of Poems</a>
-						  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						  </button>
-						  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-							<!-- Buscador -->
+{% block content %}
+	<!--Contenedor -->
+	<div class="container-fluid">
+		<br>
+		<!--Fila -->
+		<div class="row section-10">
+			<div class="col -sm-10">				
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+					<div class="container-fluid">
+						<a class="navbar-brand" href="{{ url_for('app.main_menu') }}" style="color: #00fff2;">List of Poems</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarSupportedContent">
+							<!-- Buscador del filtro -->
 							{% if filter_option is not none and filter_option %}
 								<form method="post" class="d-flex" role="search">
 									<label for="filter_value">Filter Value:</label>
@@ -35,36 +34,36 @@
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="filterDropdown">
 										{% for filter_opt in filter_options %}
-										  <li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter_option=filter_opt) }}">{{ filter_opt }}</a></li>
-										  {% if not loop.last %}
-										  <li><hr class="dropdown-divider"></li>
-									  		{% endif %}
+											<li><a class="dropdown-item" href="{{ url_for('app.main_menu', filter_option=filter_opt) }}">{{ filter_opt }}</a></li>
+											{% if not loop.last %}
+												<li><hr class="dropdown-divider"></li>
+											{% endif %}
 										{% endfor %}
-									  </ul>
+									</ul>
 								</li>								
 								<li class="nav-item dropdown">
-								  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
-									Sort by
-								  </a>
-								  	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: #ffe600;">
+										Sort by
+									</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<!-- Opciones de Ordenamiento -->
 										{% for sort_opt in sort_options %}
-										  <li><a class="dropdown-item" href="{{ url_for('app.main_menu', sort_option=sort_opt) }}">{{ sort_opt }}</a></li>
-										  {% if not loop.last %}
-										  <li><hr class="dropdown-divider"></li>
-									  		{% endif %}
+											<li><a class="dropdown-item" href="{{ url_for('app.main_menu', sort_option=sort_opt) }}">{{ sort_opt }}</a></li>
+											{% if not loop.last %}
+												<li><hr class="dropdown-divider"></li>
+											{% endif %}
 										{% endfor %}
-								  	</ul>
+									</ul>
 								</li>
 							</ul>
-						  </div>
 						</div>
-				  	</nav>
-				</div>
-		   	</div><!--Fin de la fila -->
-		   <div class="row section-4">
+					</div>
+				</nav>
+			</div>
+		</div><!--Fin de la fila -->
+		<div class="row section-4">
 			<div class="col -sm-10">
-		   		<table class="table table-dark table-striped">
+				<table class="table table-dark table-striped">
 					<thead>
 					<tr>
 						<th scope="col">#</th>
@@ -95,16 +94,16 @@
 					</tbody>
 				</table>
 			</div>
-			</div><!--Fin de la fila -->
-			<!-- PAGINACION -->
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
+		</div><!--Fin de la fila -->
+		<!-- PAGINACION -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
 				{% if page > 1 %}
-				<li class="page-item">
-					<a class="page-link" href="{{ url_for('app.main_menu', page=page-1) }}" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span> Previous
-					</a>
-				</li>
+					<li class="page-item">
+						<a class="page-link" href="{{ url_for('app.main_menu', page=page-1) }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span> Previous
+						</a>
+					</li>
 				{% endif %}
 				{% for p in range(1, total_pages + 1) %}
 					<li class="page-item {% if p == page %}active{% endif %}">
@@ -118,25 +117,7 @@
 						</a>
 					</li>
 				{% endif %}
-				</ul>
-			</nav>
-		</div><!-- Fin del contenedor -->
-		{% endblock %}
-		<!-- Agrego scripts -->
-		{% block scripts %}
-		<script>
-			$(document).ready(function() {
-				$('#filterMenu').on('click', 'a', function(e) {
-					// Evita que la página se recargue al hacer clic en un enlace del menú desplegable
-					e.preventDefault();
-			
-					// Muestra el formulario solo si se hace clic en una opción de filtro
-					if ($(this).attr('href').indexOf('filter_option=') !== -1) {
-						$('#filterForm').show();
-					} else {
-						$('#filterForm').hide();
-					}
-				});
-			});
-			</script>			
-		{% endblock %}
+			</ul>
+		</nav>
+	</div><!-- Fin del contenedor -->
+{% endblock %}

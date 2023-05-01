@@ -1,38 +1,37 @@
 {% extends 'base.html' %}
 
-		{% block title %}Log in{% endblock %}
+{% block title %}Log in{% endblock %}
 
-		{% block content %}
-		<!--Contenedor -->
-		<div class="container-fluid">
-			<br>
-
-		   <div class="row">
+{% block content %}
+	<!--Contenedor -->
+	<div class="container-fluid">
+		<br>
+		<div class="row">
 			<div class="col-sm-4">
-
+				<br>
 			</div>
 			<div class="col-sm-3">
-			<p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;">
-				<p style="color: #ff7525; text-align: center; font-size: x-large;">The Poet's Inn</p>
-			<form action="/login" method="POST">
-				<div class="mb-3">
-				  <label for="exampleInputEmail1" class="form-label" style="color: white;">Email address</label>
-				  <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-				  <div id="emailHelp" class="form-text" style="color: white;">We'll never share your email with anyone else.</div>
-				</div>
-				<div class="mb-3">
-				  <label for="exampleInputPassword1" class="form-label" style="color: white;">Password</label>
-				  <input name="password" type="password" class="form-control" id="exampleInputPassword1">
-				</div>
-				<div class="mb-3 form-check">
-				  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-				  <label class="form-check-label" for="exampleCheck1" style="color: white;">Check me out</label>
-				</div>
-				<button type="submit" class="btn btn-success">Sign In</button>
-			  </form>
+				<p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 600px;">
+						<p style="color: #ff7525; text-align: center; font-size: x-large;">The Poet's Inn</p>
+						<form action="/login" method="POST">
+							<div class="mb-3">
+								<label for="exampleInputEmail1" class="form-label" style="color: white;">Email address</label>
+								<input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+								<div id="emailHelp" class="form-text" style="color: white;">We'll never share your email with anyone else.</div>
+							</div>
+							<div class="mb-3">
+								<label for="exampleInputPassword1" class="form-label" style="color: white;">Password</label>
+								<input name="password" type="password" class="form-control" id="exampleInputPassword1">
+							</div>
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1" style="color: white;">Check me out</label>
+							</div>
+							<button type="submit" class="btn btn-success">Sign In</button>
+						</form>
+					</div>
+				</p>
 			</div>
-			</div></p>
-		   </div>
-
-        </div><!-- Fin del contenedor -->
-		{% endblock %}
+		</div>
+	</div><!-- Fin del contenedor -->
+{% endblock %}

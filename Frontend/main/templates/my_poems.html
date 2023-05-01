@@ -3,96 +3,96 @@
 {% block title %}Your poems!{% endblock %}
 
 {% block content %}
-      <div class="container-fluid">
-            <!--Fila -->
-          <div class="row section-10">
-            <!--Columna -->
-            <div class="col-md-12">
-              <p> </p>
-            </div><!--Fin de la columna -->
-          </div> <!--Fin de la fila -->
-          <div class="row section-10">
-            <div class="col -sm-10">
-            <nav class="navbar navbar-expand-lg -dark bg-dark">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="color: #25c1ff;">Your Poems</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex" role="search">
+  <!--Contenedor -->
+  <div class="container-fluid">
+    <!--Fila -->
+    <div class="row section-10">
+      <!--Columna -->
+      <div class="col-md-12">
+        <p> </p>
+      </div><!--Fin de la columna -->
+    </div> <!--Fin de la fila -->
+    <div class="row section-10">
+      <div class="col -sm-10">
+        <nav class="navbar navbar-expand-lg -dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: #25c1ff;">Your Poems</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">                  
-                </ul>
-              </div>
+              </form>
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">                  
+              </ul>
             </div>
-              </nav>
           </div>
-        </div>
-          <div class="row section-4">
-            <div class="col -sm-10">
-            <table class="table table-dark table-striped">
-              <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Poem's Name</th>
-                <th scope="col">Author</th>
-                <th scope="col">Rating</th>
-                <th scope="col">Datetime</th>
-                <th scope="col"> </th>
-                <th scope="col"> </th>
-              </tr>
-              </thead>
-              <tbody>
-                {% for poem in poems %}
-              <tr>
-                <th scope="row">1</th>
-                <td>{{poem.title}}</td>
-                <td>You</td>
-                <td>{{poem.rating}}</td>
-                <td>{{poem.date_time}}</td>
-                <td><a class="btn btn-success" href="{{url_for('poem.read_my_poem', id=poem.id)}}" role="button">Read</a>
-                <td><a class="btn btn-warning" href="{{url_for('poem.edit_poem', id=poem.id)}}" role="button">Edit</a>
-              </tr>
-                {% endfor %}
-            </table>
-          </div>
-        </div>
-        <!-- PAGINACION -->
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            {% if page > 1 %}
-              <li class="page-item">
-                <a class="page-link" href="{{ url_for('app.main_menu_user', page=page-1) }}" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span> Previous
-                </a>
-              </li>
-            {% endif %}
-            {% for p in range(1, total_pages + 1) %}
-              <li class="page-item {% if p == page %}active{% endif %}">
-                <a class="page-link" href="{{ url_for('app.main_menu_user', page=p) }}">{{ p }}</a>
-              </li>
-            {% endfor %}
-            {% if page < total_pages %}
-              <li class="page-item">
-                <a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
-                  Next <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            {% endif %}
-          </ul>
         </nav>
-          <div class="row section-6">
-            <!--Columna -->
-          </div>
-          <div class="row section-12">
-            <div class="col-md-12">
+      </div>
+    </div>
+    <div class="row section-4">
+      <div class="col -sm-10">
+        <table class="table table-dark table-striped">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Poem's Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Datetime</th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for poem in poems %}
+            <tr>
+              <th scope="row">1</th>
+              <td>{{poem.title}}</td>
+              <td>You</td>
+              <td>{{poem.rating}}</td>
+              <td>{{poem.date_time}}</td>
+              <td><a class="btn btn-success" href="{{url_for('poem.read_my_poem', id=poem.id)}}" role="button">Read</a>
+              <td><a class="btn btn-warning" href="{{url_for('poem.edit_poem', id=poem.id)}}" role="button">Edit</a>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+      <!-- PAGINACION -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if page > 1 %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('app.main_menu_user', page=page-1) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span> Previous
+              </a>
+            </li>
+          {% endif %}
+          {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('app.main_menu_user', page=p) }}">{{ p }}</a>
+            </li>
+          {% endfor %}
+          {% if page < total_pages %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
+                Next <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+        <div class="row section-6">
+          <br>
+        </div>
+        <div class="row section-12">
+          <div class="col-md-12">
             <a class="btn btn-warning" href="/home" role="button">Back to Home</a>
             <p></p>
           </div><!--Fin de la columna -->
-          </div>
-         
-      </div>
-  {% endblock %}
+        </div> <!--Fin de la fila -->        
+    </div> <!-- Fin del contenedor -->
+{% endblock %}

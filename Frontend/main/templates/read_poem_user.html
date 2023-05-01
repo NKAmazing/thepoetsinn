@@ -2,96 +2,91 @@
 
 {% block title %}Read Poem{% endblock %}
 
-		{% block content %}
-        <div class="container-fluid">
-			<!--Fila -->
-              <div class="row">
-                <br>
-                <div class="col-sm-6">
-                  <br>
-                  <div class="card text-bg-dark mb-3" style="width: 100%; height: 500px;">
-                    <div class="card-header">{{poem.user.username}}</div>
-                    <div class="card-body">
-                      <h5 class="card-title">{{poem.title}}</h5>
-                      <p class="card-text">{{poem.body}}</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                    <div class="d-grid gap-2 d-md-block">
-                      <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
-                      &nbsp;
-                      <button type="button" class="btn btn-dark"
-                        data-bs-toggle="popover" data-bs-placement="bottom"
-                        data-bs-custom-class="custom-popover"
-                        title="Poem's Details"
-                        data-bs-html="true"
-                        data-bs-content="- AUTHOR: User 1 <br/>- DATETIME: 17-05-2022
-                        ">
-                        Details +
+{% block content %}
+  <div class="container-fluid">
+  <!--Fila -->
+    <div class="row">
+      <br>
+      <div class="col-sm-6">
+        <br>
+        <div class="card text-bg-dark mb-3" style="width: 100%; height: 500px;">
+          <div class="card-header">{{poem.user.username}}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{poem.title}}</h5>
+              <p class="card-text">{{poem.body}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="d-grid gap-2 d-md-block">
+                  <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
+                  &nbsp;
+                  <button type="button" class="btn btn-dark"
+                    data-bs-toggle="popover" data-bs-placement="bottom"
+                    data-bs-custom-class="custom-popover"
+                    title="Poem's Details"
+                    data-bs-html="true"
+                    data-bs-content="- AUTHOR: User 1 <br/>- DATETIME: 17-05-2022
+                    ">
+                    Details +
+                  </button>
+                    &nbsp;
+                    {% if request.cookies.get("access_token") %}
+                      <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        Rate
                       </button>
-                        &nbsp;
-                        {% if request.cookies.get("access_token") %}
-                        <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                          Rate
-                        </button>
-                        {% endif %}
-                      
-                        <form action="{{ url_for('poem.read_poem_user', id=poem['id']) }}" method="post">
-                          <input type="hidden" name="poem_id" value="{{ poem['id'] }}">
-                          <input type="hidden" name="user_id" value="{{ user_id }}">
-                          <div class="collapse" id="collapseExample">
-                              <p>
-                                  <div class="card text-bg-dark mb-3" style="width: 100%; height: 300px;">
-                                      <div class="card-header"><h5>Rate the Poem</h5></div>
-                                      <div class="card-body">
-                                        <h5 class="card-title">
-                                          <div class="btn-group" role="group" aria-label="Basic example">
-                                            <input type="number" class="form-control" name="score" placeholder="Enter a score from 1 to 5" min="1" max="5" required>
-                                          </div>                                          
-                                        </h5>
-                                                                              
-                                          </h5>
-                                          <div class="form-group">
-                                              <label for="exampleFormControlTextarea1">Comment: </label>
-                                              <textarea class="form-control" id="exampleFormControlTextarea1" name="commentary" rows="3" placeholder="Write here"></textarea>
-                                          </div>
-                                          <br>
-                                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                              <button type="submit" class="btn btn-success">Rate</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </p>
-                          </div>
-                      </form>                      
-                      <br>
-                    </div>
-                  </div>                
-                  <div class="col-sm-6">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-dark"
-                      data-bs-toggle="tooltip" data-bs-placement="top"
-                      data-bs-custom-class="custom-tooltip"
-                      title="Score: 4.9 of 5 stars.">
-                      Avg Score 4.9
-                    </button>
-                  </div>
-                  </div>
-             
-              
+                    {% endif %}
+                    <form action="{{ url_for('poem.read_poem_user', id=poem['id']) }}" method="post">
+                      <input type="hidden" name="poem_id" value="{{ poem['id'] }}">
+                      <input type="hidden" name="user_id" value="{{ user_id }}">
+                      <div class="collapse" id="collapseExample">
+                          <p>
+                            <div class="card text-bg-dark mb-3" style="width: 100%; height: 300px;">
+                                <div class="card-header"><h5>Rate the Poem</h5></div>
+                                <div class="card-body">
+                                  <h5 class="card-title">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                      <input type="number" class="form-control" name="score" placeholder="Score" min="1" max="5" required>
+                                    </div>                                          
+                                  </h5>
+                                                                        
+                                    </h5>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Comment: </label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" name="commentary" rows="3" placeholder="Write here"></textarea>
+                                    </div>
+                                    <br>
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <button type="submit" class="btn btn-success">Rate</button>
+                                    </div>
+                                </div>
+                            </div>
+                          </p>
+                      </div>
+                    </form>                      
+                  <br>
               </div>
-             
-                </div><!--Fin de la columna -->
-                <div class="col-sm-1">
-                  
-                  <br>
-                </div>
-                {% if ratings %}
-                <div class="col-sm-4">
-                  <br>
-                  <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 115px;"><h4>Ratings </h4></div></p>
-                  {% for rating in ratings %}
+            </div>                
+            <div class="col-sm-6">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-dark"
+                data-bs-toggle="tooltip" data-bs-placement="top"
+                data-bs-custom-class="custom-tooltip"
+                title="Score: {{poem.rating}} of 5 stars.">
+                Avg Score {{poem.rating}}
+              </button>
+              </div>
+            </div>
+          </div>
+        </div><!--Fin de la columna -->
+            <div class="col-sm-1">
+              <br>
+            </div>
+            {% if ratings %}
+              <div class="col-sm-4">
+                <br>
+                <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 115px;"><h4>Ratings </h4></div></p>
+                {% for rating in ratings %}
                   <div class="card text-bg-dark mb-3" style="width: 600px; height: 300px;">
                     <div class="card-header">{{rating.user.username}}</div>
                     <div class="card-body">
@@ -106,7 +101,7 @@
                         <button type="button" class="btn btn-danger"
                           data-bs-toggle="tooltip" data-bs-placement="top"
                           data-bs-custom-class="custom-tooltip"
-                          title="5 of 5 stars." disabled>
+                          title="{{rating.score}} of 5 stars." disabled>
                           {{rating.score}}
                         </button>
                       </div></h5>
@@ -118,12 +113,9 @@
                       <br>
                     </div>
                   </div>
-                  {% endfor %}
-                </div>
-                {% endif %}               
-            </div>
-          </div>
-            
-            </div>
-            
-        {% endblock %}
+                {% endfor %}
+              </div>
+            {% endif %}               
+      </div>
+  </div>        
+{% endblock %}
