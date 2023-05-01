@@ -73,6 +73,36 @@ def get_poems_by_filters(filter_option, filter_value, page = 1, perpage = 3):
     # Creamos el response y le enviamos el data y headers.
     return requests.get(api_url, json = data, headers = headers)
 
+# Obtener poemas ordenados.
+def get_poems_by_sort(sort_option, page = 1, perpage = 3):
+    api_url = f'{current_app.config["API_URL"]}/poems'
+
+    # Declaramos la clave del diccionario para que se ejecute el ordenamiento.
+    dict_key = "sort_by"
+
+    # Orden de busqueda
+    if (sort_option == None):
+        sort_option = ""
+        data = {"page": page, "perpage": perpage}
+    elif (sort_option == "Datetime [Asc]"):
+        sort_option = "date_time"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
+    elif (sort_option == "Datetime [Desc]"):
+        sort_option = "date_time[desc]"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
+    elif (sort_option == "Rating [Asc]"):
+        sort_option = "rating"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
+    elif (sort_option == "Rating [Desc]"):
+        sort_option = "rating[desc]"
+        data = {"page": page, "perpage": perpage, dict_key: sort_option}
+
+    # Para obtener ordenamiento, solo se puede en usuarios sin token.
+    headers = get_headers(without_token = True)
+
+    # Creamos el response y le enviamos el data y headers.
+    return requests.get(api_url, json = data, headers = headers)
+    
 
 # Obtener la pagina de los poemas.
 def get_poems_page():

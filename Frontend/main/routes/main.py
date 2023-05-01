@@ -100,8 +100,33 @@ def main_menu():
     # Definir opciones de filtro
     filter_options = ['Username', 'User ID', 'Rating', 'Title', 'Datetime [gte]', 'Datetime [lte]']
 
+    # Definir opciones de ordenamiento
+    sort_options = ['Datetime [Asc]', 'Datetime [Desc]', 'Rating [Asc]', 'Rating [Desc]']
+
     # Obtener el valor de la opcion de filtro ingresado por el usuario
     filter_option = request.args.get("filter_option")
+
+    # Obtener el valor de la opcion de ordenamiento ingresado por el usuario
+    sort_option = request.args.get("sort_option")
+
+    print("sort_option: ", sort_option)
+
+    if sort_option != None:
+
+        # Asigno un valor mas grande de perpage
+        per_page = 1000
+
+        response = f.get_poems_by_sort(sort_option=sort_option, page=page, perpage=per_page)
+        poems = f.get_json(response)
+        list_poems = poems["poems"]
+
+        total_poems = len(list_poems)
+
+        # Calcular el numero de paginas
+        total_pages = ceil(total_poems / per_page)
+
+        response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options, sort_option=sort_option, sort_options=sort_options))
+        return response
 
     # Si el usuario eligio una opcion de filtro
     if request.method == "POST":
@@ -126,7 +151,7 @@ def main_menu():
 
 
     # Redireccionar a función de vista
-    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options, filter_option=filter_option))
+    response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options, filter_option=filter_option, sort_options=sort_options))
     # response.set_cookie("poems_page", str(page))
     return response
 
