@@ -7,22 +7,24 @@
     <br>
     <div class="col col-sm-5">
       <div class="col col-sm-5">
-        <p><div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 800px;">  
-        <form method="POST" id="form2" action="{{url_for('poem.create_poem')}}">
-          <div class="mb-3">
-            <label for="formGroupExampleInput" class="form-label" style="color:white;">Title:</label>
-            <input name="title" type="text" class="form-control form-control-lg" id="formGroupExampleInput" placeholder="Write here" style="width: 300px;">
-          </div>
-      
-          <div class="row">
-            <div class="mb-3">
-              <div class="form-group">
-                <label for="exampleFormControlTextarea1" style="color: white;">Body: <p> </p></label>
-                <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
+        <p>
+          <div class="p-3 mb-2 bg-dark text-white" style="border-radius: 10px; width: 800px;">  
+            <form method="POST" id="form2" action="{{url_for('poem.create_poem')}}">
+              <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label" style="color:white;">Title:</label>
+                <input name="title" type="text" class="form-control form-control-lg" id="formGroupExampleInput" placeholder="Write here" style="width: 300px;">
               </div>
-            </div>
-          </div>   
-        </div></p>
+              <div class="row">
+                <div class="mb-3">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1" style="color: white;">Body: <p> </p></label>
+                    <textarea name="body" class="form-control" id="exampleFormControlTextarea1" rows="15" placeholder="Write here" style="width: 99%;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>   
+          </div>
+        </p>
       </div>
       <div class="row">
         <div class="col-sm-6">
@@ -67,7 +69,6 @@
           </div>
         </div>
       </div>
-    </form>
-</div>
+    </div>
 </div>
 {% endblock %}

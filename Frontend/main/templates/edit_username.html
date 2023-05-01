@@ -24,21 +24,21 @@
           </button>
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
+            <div class="modal-dialog">
               <div class="modal-content">
-                  <div class="modal-header">
+                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">You are quitting edit mode.</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
+                </div>
+                <div class="modal-body">
                   Do you want to discard the changes?
-                  </div>
-                  <div class="modal-footer">
+                </div>
+                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I want to save it first</button>
                   <a class="btn btn-primary" href="{{ url_for('user.profile') }}" role="button">Discard changes</a>
-                  </div>
+                </div>
               </div>
-              </div>
+            </div>
           </div>
           <br>
           &nbsp;
@@ -50,12 +50,12 @@
           <br></br>
           <div id="myAlert" class="alert alert-success collapse">
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Successfully Done!</strong> Your personal information has been updated!
-                &nbsp;
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a id="linkClose" href="{{url_for('user.profile')}}" class=" btn btn-success" aria-label="Close">Nice!</a>
-                </div>
+              <strong>Successfully Done!</strong> Your personal information has been updated!
+              &nbsp;
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a id="linkClose" href="{{url_for('user.profile')}}" class=" btn btn-success" aria-label="Close">Nice!</a>
               </div>
+            </div>
           </div>
         </div>
       </div>

@@ -16,74 +16,72 @@
 		  background-color: #414141;
           background-image: url("/static/img/background3.jpg");
 		}
-	  </style>
-      {% endblock %}
+	</style>
+        {% endblock %}
 	</head>
     <body>
         <div class="container-fluid">
         {% if request.cookies.get("access_token") %}
+            <!-- En caso de estar logeado -->
             <div class="row section-1">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <a class="navbar-brand" href="/home">
-                        <img src="/static/img/logo3.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
-                        The Poet's Inn
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" style="color: #ff2525;" href="/logout">Log out</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{url_for('user.profile')}}">My Profile</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{url_for('poem.my_poems')}}">My Poems</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{{url_for('poem.create_poem')}}">Upload a Poem</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
+                        <a class="navbar-brand" href="/home">
+                            <img src="/static/img/logo3.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
+                            The Poet's Inn
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" style="color: #ff2525;" href="/logout">Log out</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="{{url_for('user.profile')}}">My Profile</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="{{url_for('poem.my_poems')}}">My Poems</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" aria-current="page" href="{{url_for('poem.create_poem')}}">Upload a Poem</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </nav>
-            
             </div><!--Fin de la fila -->
         {% else %}
-            <!--Fila -->
+            <!-- En caso de no estar logeado -->
             <div class="row section-1">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
-                        <img src="/static/img/logo3.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
-                        The Poet's Inn
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/register" style="color: #cc00ff;">Sign Up</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/login" style="color: #00ff15;">Sign In</a>
-                        </li>
-                        </ul>
-                    </div>
-                    </div>
+                        <a class="navbar-brand" href="/">
+                            <img src="/static/img/logo3.png" alt="" width="60" height="60" class="d-inline-block align-text-center">
+                            The Poet's Inn
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/register" style="color: #cc00ff;">Sign Up</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/login" style="color: #00ff15;">Sign In</a>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </nav>
-            
             </div><!--Fin de la fila -->
         {% endif %}
         {% block content %}
@@ -97,5 +95,5 @@
         
         {% block scripts %}
         {% endblock %}
-</body>
+    </body>
 </html>
