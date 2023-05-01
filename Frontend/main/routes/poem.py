@@ -3,6 +3,7 @@ from flask import Flask, Blueprint, current_app, render_template, request, redir
 import requests
 import json
 from . import functions as f
+from math import ceil
 
 poem = Blueprint('poem', __name__, url_prefix='/poem')
 
@@ -97,12 +98,25 @@ def read_my_poem(id):
 @poem.route('/my-poems')
 def my_poems():
     if request.cookies.get('access_token'):
+        # Obtener el número de página actual y la cantidad de elementos por página
+        page = int(request.args.get('page', 1))
+        per_page = 1000  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+
         jwt = f.get_jwt()
+        # Obtener el id del usuario
         id = f.get_id()
-        resp = f.get_poems_by_id(id)
+
+        # Obtener los poemas del usuario
+        resp = f.get_poems_by_id(id, page=page, perpage=per_page)
         poems = json.loads(resp.text)
         poems_list = poems["poems"]
-        return render_template('my_poems.html', jwt=jwt, poems = poems_list)
+
+        total_poems = len(poems_list)
+
+        # Calcular el numero de paginas
+        total_pages = ceil(total_poems / per_page)
+
+        return render_template('my_poems.html', jwt=jwt, poems = poems_list, page=page, total_pages=total_pages)
     else:
         return redirect(url_for('app.login'))
     

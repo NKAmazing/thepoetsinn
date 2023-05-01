@@ -40,6 +40,7 @@
                 <th scope="col">Poem's Name</th>
                 <th scope="col">Author</th>
                 <th scope="col">Rating</th>
+                <th scope="col">Datetime</th>
                 <th scope="col"> </th>
                 <th scope="col"> </th>
               </tr>
@@ -51,6 +52,7 @@
                 <td>{{poem.title}}</td>
                 <td>You</td>
                 <td>{{poem.rating}}</td>
+                <td>{{poem.date_time}}</td>
                 <td><a class="btn btn-success" href="{{url_for('poem.read_my_poem', id=poem.id)}}" role="button">Read</a>
                 <td><a class="btn btn-warning" href="{{url_for('poem.edit_poem', id=poem.id)}}" role="button">Edit</a>
               </tr>
@@ -58,33 +60,37 @@
             </table>
           </div>
         </div>
-          
-          <div class="row section-12">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
+        <!-- PAGINACION -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            {% if page > 1 %}
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
+                <a class="page-link" href="{{ url_for('app.main_menu_user', page=page-1) }}" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span> Previous
                 </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
+            {% endif %}
+            {% for p in range(1, total_pages + 1) %}
+              <li class="page-item {% if p == page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('app.main_menu_user', page=p) }}">{{ p }}</a>
+              </li>
+            {% endfor %}
+            {% if page < total_pages %}
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
+                <a class="page-link" href="{{ url_for('app.main_menu_user', page=page+1) }}" aria-label="Next">
+                  Next <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
-              </ul>
-            </nav>
-          </div>
+            {% endif %}
+          </ul>
+        </nav>
           <div class="row section-6">
             <!--Columna -->
           </div>
           <div class="row section-12">
             <div class="col-md-12">
-            <a class="btn btn-warning" href="/home" role="button">Back to Home</a><br/>
-            <br>
+            <a class="btn btn-warning" href="/home" role="button">Back to Home</a>
+            <p></p>
           </div><!--Fin de la columna -->
           </div>
          

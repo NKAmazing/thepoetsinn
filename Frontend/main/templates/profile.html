@@ -59,17 +59,11 @@
                 <td>{{user.rating_amount}}</td>
                 <td></td>
               </tr>
-              <tr>
-                <th scope="row">Poems rated</th>
-                <td>15</td>
-                <td></td>
-              </tr>
           </tbody>
         </div>
 		  </div><!--Fin de la fila -->
         <div class="row section-11">
           <div class="col-sm-12">
-            <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
             <form action="{{url_for('user.delete_user', id=user.id)}}" method="delete">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <!-- Button trigger modal -->
@@ -98,6 +92,16 @@
             </form>
             <br>
           </div>
+          <div class="row section-6">
+            <!--Columna -->
+          </div>
+          <div class="row section-12">
+            <div class="col-md-12">
+              <a class="btn btn-warning" href="{{url_for('app.main_menu_user')}}" role="button">Back to Home</a>
+            <p></p>
+          </div><!--Fin de la columna -->
+          </div>
+          
         </div>
     </div>
   {% endblock %}
