@@ -9,7 +9,7 @@
 
 #
 
-Welcome to <i>__The Poet's Inn__</i>!
+<h3 align="center"> Welcome to <i>The Poet's Inn!</i> </h3>
 
 This is a website where you will find a wide variety of poems of all kinds of genres and ideas.
 
