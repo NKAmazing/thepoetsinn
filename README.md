@@ -1,10 +1,15 @@
 <h1 align="center">The Poet's Inn</h1>
 
 ![eddie-mendoza-tavern-town](https://user-images.githubusercontent.com/83615373/230704922-dc779290-3fbb-4e24-8885-9ec66dc34a6c.jpg)
-<i>A welcoming place where all the poets of the world can feel comfortable and in good company.</i>
+<i align="center">
+
+"A welcoming place where all the poets of the world can feel comfortable and in good company."
+
+</i>
+
 #
 
-Welcome to The Poet's Inn! 
+Welcome to <i>__The Poet's Inn__</i>!
 
 This is a website where you will find a wide variety of poems of all kinds of genres and ideas.
 
@@ -22,7 +27,7 @@ On this website you can:
 
 </h3>
 
-The Poet's Inn website was created as a project designed during the course of the subject 'Programacion I' of the Software Engineering career at 'Universidad of Mendoza'. 
+The Poet's Inn website was created as a project designed during the course of the subject __Programacion I__ of the Software Engineering career at __Universidad of Mendoza__. 
 
 The objective of the project was to create a web page of poems in which we had to do a Full-Stack development incorporating both tools already known by the student as well as new ones seen during the course in 2022.
 
@@ -41,12 +46,12 @@ These are some of the working tools used:
 
 #
 Credits:
-- Developer: Nicolas Mayoral
-- Instructors: Andrea Navarro and Matias Navarro
+- Developer: [<i>Nicolas Mayoral</i>](https://github.com/NKAmazing)
+- Instructors: <i>[Andrea Navarro](https://github.com/AndreaNavarroMoreno) - [Matias Navarro](https://github.com/navarromatiassr)</i>
 
-- Art Designer: Eddie Mendoza - https://www.artstation.com/eddie
+- Art Designer: [<i>Eddie Mendoza</i>](https://www.artstation.com/eddie)
 
-- Institution: <i>Universidad de Mendoza - Facultad de Ingenieria</i>
+- Institution: [<i>Universidad de Mendoza - Facultad de Ingenieria</i>](https://um.edu.ar/ingenieria/)
 
 ![um-cover](https://user-images.githubusercontent.com/83615373/235419081-c36fcb36-c412-4317-b40a-7cad5e937339.png)
 
