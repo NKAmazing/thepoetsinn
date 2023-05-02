@@ -1,11 +1,3 @@
-<style>
-  code {
-    white-space: pre-wrap;
-    max-width: 80ch;
-  }
-</style>
-
-
 <h1 align="center">Installation Process</h1>
 
 <h3 align="left">
