@@ -143,7 +143,7 @@ Since the Frontend is a different service from the Backend, we must create an __
 
 ![image](https://user-images.githubusercontent.com/83615373/235703601-cbd12644-189e-4e70-b3f3-075b48a855ad.png)
 
-And then reference a __init.py__ file.
+And then reference an __init.py__ file, indicating that it is a python package.
 
 ![image](https://user-images.githubusercontent.com/83615373/235705186-58f46038-9def-462e-b0f8-87358186d70b.png)
 
