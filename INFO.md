@@ -6,8 +6,23 @@
 
 The project contains two services, one dedicated to the Backend connected to an API REST and another dedicated to the Frontend which through a series of configured routes makes requests to the API and brings the information requested by the user.
 
+Project Structure:
+
 ![general-structure-img](https://user-images.githubusercontent.com/83615373/235558307-9898c514-7391-4b2d-82b1-5cc6ef543e7d.png)
 
+Architecture graphic:
+```mermaid
+flowchart TD
+User[/User\]
+Frontend[Frontend]
+Backend[Backend]
+Database[(Database)]
+User --> Frontend
+Frontend -- request --> API-REST
+API-REST -- works with --> Backend
+Backend -- works with --> API-REST
+Backend -- query --> Database
+```
 
 <h2 align="left">Making the Backend</h2>
 
@@ -78,9 +93,36 @@ Poem Resources structure and implementation.
 
 </h4>
 
+We need to implement authentication to prevent unauthorized users from accessing private views.
+
 ![image](https://user-images.githubusercontent.com/83615373/235572536-3974132b-7dc2-4111-a58f-6bc31c9b9ed3.png)
 
+For this we use JWT (JSON Web Token), which consists of generating a Token that has three parts encoded in Base64, each separated by a dot.
+
+![image](https://user-images.githubusercontent.com/83615373/235688411-f6631055-524f-4704-a053-b1eb2fe7a557.png)
+
+We start with importing the Flask functionality for JWT.
+
+![image](https://user-images.githubusercontent.com/83615373/235690785-e6d73957-e11f-4e4e-96da-7d51dd532628.png)
+
+Then, we proceed to decorate the functions that require some kind of authentication.
+
 ![image](https://user-images.githubusercontent.com/83615373/235572319-40e6da90-e946-47a1-a1db-e90254460244.png)
+
+<h4 align="left">
+  
+* Mail:
+
+</h4>
+
+Finally, we created an email service that can notify users when their poems are rated.
+
+![image](https://user-images.githubusercontent.com/83615373/235692782-95cde848-8613-4c6a-8631-ed5e4f0c9157.png)
+
+And we add it to the POST method of Rating resource.
+
+![image](https://user-images.githubusercontent.com/83615373/235693278-e053ea91-859b-4561-9569-5b148904ad78.png)
+
 
 
 <h2 align="left">Making the Frontend</h2>
