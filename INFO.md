@@ -17,7 +17,7 @@ User[/User\]
 Frontend[Frontend]
 Backend[Backend]
 Database[(Database)]
-User --> Frontend
+User -- interact with --> Frontend
 Frontend -- request --> API-REST
 API-REST -- works with --> Backend
 Backend -- works with --> API-REST
@@ -40,11 +40,11 @@ The Backend consists of a Flask service connected to an API REST in which throug
 
 </h4>  
 
-To create the application, an app.py file must be created where the application must be initialized along with its respective functionalities.
+To create the application, an __app.py__ file must be created where the application must be initialized along with its respective functionalities.
 
 ![image](https://user-images.githubusercontent.com/83615373/235561260-4ea2a253-883d-4251-a00d-e13306a64842.png)
 
-An __init__.py is then created in the main folder, which allows the folder containing the app.py file to be converted to a Python package. This with the aim that modules and packages can be imported into the Flask application in an easier and more organized way.
+An __init.py__ is then created in the main folder, which allows the folder containing the app.py file to be converted to a Python package. This with the objective that modules and packages can be imported into the Flask application in an easier and more organized way.
 
 ![image](https://user-images.githubusercontent.com/83615373/235563710-93643402-35c3-4a57-902a-e2578d83822f.png)
 
@@ -131,5 +131,67 @@ The Frontend consists of a Flask service that connects to the Backend service. T
 
 ![frontend-structure-img](https://user-images.githubusercontent.com/83615373/235557921-c18d40fd-411b-462e-9041-86e83850e1f7.png)
 
+<h3 align="left">Development process:</h3>
 
-More information in the coming weeks.
+<h4 align="left">
+
+* Creation of the App:
+
+</h4>  
+
+Since the Frontend is a different service from the Backend, we must create an __app.py__ file that initializes the application.
+
+![image](https://user-images.githubusercontent.com/83615373/235703601-cbd12644-189e-4e70-b3f3-075b48a855ad.png)
+
+And then reference a __init.py__ file.
+
+![image](https://user-images.githubusercontent.com/83615373/235705186-58f46038-9def-462e-b0f8-87358186d70b.png)
+
+<h4 align="left">
+
+* Templates design:
+
+</h4>
+
+We created a series of templates that will serve as an interactive interface so that the user can interact with the web page. For this we use Bootstrap, a set of open source tools for designing websites and web applications.
+
+![image](https://user-images.githubusercontent.com/83615373/235705878-df071a90-a621-4ac6-8d47-214ea9ed7db9.png)
+
+We set some styles as CSS files and images.
+
+![image](https://user-images.githubusercontent.com/83615373/235706766-201f8762-da9b-48a9-bb97-b76f0d29825d.png)
+
+<h4 align="left">
+
+* Routes and functions configuration:
+
+</h4>
+
+Lastly, we configure the routes that will provide the context to our templates.
+
+![image](https://user-images.githubusercontent.com/83615373/235708069-00b9d226-d3e7-4546-b33a-73392991cd34.png)
+
+The routes are responsible for making requests to the API when the user interacts with the Frontend. For this we use functions stored in __functions.py__, which execute the request and return the information to the route.
+
+Here we have the function to get poems stored in __functions.py__, that requests the information with the API Url and then returns the context.
+
+![image](https://user-images.githubusercontent.com/83615373/235708900-23c929ba-88e6-4730-8581-f7e3b28a8fc6.png)
+
+Then, we make a function call from the requesting route, and render the corresponding template passing the requested information.
+
+![image](https://user-images.githubusercontent.com/83615373/235709197-3a348de0-ef6b-4a11-879c-f972fc9a9d12.png)
+
+Finally, we show the information using Jinja2 engine in the template.
+
+![image](https://user-images.githubusercontent.com/83615373/235710515-acf04d14-c500-481c-afd7-5d60caf8494d.png)
+
+<h2 align="left">Final Result</h2>
+
+We have our Poem webpage working successfully with complete responsive interface and fast data collection.
+
+
+
+
+
+
+
