@@ -31,18 +31,18 @@ The Poet's Inn website was created as a project designed during the course of th
 
 The objective of the project was to create a web page of poems in which we had to do a Full-Stack development incorporating both tools already known by the student as well as new ones seen during the course in 2022.
 
-These are some of the working tools used:
+![image](https://user-images.githubusercontent.com/83615373/235729429-b0915ea2-72cf-449a-a0ce-68aaed00fa0b.png)
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
-![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
-![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
-![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black) 
+#
+<h3 align="center">
 
+Relevant information
+
+</h3>
+
+* :page_facing_up: [Information of project development](https://github.com/NKAmazing/Programacion-I/blob/main/INFO.md)
+* 👨‍:computer: [Installation Process](https://github.com/NKAmazing/Programacion-I/blob/main/INSTALL.md)
+* :pushpin: [Implementation of future functionalities](https://github.com/NKAmazing/Programacion-I/blob/main/TODO.md)
 
 #
 Credits:
