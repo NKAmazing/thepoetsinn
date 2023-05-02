@@ -4,8 +4,10 @@ import requests
 import json
 from . import functions as f
 
+# Creo el blueprint
 user = Blueprint('user', __name__, url_prefix='/user')
 
+# Ver mi perfil de usuario
 @user.route('/my-profile', methods=['GET', 'POST'])
 def profile():
     jwt = f.get_jwt()
@@ -18,16 +20,21 @@ def profile():
     else:
         return redirect('app.login')
 
+# Editar nombre de usuario
 @user.route('/edit_username', methods=['GET', 'POST'])
 def edit_username():
     jwt = f.get_jwt()
     if jwt:
+        # Obtengo el id del usuario
         user_id = f.get_id()
+        # Obtengo la informacion del usuario
         user_info = f.get_user_info(user_id)
         if request.method == 'POST':
+            # Obtengo el nuevo username
             new_username = request.form['username']
-            response = f.edit_username(user_id, new_username)
             if new_username != "":
+                # Actualizo el username
+                response = f.edit_username(user_id, new_username)
                 if response.ok:
                     flash('Username successfully updated!', 'success')
                     print("Username successfully updated!")
@@ -41,17 +48,22 @@ def edit_username():
             return render_template('edit_username.html', user=user_info)
     else:
         return redirect(url_for('app.login'))
-    
+
+# Editar email 
 @user.route('/edit-email', methods=['GET', 'POST'])
 def edit_email():
     jwt = f.get_jwt()
     if jwt:
+        # Obtengo el id del usuario
         user_id = f.get_id()
+        # Obtengo la informacion del usuario
         user_info = f.get_user_info(user_id)
         if request.method == 'POST':
+            # Obtengo el nuevo email
             new_email = request.form['email']
-            response = f.edit_email(user_id, new_email)
             if new_email != "":
+                # Actualizo el email
+                response = f.edit_email(user_id, new_email)
                 if response.ok:
                     flash('Email successfully updated!', 'success')
                     print("Email successfully updated!")
@@ -71,12 +83,16 @@ def edit_email():
 def edit_password():
     jwt = f.get_jwt()
     if jwt:
+        # Obtengo el id del usuario
         user_id = f.get_id()
+        # Obtengo la informacion del usuario
         user_info = f.get_user_info(user_id)
         if request.method == 'POST':
+            # Obtengo la nueva contraseña
             new_password = request.form['password']
-            response = f.edit_password(user_id, new_password)
             if new_password != "":
+                # Actualizo la contraseña
+                response = f.edit_password(user_id, new_password)
                 print(new_password)
                 if response.ok:
                     flash('Password successfully updated!', 'success')
@@ -96,8 +112,11 @@ def edit_password():
 @user.route('/delete-account/<int:id>')
 def delete_user(id):
     jwt = f.get_jwt()
+    # Verifico que el usuario este logueado
     if jwt:
+        # Borro el usuario
         response = f.delete_user(id)
+        # Verifico que se haya borrado correctamente
         if response.ok:
             flash('Account successfully deleted!', 'success')
             return redirect(url_for('app.login'))

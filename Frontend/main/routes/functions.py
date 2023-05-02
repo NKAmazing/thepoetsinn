@@ -138,9 +138,6 @@ def delete_poem(id):
     return requests.delete(api_url, headers=headers)
 
 
-#--------------- Poems -----------------#
-
-
 #--------------- User -----------------#
 
 # Obtengo los datos del usuario.
@@ -174,12 +171,10 @@ def delete_user(id):
     headers = get_headers(without_token=False)
     return requests.delete(api_url, headers=headers)
 
-#--------------- User -----------------#
 
+#--------------- Ratings -----------------#
 
-#--------------- Calificaciones -----------------#
-
-#Obtener las calificaciones de un poema en especifico.
+# Obtener las calificaciones de un poema en especifico.
 def get_ratings_by_poem_id(id):
     api_url = f'{current_app.config["API_URL"]}/ratings'
 
@@ -187,8 +182,8 @@ def get_ratings_by_poem_id(id):
     headers = get_headers()
     return requests.get(api_url, json = data, headers = headers)
 
-#--------------- Calificaciones -----------------#
 
+# Obtener las calificaciones de un usuario en especifico.
 def get_ratings_by_user_id(id):
     api_url = f'{current_app.config["API_URL"]}/ratings'
 
@@ -197,7 +192,7 @@ def get_ratings_by_user_id(id):
     return requests.get(api_url, json = data, headers = headers)
 
 
-#Agregar una calificacion a un poema.
+# Agregar una calificacion a un poema.
 def add_rating(user_id, poem_id, score, commentary):
     api_url = f'{current_app.config["API_URL"]}/ratings'
     data = {"user_id": user_id, "poem_id": poem_id, "score": score, "commentary": commentary}
@@ -206,12 +201,12 @@ def add_rating(user_id, poem_id, score, commentary):
 
 #--------------- Utilidades -----------------#
 
-#Obtengo el json txt.
+# Obtengo el json txt.
 def json_load(response):
     return json.loads(response.text)
 
 
-#Obtengo el email del usuario
+# Obtengo el email del usuario
 def get_headers(without_token = False):
     jwt = get_jwt()
     if jwt and without_token == False:
@@ -220,24 +215,25 @@ def get_headers(without_token = False):
         return {"Content-Type" : "application/json"}
 
 
-#Obtener el token desde response.
+# Obtener el token desde response.
 def get_jwt():
     return request.cookies.get("access_token")
 
 
-#Obtener el id desde response.
+# Obtener el id desde response.
 def get_id():
     return request.cookies.get("id")
 
 
-#Hacer redirect
-
+# Hacer redirect a una url.
 def redirect_to(url):
     return redirect(url_for(url))
 
+
+
 #--------------- Utilidades -----------------#
 
-#Editar un usuario.
+# Editar un usuario.
 def edit_user(id, username, email, password):
     api_url = f'{current_app.config["API_URL"]}/user/{id}'
     data = {"id":id, "username": username, "email": email, "passw": password}

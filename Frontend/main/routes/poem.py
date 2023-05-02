@@ -5,9 +5,10 @@ import json
 from . import functions as f
 from math import ceil
 
+# Creo el blueprint
 poem = Blueprint('poem', __name__, url_prefix='/poem')
 
-
+# Leer poema
 @poem.route('/read/poem/<int:id>')
 def read_poem(id):
     # Obtener poema
@@ -20,6 +21,7 @@ def read_poem(id):
 
     return render_template('read_poem.html', poem=poem, ratings=ratings)
 
+# Leer poema como usuario
 @poem.route('/read/poem/rate/<int:id>', methods=['GET', 'POST'])
 def read_poem_user(id):
     jwt = f.get_jwt()
@@ -45,7 +47,8 @@ def read_poem_user(id):
         return render_template('read_poem_user.html', poem=poem, ratings=ratings)
     else:
         return redirect(url_for("app.login"))
-    
+
+# Crear poema
 @poem.route('/create-poem', methods=['GET', 'POST'])
 def create_poem():
     jwt = f.get_jwt()
@@ -82,7 +85,8 @@ def create_poem():
             return redirect(url_for('app.main_menu_user'))
     else:
         return redirect(url_for('app.login'))
-    
+
+# Leer mi poema
 @poem.route('/read/my-poem/<int:id>')
 def read_my_poem(id):
     if request.cookies.get('access_token'):
@@ -94,13 +98,14 @@ def read_my_poem(id):
         return render_template('read_my_poem.html', jwt=jwt, poem=poem, ratings=ratings)
     else:
         return redirect(url_for('app.login'))
-    
+
+# Ver lista de mis poemas
 @poem.route('/my-poems')
 def my_poems():
     if request.cookies.get('access_token'):
         # Obtener el número de página actual y la cantidad de elementos por página
         page = int(request.args.get('page', 1))
-        per_page = 1000  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+        per_page = 1000  # Cambiar esto a la cantidad de elementos que deseas mostrar por página
 
         jwt = f.get_jwt()
         # Obtener el id del usuario
@@ -152,8 +157,11 @@ def edit_poem(id):
 @poem.route('/delete-poem/<int:id>')
 def delete_poem(id):
     jwt = f.get_jwt()
+    # Verifico que el usuario este logueado
     if jwt:
+        # Borro el poema
         response = f.delete_poem(id)
+        # Verifico que el request haya sido exitoso
         if response.ok:
             flash('Poem successfully deleted.', 'success')
             return redirect(url_for('poem.my_poems'))

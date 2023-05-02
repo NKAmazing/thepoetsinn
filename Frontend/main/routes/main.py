@@ -6,9 +6,10 @@ from . import functions as f
 from flask_paginate import Pagination, get_page_parameter
 from math import ceil
 
-
+# Creo el blueprint
 app = Blueprint('app', __name__, url_prefix='/')
 
+# Registro de usuario
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if (request.method == "POST"):
@@ -34,7 +35,7 @@ def register():
     else:
         return render_template("register.html")
 
-
+# Login de usuario
 @app.route('/login', methods=["GET", "POST"])
 def login():
     if (request.method == "POST"):
@@ -68,7 +69,7 @@ def login():
     else:
         return render_template("login.html")
 
-
+# Logout de usuario
 @app.route('/logout')
 def logout():
     # Redirecciono al login.
@@ -77,12 +78,12 @@ def logout():
     resp.set_cookie('access_token', '', expires=0)
     return resp
 
-
+# Main menu publico
 @app.route('/', methods=['GET', 'POST'])
 def main_menu():
     # Obtener el número de página actual y la cantidad de elementos por página
     page = int(request.args.get('page', 1))
-    per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+    per_page = 6  # Cambiar esto a la cantidad de elementos que deseas mostrar por página
     
     # Obtener los poemas
     response = f.get_poems(page=page, perpage=per_page)
@@ -152,15 +153,14 @@ def main_menu():
 
     # Redireccionar a función de vista
     response = make_response(render_template('main_menu.html', poems = list_poems, page = page, total_pages=total_pages, filter_options=filter_options, filter_option=filter_option, sort_options=sort_options))
-    # response.set_cookie("poems_page", str(page))
     return response
 
-
+# Main menu de usuario
 @app.route('/home')
 def main_menu_user():
     # Obtener el número de página actual y la cantidad de elementos por página
     page = int(request.args.get('page', 1))
-    per_page = 6  # Cambia esto a la cantidad de elementos que deseas mostrar por página
+    per_page = 6  # Cambiar esto a la cantidad de elementos que deseas mostrar por página
 
     jwt = f.get_jwt()
     if jwt:
