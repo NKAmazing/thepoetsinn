@@ -58,4 +58,3 @@ The idea would be to add a __Details +__ button that shows us the option to visi
 
 ![image](https://user-images.githubusercontent.com/83615373/235817743-0cd74da4-2e28-469f-b0b3-3c3ac4cfa3fe.png)
 
-<h3 align="left">
