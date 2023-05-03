@@ -35,7 +35,7 @@ app.run(host='thepoetsinn.com', port=80)
 A new functionality in the Frontend that allow us to receive notificacions when someone rate your poems.
 Similar to the send email configuration, this function would allow us to see a message with the same information in the Navbar section of the template, right next to the Logout button.
 
-![image](https://user-images.githubusercontent.com/83615373/235813184-696be480-4fa8-4d69-9546-1986dd6d3733.png)
+![image](https://user-images.githubusercontent.com/83615373/235817838-4e5662c9-6766-4123-9b50-408e01c2cf1f.png)
 
 <h3 align="left">
 
@@ -45,7 +45,7 @@ Similar to the send email configuration, this function would allow us to see a m
 
 Just as the method of Edit Poem, the Edit Rating method would allow us modify every rating we make. The new edit button would be located in the bottom right part of the rating. 
 
-![image](https://user-images.githubusercontent.com/83615373/235813907-31757a47-67f3-4068-b61d-8cef92bd82c1.png)
+![image](https://user-images.githubusercontent.com/83615373/235817814-530117b2-cf6f-4479-8d30-934e9c9dd400.png)
 
 <h3 align="left">
 
@@ -54,19 +54,8 @@ Just as the method of Edit Poem, the Edit Rating method would allow us modify ev
 </h3>
 
 Until now the functionality to view user profile is only available with the authenticated user at that moment.
-The idea would be to add a Details + button that shows us the option to visit that user's profile.
+The idea would be to add a __Details +__ button that shows us the option to visit that user's profile.
 
-![image](https://user-images.githubusercontent.com/83615373/235814323-d2c15da5-59ea-4308-834b-56a3021004e2.png)
+![image](https://user-images.githubusercontent.com/83615373/235817743-0cd74da4-2e28-469f-b0b3-3c3ac4cfa3fe.png)
 
 <h3 align="left">
-
-* Updating Flask
-
-</h3>
-
-Looks like there's some vulnerability with Flask actual version of the project. We need to update Flask version of the requirements.txt to solve the problem.
-
-![image](https://user-images.githubusercontent.com/83615373/235816205-75f375cd-4946-4d07-86d7-480d0fb69538.png)
-
-
-
