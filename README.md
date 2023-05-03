@@ -9,14 +9,14 @@
 
 #
 
-<h3 align="left"> Welcome to <i>The Poet's Inn!</i> </h3>
+<h3 align="left"> Welcome to The Poet's Inn! :pencil:</h3>
 
 This is a website where you will find a wide variety of poems of all kinds of genres and ideas.
 
 On this website you can:
-- Upload your poems
-- Read other people's poems
-- Receive ratings for your work
+- :outbox_tray: Upload your poems :scroll:
+- :page_with_curl: Read other people's poems :woman:
+- :star: Receive ratings for your work :star2:
 
 #
 <h3 align="center">
