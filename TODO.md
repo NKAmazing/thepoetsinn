@@ -58,4 +58,15 @@ The idea would be to add a Details + button that shows us the option to visit th
 
 ![image](https://user-images.githubusercontent.com/83615373/235814323-d2c15da5-59ea-4308-834b-56a3021004e2.png)
 
+<h3 align="left">
+
+* Updating Flask
+
+</h3>
+
+Looks like there's some vulnerability with Flask actual version of the project. We need to update Flask version of the requirements.txt to solve the problem.
+
+![image](https://user-images.githubusercontent.com/83615373/235816205-75f375cd-4946-4d07-86d7-480d0fb69538.png)
+
+
 
