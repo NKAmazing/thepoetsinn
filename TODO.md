@@ -32,7 +32,7 @@ app.run(host='thepoetsinn.com', port=80)
 
 </h3>
 
-A new functionality in the Frontend that allow us to receive notificacions when someone rate your poems.
+A new functionality in the Frontend that allow us to receive notifications when someone rate your poems.
 Similar to the send email configuration, this function would allow us to see a message with the same information in the Navbar section of the template, right next to the Logout button.
 
 ![image](https://user-images.githubusercontent.com/83615373/235817838-4e5662c9-6766-4123-9b50-408e01c2cf1f.png)
