@@ -18,7 +18,7 @@ def profile():
         user = json.loads(user.text)
         return render_template('profile.html', jwt=jwt, user = user)
     else:
-        return redirect('app.login')
+        return redirect(url_for('app.login'))
 
 # Editar nombre de usuario
 @user.route('/edit_username', methods=['GET', 'POST'])
